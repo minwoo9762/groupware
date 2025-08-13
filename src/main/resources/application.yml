@@ -1,0 +1,57 @@
+
+server:
+    port: 8070
+
+
+
+spring:
+    application:
+      name: MystargramAWS
+    mvc:
+      view:
+        prefix: /WEB-INF/views/
+        suffix: .jsp
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mystargram
+      username: root
+      password: adminuser
+
+    mail:
+      host: smtp.gmail.com
+      port: 587
+    username: www704@nave.com
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          timeout: 5000
+
+
+    servlet:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 10MB
+
+kakao:
+  client_id:
+  redirect_uri: http://localhost:8070/kakaoLogin
+
+cloud:
+  aws:
+    s3:
+      bucket:
+    credentials:
+      access-key:
+      secret-key:
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/**/**.xml
