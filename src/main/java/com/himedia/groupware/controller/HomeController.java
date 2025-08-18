@@ -28,10 +28,7 @@ public class HomeController {
             model.addAttribute("loginUser", udto);
 
             AttendanceDto confirmAtd = atds.selectAttendance(udto.getEmail());
-            System.out.println("@@@@@" + confirmAtd.getIndate());
             if(confirmAtd != null) model.addAttribute("confirmAtd", confirmAtd);
-
-
 
         }
         return url;
