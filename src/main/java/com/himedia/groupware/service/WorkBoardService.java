@@ -22,4 +22,9 @@ public class WorkBoardService {
         System.out.println((list));
         return result;
     }
+
+    public WorkBoardDto getBoardOne(int id) {
+        return bdao.getboard(id);
+    }
+
 }
