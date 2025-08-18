@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Paging {
+
     private int page;
     private int totalCount;
     private int displayRow=3;
@@ -30,5 +31,4 @@ public class Paging {
         endNum = page * displayRow;
         System.out.println(beginPage + " " + endPage + " " + startNum + " " + endNum);
     }
-
 }

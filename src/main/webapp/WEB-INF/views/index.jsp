@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
+
   <!-- FullCalendar 라이브러리 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
 
@@ -127,6 +128,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="/script/home.js"></script>
+
 </body>
 </html>
 
