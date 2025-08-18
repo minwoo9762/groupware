@@ -24,8 +24,7 @@ public class WorkController {
     @Autowired
     WorkBoardService bs;
 
-    @GetMapping("/")
-    public String mainPage (){return "mainTest";}
+
 
     @GetMapping("/email")
     public String email() {return "/email/workEmail";}
@@ -60,7 +59,7 @@ public class WorkController {
             model.addAttribute("msg", "수정을 위한 패스워드가 일치하지 않습니다");
         else{
             url="redirect:/boardViewWithoutCnt?num="+workboarddto.getId();
-            bs.update(workboarddto);
+           //  bs.update(workboarddto);
     }
 
         return url;
