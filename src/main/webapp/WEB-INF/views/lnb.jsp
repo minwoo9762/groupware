@@ -6,9 +6,11 @@
         <li>
             <span>인사관리</span></span>
             <ul class="depth">
+
                 <li><a href="attendance?id=2">근태 조회</a></li>
                 <li><a href="vacation?id=1">휴가 조회</a></li>
                 <li><a href="paycheck">급여 조회</a></li>
+
             </ul>
         </li>
         <li>
@@ -21,4 +23,6 @@
         </li>
         <li><span onclick="location.href='admin'" style="cursor: pointer;">관리자</span></li>
     </ul>
+
 </div>
+

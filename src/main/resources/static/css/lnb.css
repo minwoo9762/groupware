@@ -1,69 +1,9 @@
-.layout {
-    display: flex;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
 
-/* 왼쪽 사이드 메뉴 */
-.lnb {
-    width: 230px;
-    height: 100%;
-    border-right: 1px solid #555;
-    box-sizing: border-box;
-    background-color: #f8f8f8;
-    overflow-y: auto;
-}
+.lnb {width: 230px; height: 100%; border-right: 1px solid #ddd; box-sizing: border-box; }
+.lnb > ul {display: flex; flex-direction: column; padding: 40px 0; box-sizing: border-box}
+.lnb > ul > li {display: flex; flex-direction: column; padding:0px 30px 14px; box-sizing: border-box;}
+.lnb > ul > li > span {font-size: 24px; font-weight: 700;}
+.lnb > ul > li > .depth {display: flex; flex-direction: column;}
+.lnb > ul > li > .depth > li {padding:8px 14px; box-sizing: border-box;}
+.lnb > ul > li > .depth > li > a {font-size: 14px;}
 
-/* 메뉴 구조 */
-.lnb > ul {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-    margin: 0;
-    list-style: none;
-}
-
-/* 상위 메뉴 항목 */
-.lnb > ul > li {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 20px;
-    box-sizing: border-box;
-}
-
-/* 메뉴 타이틀 */
-.lnb > ul > li > span {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-
-/* 서브 메뉴 */
-.lnb .depth {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-}
-
-.lnb .depth > li {
-    padding: 5px 0;
-}
-
-.lnb .depth > li > a {
-    font-size: 14px;
-    text-decoration: none;
-}
-
-.lnb .depth > li > a:hover {
-    text-decoration: underline;
-}
-
-/* 오른쪽 본문 */
-.main-content {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff;
-}
