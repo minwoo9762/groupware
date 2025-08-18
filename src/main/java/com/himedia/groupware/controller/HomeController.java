@@ -19,7 +19,7 @@ public class HomeController {
         return "index";
     }
 
-    @PostMapping("/attendance")
+    @PostMapping("/attendance2")
     public String attendance(@RequestBody AttendanceDto atddao) {
         System.out.println(atddao);
         atds.insertAttendance(atddao);

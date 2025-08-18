@@ -1,7 +1,6 @@
 package com.himedia.groupware.controller;
 
 import com.himedia.groupware.dto.AttendanceDto;
-import com.himedia.groupware.dto.VacationDto;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -22,10 +21,6 @@ public class HrController {
     @Autowired
     HrService hs;
 
-    @GetMapping("/home")
-    public String home() {
-        return "index";
-    }
 
 
     @GetMapping("/attendance")
@@ -103,7 +98,7 @@ public class HrController {
     @GetMapping("/vacationList")
     public String vacationList(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        VacationDto loginVacation = (VacationDto) session.getAttribute("loginVacation");
+        // VacationDto loginVacation = (VacationDto) session.getAttribute("loginVacation");
         HashMap<String, Object> result = null;
 
         return "/Hr/vacation";

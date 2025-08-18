@@ -33,7 +33,7 @@
             <c:forEach items="${boardList}" var="board" >
                 <div class="tr">
                     <div class="td" style="flex: 1">${board.id}</div>
-                    <div class="td" style="flex: 2">${board.name}</div>
+                    <div class="td" style="flex: 2">${loginUser.name}</div>
                     <a class="td" style="flex: 8" >
                     <a href="boardView?id=${board.id}">
                     ${board.title}
