@@ -1,1 +1,10 @@
-#header {display: flex; justify-content: space-between; align-items: center; padding: 0 30px; height: 55px; border-bottom: 1px solid #555; box-sizing: border-box}
+
+#header {display: flex; justify-content: space-between; align-items: center; padding: 0 30px; height: 55px; border-bottom: 1px solid #ddd; box-sizing: border-box}
+
+#header .util {display: flex; align-items: center; gap: 8px;}
+#header .util .mypage {display: block; width: 36px; height: 36px; border-radius: 50%; overflow: hidden;}
+#header .util .mypage > img {width: 100%; height: 100%; object-fit: cover;}
+#header .util .address {display: block; margin-right: 20px; width: 36px; height: 36px; border-radius: 50%; overflow: hidden;}
+#header .util .address > img {width: 100%; height: 100%; object-fit: cover;}
+#header .util .logout {display: block; width: 36px; height: 36px; border-radius: 50%; overflow: hidden;}
+#header .util .logout > img {width: 100%; height: 100%; object-fit: cover;}
