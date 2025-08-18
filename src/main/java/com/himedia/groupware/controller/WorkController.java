@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 @Controller
 @RequiredArgsConstructor
 public class WorkController {
