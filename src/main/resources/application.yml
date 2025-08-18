@@ -20,8 +20,8 @@ spring:
     mail:
       host: smtp.gmail.com
       port: 587
-    username: www704@nave.com
-    password:
+    username: akehsskehssk@gmail.com
+    password: ynoc atnf sydd hmjy
     properties:
       mail:
         smtp:
@@ -29,7 +29,6 @@ spring:
           starttls:
             enable: true
           timeout: 5000
-
 
     servlet:
       multipart:
@@ -55,3 +54,4 @@ cloud:
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/**/**.xml
+

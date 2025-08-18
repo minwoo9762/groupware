@@ -4,6 +4,7 @@
 <section class="section admin">
     <%@include file="../lnb.jsp"%>
     <form name="writeBoard" id="writeBoard" method="post" action="writeBoard" >
+        <input type="hidden" name="userid" value="${loginUser.userid}" />
     <div class="main">
         <h2 class="title" style="font-size:40px;">게시글 등록</h2>
         <div class="tableWrap">
@@ -36,6 +37,12 @@
                     <div id="imgPreview"></div>
                     <input type="hidden" name="image" id="image"/>
                 </div>
+
+                <div class="btns">
+                    <input type="submit" value="작성완료" />
+                    <input type="button" value="돌아가기" />
+                </div>
+
             </div>
         </div>
     </div>

@@ -2,9 +2,9 @@
 
 <%@include file="../header.jsp"%>
 <section class="section admin">
-    <%@include file="../lnb.jsp"%>
-    <div class="main">
-        <h2 class="title" style="font-size:40px;">게시판</h2>
+  <%@include file="../lnb.jsp"%>
+<div class="main">
+        <h2 class="title" style="font-size:40px;">전자 결제</h2>
         <div class="searchWrap">
             부서명
             <select>
@@ -30,22 +30,18 @@
                     </div>
                 </div>
             </div>
-            <c:forEach items="${boardList}" var="board" >
+            <c:forEach items="${approvalList}" var="approval" >
                 <div class="tr">
-                    <div class="td" style="flex: 1">${board.id}</div>
-                    <div class="td" style="flex: 2">${board.name}</div>
-                    <a class="td" style="flex: 8" >
-                    <a href="boardView?id=${board.id}">
-                    ${board.title}
-                    </a>
-                    </div>
-                    <div class="td" style="flex: 2">${board.indate}</div>
-                    <div class="td" style="flex: 2"><%--${reply.count}--%></div>
+                    <div class="td" style="flex: 1">${approval.id}</div>
+                    <div class="td" style="flex: 2">${approval.name}</div>
+                    <div class="td" style="flex: 8" >${approval.title}</div>
+                    <div class="td" style="flex: 2">${approval.indate}</div>
                 </div>
            </c:forEach>
                 </div>
-        <div class="writebutton">
-            <input type="button" value="게시물 등록" onclick="location.href='workBoardWrite'" />
+        <div class="btn">
+            <input type="button" value="삭제" onclick="location.href='deleteApproval'" />
+            <input type="button" value="뒤로가기" onclick="location.href='approvalMain'" />
         </div>
     <div style="display: flex; justify-content: center; font-size: 105%">
             <c:if test="${paging.prev}" >
@@ -64,6 +60,8 @@
             </c:if>
         </div>
     </div>
+
 </section>
+
 </body>
 </html>
