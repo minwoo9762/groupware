@@ -30,8 +30,6 @@ public class HomeController {
             AttendanceDto confirmAtd = atds.selectAttendance(udto.getEmail());
             if(confirmAtd != null) model.addAttribute("confirmAtd", confirmAtd);
 
-
-
         }
         return url;
     }
