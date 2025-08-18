@@ -26,4 +26,5 @@ public class WorkBoardService {
     public WorkBoardDto getBoardOne(int id) {
         return bdao.getboard(id);
     }
+
 }

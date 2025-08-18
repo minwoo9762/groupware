@@ -28,6 +28,7 @@
         <div class="tr" id="textarea">
           <div class="th" style="flex: 1" >내 용</div>
           <div class="th"  style="flex: 6" >${board.content} </div>
+
         </div>
 
     <div class="field">
@@ -47,6 +48,7 @@
     </div>
     <div class="updateBtns">
       <input type="button" value="수정" onClick="location.href='updateBoard?id=${board.id}'"/>
+
       <input type="button" value="삭제" onClick="deleteBoard('${board.id}')"/>
       <input type="button" value="패스워드 수정" onClick="updateBoardPass('${board.id}')"/>
       <input type="button" value="목록으로" onClick="location.href='workBoard'"/>

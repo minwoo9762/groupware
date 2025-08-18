@@ -8,7 +8,9 @@
         select * from board
     </select>
 
+
 <select id="getboard" resultType="com.himedia.groupware.dto.WorkBoardDto">
     select * from board where id=#{id}
 </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.himedia.groupware.controller;
 import com.himedia.groupware.dto.WorkBoardDto;
 import com.himedia.groupware.service.WorkBoardService;
 import jakarta.servlet.http.HttpServletRequest;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,6 @@ public class WorkController {
         System.out.println((mav));
         return mav;
     }
-
-     @GetMapping("/workBoardWrite")
-    public String workBoardWrite(){return "work/workBoardWrite";}
 
     @GetMapping("/updateBoard")
     public String updateBoard(@RequestParam("dto") @Valid WorkBoardDto workboarddto , BindingResult result,
