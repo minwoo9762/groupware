@@ -99,9 +99,7 @@
     </c:choose>
   </div>
 </div>
-
-
-
+</div>
 
 </section>
 </body>

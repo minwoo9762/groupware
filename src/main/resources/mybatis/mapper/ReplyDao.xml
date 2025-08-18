@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.groupware.dao.IReplyDao">
+    <select id="getReplyCount" resultType="_int">
+        select count(*) from reply where boardid=#{id}
+    </select>
+</mapper>

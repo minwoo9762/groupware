@@ -4,13 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.himedia.groupware.dao.WorkBoardDao">
-    <select id="selectBoard" resultType="com.himedia.groupware.dto.WorkBoardDto">
-        select * from board
+    <select id="getAllCount" resultType="_int">
+        select count(*)from board;
     </select>
 
+    <select id="selectBoard" parameterType="com.himedia.groupware.dto.Paging" resultType="com.himedia.groupware.dto.WorkBoardDto">
+        select*from board order by id desc limit #{displayRow} offset #{startNum}
+    </select>
 
-<select id="getboard" resultType="com.himedia.groupware.dto.WorkBoardDto">
-    select * from board where id=#{id}
-</select>
+    <select id="getBoard" resultType="com.himedia.groupware.dto.WorkBoardDto">
+        select*from board where id=#{id}
+    </select>
+
+    <update id="addReadCount">
+        update board set readcount = readcount + 1 where id =#{id}
+    </update>
+
+    <insert id="insert" parameterType="com.himedia.groupware.dto.WorkBoardDto">
+        insert into board (userid, content, name, title, image, savefilename) values (#{userid}, #{content}, #{name}, #{title}, #{image}, #{savefilename})
+    </insert>
+
+
 
 </mapper>

@@ -14,5 +14,8 @@ public class WorkBoardDto {
     private String name;
     private String title;
     private Timestamp indate;
+    private int replycnt;
+    private String image;
+    private String savefileName;
 
 }

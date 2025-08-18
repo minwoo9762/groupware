@@ -1,10 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="../header.jsp"%>
-<section class="section admin">
+<section>
     <%@include file="../lnb.jsp"%>
     <form name="writeBoard" id="writeBoard" method="post" action="writeBoard" >
-        <input type="hidden" name="userid" value="${loginUser.userid}" />
     <div class="main">
         <h2 class="title" style="font-size:40px;">게시글 등록</h2>
         <div class="tableWrap">
@@ -18,14 +17,13 @@
                 </div>
 
                 <div class="tr">
-                    <div class="th" style="flex: 1">작성자<%--${loginUser.name}--%></div>
+                    <div class="th" style="flex: 1">작성자${loginUser.name}</div>
                     <div class="th"  style="flex: 6"><input type="text" name="title" /></div>
                 </div>
 
                 <div class="tr">
                     <div class="th" >카테고리</div>
                     <div class="th" >게시판</div>
-                    <div class="th" ><label>패스워드</label><input type="password" name="bpwd" /></div>
                 </div>
 
                 <div class="tr" id="textarea">
@@ -40,7 +38,7 @@
 
                 <div class="btns">
                     <input type="submit" value="작성완료" />
-                    <input type="button" value="돌아가기" />
+                    <input type="button" value="돌아가기" onclick="location.href='workBoard'" />
                 </div>
 
             </div>
