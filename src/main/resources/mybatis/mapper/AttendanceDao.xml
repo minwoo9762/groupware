@@ -4,5 +4,17 @@
 
 
 <mapper namespace="com.himedia.groupware.dao.AttendanceIDao">
-    <insert id=""></insert>
+    <select id="selectAttendance" parameterType="com.himedia.groupware.dto.UserDto">
+        select * from attendance where userid=#{email};
+    </select>
+
+    <insert id="insertAttendance" parameterType="com.himedia.groupware.dto.UserDto">
+        insert into attendance (userid, indate, outdate, state)
+        values (#{email}, #{atddao.indate}, #{atddao.outdate}, #{atddao.state});
+    </insert>
+
+    <update id="updateAttendance" parameterType="com.himedia.groupware.dto.UserDto">
+        UPDATE attendance SET outdate = #{atddao.outdate}, state = 2 WHERE userid = #{email} AND outdate IS NULL;
+    </update>
+
 </mapper>

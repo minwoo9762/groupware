@@ -29,7 +29,7 @@ function clickAttend(target) {
     if(targetId === "btnAttend") {
         attendTime.time = currentTime;
         attendTime.indate = formattedDate + " " + formattedClock;
-        attendTime.state = "active";
+        attendTime.state = 1;
         let attendTimeActive = document.getElementById("attendTime").innerText = attendTime.time;
         console.log("출근시간 : " + attendTime.time);
         console.log("출근 indate : " + attendTime.indate);
@@ -39,7 +39,7 @@ function clickAttend(target) {
     } else  if(targetId === "btnleave") {
         leaveTime.time = currentTime;
         leaveTime.indate = formattedDate + " " + formattedClock;
-        leaveTime.state = "active";
+        leaveTime.state = 1;
         let leaveTimeActive = document.getElementById("leaveTime").innerText = leaveTime.time;
 
         console.log("퇴근시간 : " + leaveTime.time);
@@ -49,11 +49,14 @@ function clickAttend(target) {
         ajaxLeave(leaveTime);
     };
 }
-// ajax에서 obj.state 가 active 이면 버튼 미리 비활성화.
+
 function ajaxAttend(attendTime) {
-    let formData = {attendIndate: attendTime.indate, state: attendTime.state}
+    let formData = {
+        indate: attendTime.indate,
+        state: attendTime.state
+    }
     $.ajax({
-        url: location.origin + "/attendance",
+        url: location.origin + "/addAttendance",
         type: "POST",
         contentType: 'application/json',
         data: JSON.stringify(formData),
@@ -69,9 +72,9 @@ function ajaxAttend(attendTime) {
 }
 function ajaxLeave(leaveTime) {
 
-    let formData = {leaveTimeIndate: leaveTime.indate, state: leaveTime.state}
+    let formData = {outdate: leaveTime.indate, state: leaveTime.state}
     $.ajax({
-        url: location.origin + "/attendance",
+        url: location.origin + "/addAttendance",
         type: "POST",
         contentType: 'application/json',
         data:  JSON.stringify(formData),
