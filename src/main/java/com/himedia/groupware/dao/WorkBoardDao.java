@@ -11,4 +11,6 @@ import java.util.HashMap;
 public interface WorkBoardDao {
 
     ArrayList<WorkBoardDto> selectBoard();
+
+    WorkBoardDto getboard(int id);
 }
