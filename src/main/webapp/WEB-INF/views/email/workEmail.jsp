@@ -3,17 +3,10 @@
 <%@include file="../header.jsp"%>
 <section class="section admin">
     <%@include file="../lnb.jsp"%>
+
     <div class="main">
-        <h2 class="title" style="font-size:40px;">게시판</h2>
+        <h2 class="title" style="font-size:40px;">이메일</h2>
         <div class="searchWrap">
-            부서명
-            <select>
-                <option>선택</option>
-                <option>인사</option>
-                <option>영업</option>
-                <option>1팀</option>
-                <option>2팀</option>
-            </select>
             <input type="text" />
             <input type="button" />
                 검색
@@ -23,29 +16,15 @@
                 <div class="thead">
                     <div class="tr">
                         <div class="th" style="flex: 1">No.</div>
-                        <div class="th"  style="flex: 2">사용자명</div>
-                        <div class="th"  style="flex: 8">제 목</div>
-                        <div class="th"  style="flex: 2">작성 일자</div>
+                        <div class="th"  style="flex: 2">보낸이</div>
+                        <div class="th"  style="flex: 8">내 용</div>
                         <div class="th"  style="flex: 2"></div>
                     </div>
                 </div>
             </div>
-            <c:forEach items="${boardList}" var="board" >
-                <div class="tr">
-                    <div class="td" style="flex: 1">${board.id}</div>
-                    <div class="td" style="flex: 2">${board.name}</div>
-                    <a class="td" style="flex: 8" >
-                    <a href="boardView?id=${board.id}">
-                    ${board.title}
-                    </a>
-                    </div>
-                    <div class="td" style="flex: 2">${board.indate}</div>
-                    <div class="td" style="flex: 2"><%--${reply.count}--%></div>
-                </div>
-           </c:forEach>
-                </div>
+        </div>
         <div class="writebutton">
-            <input type="button" value="게시물 등록" onclick="location.href='workBoardWrite'" />
+            <input type="button" value="이메일 보내기" onclick="location.href='writeEmail'" />
         </div>
     <div style="display: flex; justify-content: center; font-size: 105%">
             <c:if test="${paging.prev}" >
@@ -64,6 +43,8 @@
             </c:if>
         </div>
     </div>
+
 </section>
+
 </body>
 </html>

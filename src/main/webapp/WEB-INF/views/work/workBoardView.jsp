@@ -85,10 +85,10 @@
           <div class="reply_row">
             <div class="reply_col">${reply.userid}</div>
             <div class="reply_col"><fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm"/></div>
-            <div class="reply_col">${reply.content}</div>
+            <div class="reply_col">${reply.reply}</div>
             <div class="reply_col">
                 <c:if test="${reply.userid==loginUser.userid}">
-                  <input type="button" value="삭제" onClick="deleteReply('${reply.replynum}','${board.id}')" />
+                  <input type="button" value="삭제" onClick="deleteReply('${reply.id}','${board.id}')" />
                 </c:if>
             </div>
           </div>

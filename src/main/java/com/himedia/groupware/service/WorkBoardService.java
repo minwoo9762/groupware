@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
-public class Work_BoardService {
+public class WorkBoardService {
 
     @Autowired
     WorkBoardDao bdao;
