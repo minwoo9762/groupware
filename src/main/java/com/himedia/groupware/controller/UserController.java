@@ -43,7 +43,7 @@ public class UserController {
                 model.addAttribute("message", "이메일 또는 비밀번호가 다릅니다.");
             else {
                 session.setAttribute("loginUser", udto);
-                url = "index";
+                url = "redirect:/home";
             }
         }
         return url;
@@ -80,6 +80,8 @@ public class UserController {
             model.addAttribute("message", "이메일 중복검사를 실행하세요.");
         else if (result.hasFieldErrors("pwd"))
             model.addAttribute("message", "비밀번호를 입력하세요.");
+        else if (!us.isValidPwd(userdto.getPwd()))
+            model.addAttribute("message", "올바른 비밀번호를 입력하세요.");
         else if(!userdto.getPwd().equals(pwdCheck))
             model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다.");
         else if (result.hasFieldErrors("name"))
@@ -115,7 +117,8 @@ public class UserController {
         else if(!udto.getName().equals(name))
             result.put("findPwdMsg", "해당 이름의 사원이 존재하지 않습니다.");
         else {
-            number = mailService.sendMail(email);
+            number = (int)(Math.random()*90000)+100000;
+            mailService.sendMail(email, number);
             result.put("findPwdMsg", "이메일을 발송했습니다.");
             result.put("state", "sended");
         }

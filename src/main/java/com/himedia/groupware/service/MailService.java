@@ -4,17 +4,18 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor //
+@RequiredArgsConstructor
+@Async
 public class MailService {
     private final JavaMailSender JMSender;
-    private static int number;
-    public int sendMail(String email) {
-        number = (int)(Math.random()*90000)+100000;
+
+    public void sendMail(String email, int number) {
 
         MimeMessage message = JMSender.createMimeMessage();
         try {
@@ -31,6 +32,5 @@ public class MailService {
             throw new RuntimeException(e);
         }
         JMSender.send(message);
-        return number;
     }
 }
