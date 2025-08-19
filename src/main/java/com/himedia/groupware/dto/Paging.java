@@ -7,8 +7,8 @@ public class Paging {
 
     private int page;
     private int totalCount;
-    private int displayRow=3;
-    private int displayPage=5;
+    private int displayRow;
+    private int displayPage;
     private int beginPage;
     private int endPage;
     private boolean prev;
@@ -17,7 +17,6 @@ public class Paging {
     private int endNum;
 
     public void calPaging() {
-        if(page < 1) page = 1;
         endPage = ((int) (Math.ceil(page / (double) displayPage))) * displayPage;
         beginPage = endPage - (displayPage - 1);
         int totalPage = (int) Math.ceil(totalCount / (double) displayRow);
@@ -29,6 +28,5 @@ public class Paging {
         prev = (beginPage == 1) ? false : true;
         startNum = (page - 1) * displayRow;
         endNum = page * displayRow;
-        System.out.println(beginPage + " " + endPage + " " + startNum + " " + endNum);
     }
 }
