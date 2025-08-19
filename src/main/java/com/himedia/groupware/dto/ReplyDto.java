@@ -7,8 +7,11 @@ import java.sql.Timestamp;
 @Data
 public class ReplyDto {
     private int id;
-    private int userId;
-    private int boardId;
+    private int userid;
+    private int boardid;
+    private String name;
     private String reply;
     private Timestamp writedate;
+
+
 }

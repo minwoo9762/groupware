@@ -1,10 +1,10 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="../header.jsp"%>
 <section class="section admin">
 <%@include file="../lnb.jsp"%>
 
   <div class="main">
-    <h2 class="title" style="font-size:40px;">게시글 상세보기</h2>
+    <h2 class="title" style="font-size:20px;">게시글 상세보기 게시글 보기</h2>
     <div class="tableWrap">
       <div class="table">
 
@@ -28,7 +28,6 @@
         <div class="tr" id="textarea">
           <div class="th" style="flex: 1" >내 용</div>
           <div class="th"  style="flex: 6" >${board.content} </div>
-
         </div>
 
     <div class="field">
@@ -40,18 +39,16 @@
             이미지가 없습니다
           </c:when>
           <c:otherwise>
-            <img src="${board.savefilename}" width="350"/><br />
+            <img src="/images/${board.savefilename}" width="350"/><br />
             ${board.image}
           </c:otherwise>
         </c:choose>
       </div>
     </div>
     <div class="updateBtns">
-      <input type="button" value="수정" onClick="location.href='updateBoard?id=${board.id}'"/>
-
-      <input type="button" value="삭제" onClick="deleteBoard('${board.id}')"/>
-      <input type="button" value="패스워드 수정" onClick="updateBoardPass('${board.id}')"/>
-      <input type="button" value="목록으로" onClick="location.href='workBoard'"/>
+      <input type="button" value="수정" onClick="location.href='updateBoardForm?id=${board.id}'"/>
+      <input type="button" value="삭제" onClick="deleteBoard('${board.id}')" />
+      <input type="button" value="목록으로" onClick="location.href='workBoard'" />
     </div>
   </div>
 
@@ -65,31 +62,32 @@
 
     <form action="addReply" method="post" name="addRep">
       <input type="hidden" name="boardid" value="${board.id}" />
-      <input type="hidden" name="userid" value="${loginUser.userid}" />
+      <input type="hidden" name="userid" value="${loginUser.id}" />
+      <input type="hidden" name="name" value="${loginUser.name}" />
       <div class="reply_row">
-        <div class="reply_col">${loginUser.userid}</div>
+        <div class="reply_col">${loginUser.name}</div>
         <div class="reply_col">
           <c:set var="now" value="<%=new java.util.Date()%>"/>
           <fmt:formatDate value="${now}" pattern="MM/dd hh:mm"/>
         </div>
-        <div class="reply_col"><input type="text" name="content" size="60"></div>
-        <div class="reply_col">
+        <div class=""><input type="text" name="reply" size="60"></div>
+        <div class="">
           <input type="submit" value="댓글작성" onclick="return replyCheck();">
         </div>
       </div>
     </form>
     <c:choose>
       <c:when test="${replyList.size()==0}">
-        <div class="reply_col">댓글이 하나도 없습니다.</div>
+        <div class="">댓글이 하나도 없습니다.</div>
       </c:when>
       <c:otherwise>
         <c:forEach items="${replyList}" var="reply">
-          <div class="reply_row">
-            <div class="reply_col">${reply.userid}</div>
-            <div class="reply_col"><fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm"/></div>
-            <div class="reply_col">${reply.reply}</div>
-            <div class="reply_col">
-                <c:if test="${reply.userid==loginUser.userid}">
+          <div class="">
+            <div class="">${reply.name}</div>
+            <div class=""><fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm"/></div>
+            <div class="">${reply.reply}</div>
+            <div class="">
+                <c:if test="${reply.userid==loginUser.id}">
                   <input type="button" value="삭제" onClick="deleteReply('${reply.id}','${board.id}')" />
                 </c:if>
             </div>
