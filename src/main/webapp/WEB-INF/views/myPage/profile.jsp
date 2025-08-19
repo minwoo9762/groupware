@@ -20,7 +20,7 @@
             <label>부서</label><div>${partName}</div>
         </div>
         <div class="field">
-            <label>주소</label><div>${loginUser.address1}<br>${loginUser.address2}</div>
+            <label>주소</label><div>${loginUser.address1} ${loginUser.address2} ${loginUser.address3}</div>
         </div>
         <div class="field">
             <label>권한</label><div>${providerName}</div>
