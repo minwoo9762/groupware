@@ -7,8 +7,8 @@
             <span>인사관리</span></span>
             <ul class="depth">
 
-                <li><a href="attendance?id=2">근태 조회</a></li>
-                <li><a href="vacation?id=1">휴가 조회</a></li>
+                <li><a href="attendance?id=2"<%--+${id}--%>>근태 조회</a></li>
+                <li><a href="vacation?id=2"<%--+${id}--%>>결재 조회</a></li>
                 <li><a href="paycheck">급여 조회</a></li>
 
             </ul>

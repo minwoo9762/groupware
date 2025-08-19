@@ -1,6 +1,9 @@
 package com.himedia.groupware.controller;
 
 import com.himedia.groupware.dto.AttendanceDto;
+import com.himedia.groupware.dto.PayDto;
+import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.dto.VacationDto;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -92,22 +95,45 @@ public class HrController {
         model.addAttribute("vacationCount", vacationCount);
         model.addAttribute("remainingVacation", remainingVacation);
 
-        return "/Hr/attendance";
+        return "attendance/attendance";
     }
 
-    @GetMapping("/vacationList")
-    public String vacationList(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        // VacationDto loginVacation = (VacationDto) session.getAttribute("loginVacation");
-        HashMap<String, Object> result = null;
+    @GetMapping("/vacation")
+    public String vacation(HttpServletRequest request, Model model) {
+        HashMap<String, Object> result = hs.selectVacation(request);
 
-        return "/Hr/vacation";
+        model.addAttribute("vacationList", result.get("vacationList"));
+        model.addAttribute("paging", result.get("paging"));
+        model.addAttribute("key", result.get("key"));
+
+        return "vacation/vacation";
     }
+
+    @GetMapping("/vacationDetail")
+    public String vacationDetail(@RequestParam("pseq") int pseq, Model model) {
+        VacationDto vdto = hs.getVacation(pseq);
+        model.addAttribute("vacationDetail", vdto);
+
+        return "vacation/vacationDetail";
+    }
+
 
     @GetMapping("/paycheck")
-    public String paycheck(Model model) {
+    public String paycheck(HttpServletRequest request, Model model) {
+        HashMap<String, Object> result = hs.selectPay(request);
+        model.addAttribute("payList", result.get("payList"));
+        model.addAttribute("paging", result.get("paging"));
+        model.addAttribute("key", result.get("key"));
 
-        return "/Hr/paycheck";
+        return "pay/payCheckList";
+    }
+
+    @GetMapping("/payDetail")
+    public String payDetail(@RequestParam("pseq") int pseq, Model model) {
+        PayDto pdto = hs.getPay(pseq);
+        model.addAttribute("PayDto", pdto);
+
+        return "pay/payDetail";
     }
 
 }
