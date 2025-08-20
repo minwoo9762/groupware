@@ -77,8 +77,8 @@
         <h2>Join</h2>
         <div class="field">
             <label>E-Mail</label>
-            <div>
-                <input type="text" name="email" value="${dto.email}">
+            <div class="btn">
+                <input type="text" name="email" value="${dto.email}">&nbsp;
                 <input type="button" value="중복검사" id="duplication">
                 <div id="duplicationMsg" style="flex: 2"></div>
                 <input type="hidden" name="emailCheck" id="emailCheck" value="${emailCheck}">
@@ -114,8 +114,8 @@
         </div>
         <div class="field">
             <label>우편번호</label>
-            <div>
-                <input type="text" id="my_postcode" name="zipNum" value="${dto.zipNum}" readonly>
+            <div class="btn">
+                <input type="text" id="my_postcode" name="zipNum" value="${dto.zipNum}" readonly>&nbsp;
                 <input type="button" value="우편번호 찾기" onclick="findZipNum()">
             </div>
         </div>
@@ -124,8 +124,8 @@
         </div>
         <div class="field">
             <label>상세 주소</label>
-            <input type="text" id="my_detailAddress" name="address2" value="${dto.address2}">
-            <input type="text" id="my_extraAddress" name="address3" value="${dto.address3}">
+            <input type="text" id="my_detailAddress" name="address2" value="${dto.address2}" style="flex: 4">&nbsp;
+            <input type="text" id="my_extraAddress" name="address3" value="${dto.address3}" style="flex: 1">
         </div>
         <div class="field">
         </div>
