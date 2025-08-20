@@ -6,7 +6,7 @@
 <mapper namespace="com.himedia.groupware.dao.HrDao">
 
     <select id="selectAttendanceByUserId" parameterType="int" resultType="com.himedia.groupware.dto.AttendanceDto">
-        SELECT * FROM attendance WHERE id = #{id}
+        SELECT * FROM attendance WHERE aseq = #{aseq}
     </select>
     
     <select id="getAllCountForPay" resultType="_int">
