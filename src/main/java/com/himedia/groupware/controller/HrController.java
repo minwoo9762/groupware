@@ -2,11 +2,9 @@ package com.himedia.groupware.controller;
 
 import com.himedia.groupware.dto.AttendanceDto;
 import com.himedia.groupware.dto.PayDto;
-import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.dto.VacationDto;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +23,10 @@ public class HrController {
     private HrService hs;
 
     @GetMapping("/attendance")
-    public String attendance(@RequestParam("aseq") int aseq, Model model, HttpServletRequest request) {
-        Object loginUser = request.getSession().getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/";
-        }
-
+    public String attendance(@RequestParam("aseq") int aseq, Model model) {
         List<AttendanceDto> attendanceList = hs.selectAttendanceByUserId(aseq);
 
-        // 기준
+        // 출근, 퇴근 기준 시간
         LocalTime cutoffLate = LocalTime.of(9, 30);
         LocalTime cutoffEarlyLeave = LocalTime.of(18, 30);
 
@@ -46,7 +39,7 @@ public class HrController {
             Timestamp indate = att.getIndate();
             Timestamp outdate = att.getOutdate();
 
-            // 휴가
+            // 휴가 상태
             if (att.getState() == 5) {
                 vacationCount++;
                 continue;
@@ -61,7 +54,7 @@ public class HrController {
 
             LocalTime inTime = indate.toLocalDateTime().toLocalTime();
 
-            // 지각
+            // 지각 여부
             if (inTime.isAfter(cutoffLate)) {
                 att.setState(1);
                 lateCount++;
@@ -71,7 +64,7 @@ public class HrController {
 
             if (outdate != null) {
                 LocalTime outTime = outdate.toLocalDateTime().toLocalTime();
-                // 조퇴
+                // 조퇴 여부
                 if (outTime.isBefore(cutoffEarlyLeave)) {
                     att.setState(4);
                     earlyLeaveCount++;
@@ -79,7 +72,7 @@ public class HrController {
             }
         }
 
-        // 잔여 휴가
+        // 잔여 휴가 계산 (15일 고정)
         int totalVacationDays = 15;
         int remainingVacation = totalVacationDays - vacationCount;
 
@@ -124,26 +117,15 @@ public class HrController {
         return "vacation/vacationDetail";
     }
 
-    @GetMapping("/deleteVacation")
-    public String deletePay(@RequestParam("pseq") int pseq){
-        hs.deleteVacation(pseq);
-        return "redirect:/vacation";
-    }
-
     @GetMapping("/paycheck")
     public String paycheck(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        HashMap<String, Object> result = null;
-        String url = "redirect:/";
-        if (loginUser != null) {
-            url = "pay/payCheckList";
-            result = hs.selectPay(request);
-            model.addAttribute("payList", result.get("payList"));
-            model.addAttribute("paging", result.get("paging"));
-            model.addAttribute("key", result.get("key"));
-        }
-        return url;
+        HashMap<String, Object> result = hs.selectPay(request);
+
+        model.addAttribute("payList", result.get("payList"));
+        model.addAttribute("paging", result.get("paging"));
+        model.addAttribute("key", result.get("key"));
+
+        return "pay/payCheckList";
     }
 
     @GetMapping("/payDetail")
@@ -153,10 +135,8 @@ public class HrController {
         }
 
         PayDto pdto = hs.getPay(pseq);
-        model.addAttribute("payDetail", pdto);
+        model.addAttribute("payDto", pdto);
 
         return "pay/payDetail";
     }
-
-
 }

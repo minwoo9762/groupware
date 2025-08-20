@@ -40,7 +40,6 @@ button {border: none; background: none;}
 
 .line {margin: 24px 0; border: 1px solid #e5e5e5; box-sizing: border-box;}
 
-
 .admin .main {display: flex; flex-direction: column;}
 .admin .main .searchWrap {display: flex; justify-content: flex-end; align-items: center; gap: 5px; padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
 
@@ -56,6 +55,9 @@ button {border: none; background: none;}
 
 img{object-fit:contain; width: 300px; height: 200px;}
 
+.formBundle{display: flex; flex-direction: column; width:90%; height: 90%;}
+.formBundle .container{{padding: 20px 30px 20px 30px; display: flex; flex-direction: column; width: 100%; height: 100%; justify-content: flex-start;}}
+.containerForm{width:100%; height: 100%;}
 .container{padding: 20px 30px 20px 30px; display: flex; flex-direction: column; width: 90%; height: 90%; justify-content: flex-start;}
 .head{margin-left:20px ; font-size:30px; font-weight: bold; padding-bottom: 10px}
 .mainBox{border-top: 3px solid silver; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column;
@@ -71,20 +73,27 @@ img{object-fit:contain; width: 300px; height: 200px;}
     font-weight: bold; font-size: 20px;}
 
 .bar{display: flex; height:55px; align-items: center; font-weight: bold; font-size: 15px; border-bottom: 1px solid silver;}
-.left{flex: 2; text-align: center; border-right: 1px solid silver;}
-.right{flex: 5; text-align: center;}
+.left{flex: 2; text-align: center; border-right: 1px solid silver; font-size: 20px;}
+.right{flex: 5; text-align: center; font-size: 20px;}
+.inputText{width:95%; height:95%; font-size: 20px; border: none;}
 
 .contentBar{display: flex; height:250px; align-items: center; font-weight: bold; font-size: 15px; border-bottom: 1px solid silver;}
 .contentLeft{flex: 2; text-align: center; display: flex; flex-direction: column; height: 98%}
-.contentBox{flex: 5; display: flex; height: 98%; border-left: 1px solid silver; align-items: center; justify-content: center;}
+.contentBox{flex: 5; display: flex; height: 98%; border-left: 1px solid silver; align-items: center; justify-content: center;
+    font-size: 20px;}
+.contentBox textarea{width:95%; height: 95%; padding: 10px; font-size: 20px; border:none;}
 .contentLeft .first{flex:1; border-bottom: 3px solid silver; display: flex; align-items: center; justify-content: center;}
 .contentLeft .second{flex:1; display: flex; align-items: center; justify-content: center;}
-.contentLeft .imgField{flex:3; display: flex; align-items: center; justify-content: center; width: 95%; height: 95%;}
+.contentLeft .imgField{flex:3; display: flex; align-items: center; justify-content: center; width: 95%; height: 95%; flex-direction: column;}
 .updateBtns{height: 60px; display: flex; justify-content: center; align-items: center; margin-top: 5px;}
 .updateBtns input[type=button]{background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
     font-size: 18px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15);
     margin: 0px 10px 0px 10px; width:100px; height: 50px;}
 .updateBtns input[type=button]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
+.updateBtns input[type=submit]{background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
+    font-size: 18px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    margin: 0px 10px 0px 10px; width:100px; height: 50px;}
+.updateBtns input[type=submit]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
 
 .reply_title{display: flex; height:30px; border-bottom: 3px solid silver; background: #6c757d; color: #e5e5e5; align-items: center;
     font-weight: bold; font-size: 14px; border-radius: 10px 10px 0px 0px; margin-top: 10px;}
@@ -102,4 +111,8 @@ img{object-fit:contain; width: 300px; height: 200px;}
     font-size: 15px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15); width: 48px; height: 28px;}
 .reply_btn input[type=button]{background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
     font-size: 15px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15); width: 48px; height: 28px;}
+.reply_btn input[type=submit]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
+.reply_btn input[type=button]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
+
+.insertImg{display: flex; flex-direction: column; margin-top: 10px; margin-left: 30px;}
 
