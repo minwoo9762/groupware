@@ -152,4 +152,5 @@ public class HrService {
     public VacationDto getVacation(int pseq) {
         return hdao.getVacation(pseq);
     }
+
 }

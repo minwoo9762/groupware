@@ -14,8 +14,8 @@
                 <div class="tb">
                     <div class="row">
                         <div class="col" style="display: flex; align-items: center;">
-                            <input type="text" name="key" value="${key}" />&nbsp;
-                            <input type="button" name="b_search" value="검색"/>
+                            제목&nbsp;<input type="text" name="key" value="${key}" />&nbsp;
+                            <input type="button" name="p_search" value="검색" onclick="go_search('paycheck')"/>
                         </div>
                     </div>
 

@@ -1,0 +1,60 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+article {
+    margin: 40px;
+    width: 100%;
+    height: calc(100vh - 80px); /* 화면 높이에서 margin 위아래 제외 */
+    padding: 20px 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Arial', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.field {
+    min-height: 280px;          /* 최소 높이 유지 */
+    margin-bottom: 10px;        /* 아래 여백 줄임 */
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    text-align: center;
+    overflow-y: auto;           /* 내용 넘칠 때 스크롤 */
+}
+
+.btn {
+    margin-top: 10px;           /* 위쪽 여백 추가 */
+    text-align: right;
+}
+
+.btn input[type="button"] {
+    background-color: #404040;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn input[type="button"]:hover {
+    background-color: #404040;
+}

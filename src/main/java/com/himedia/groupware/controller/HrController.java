@@ -92,6 +92,10 @@ public class HrController {
 
     @GetMapping("/vacation")
     public String vacation(HttpServletRequest request, Model model) {
+        if(request.getSession().getAttribute("loginUser") == null) {
+            return "redirect:/";
+        }
+
         HashMap<String, Object> result = hs.selectVacation(request);
 
         model.addAttribute("vacationList", result.get("vacationList"));
@@ -102,7 +106,11 @@ public class HrController {
     }
 
     @GetMapping("/vacationDetail")
-    public String vacationDetail(@RequestParam("pseq") int pseq, Model model) {
+    public String vacationDetail(@RequestParam("pseq") int pseq, Model model, HttpServletRequest request) {
+        if(request.getSession().getAttribute("loginUser") == null) {
+            return "redirect:/";
+        }
+
         VacationDto vdto = hs.getVacation(pseq);
         model.addAttribute("vacationDetail", vdto);
 
@@ -121,7 +129,11 @@ public class HrController {
     }
 
     @GetMapping("/payDetail")
-    public String payDetail(@RequestParam("pseq") int pseq, Model model) {
+    public String payDetail(@RequestParam("pseq") int pseq, Model model, HttpServletRequest request) {
+        if(request.getSession().getAttribute("loginUser") == null) {
+            return "redirect:/";
+        }
+
         PayDto pdto = hs.getPay(pseq);
         model.addAttribute("payDto", pdto);
 

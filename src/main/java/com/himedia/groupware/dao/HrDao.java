@@ -24,4 +24,6 @@ public interface HrDao {
     ArrayList<VacationDto> selectVacation(Paging paging, String key);
 
     VacationDto getVacation(int pseq);
+
+    void deleteVacation(int pseq);
 }

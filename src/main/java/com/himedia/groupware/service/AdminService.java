@@ -3,12 +3,12 @@ package com.himedia.groupware.service;
 import com.himedia.groupware.dao.AdminIDao;
 import com.himedia.groupware.dto.NoticeDto;
 import com.himedia.groupware.dto.Paging;
+import com.himedia.groupware.dto.PayDto;
 import com.himedia.groupware.dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,19 +28,19 @@ public class AdminService {
 
 
         int page = 1;
-        if(request.getParameter("page") != null) {
+        if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
             session.setAttribute("page", page);
-        } else if(session.getAttribute("page") != null) {
-            page = (Integer)session.getAttribute("page");
+        } else if (session.getAttribute("page") != null) {
+            page = (Integer) session.getAttribute("page");
         }
 
         String key = "";
-        if(request.getParameter("key") != null){
-            key=request.getParameter("key");
+        if (request.getParameter("key") != null) {
+            key = request.getParameter("key");
             session.setAttribute("key", key);
-        } else if(session.getAttribute("key") != null){
-            key=(String)session.getAttribute("key");
+        } else if (session.getAttribute("key") != null) {
+            key = (String) session.getAttribute("key");
         }
 
         Paging paging = new Paging();
@@ -52,7 +52,7 @@ public class AdminService {
         paging.setTotalCount(count);
         paging.calPaging();
 
-        if( page > paging.getEndPage() ) {
+        if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
@@ -80,19 +80,19 @@ public class AdminService {
 
 
         int page = 1;
-        if(request.getParameter("page") != null) {
+        if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
             session.setAttribute("page", page);
-        } else if(session.getAttribute("page") != null) {
-            page = (Integer)session.getAttribute("page");
+        } else if (session.getAttribute("page") != null) {
+            page = (Integer) session.getAttribute("page");
         }
 
         String key = "";
-        if(request.getParameter("key") != null){
-            key=request.getParameter("key");
+        if (request.getParameter("key") != null) {
+            key = request.getParameter("key");
             session.setAttribute("key", key);
-        } else if(session.getAttribute("key") != null){
-            key=(String)session.getAttribute("key");
+        } else if (session.getAttribute("key") != null) {
+            key = (String) session.getAttribute("key");
         }
 
         Paging paging = new Paging();
@@ -104,7 +104,7 @@ public class AdminService {
         paging.setTotalCount(count);
         paging.calPaging();
 
-        if( page > paging.getEndPage() ) {
+        if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
@@ -125,8 +125,33 @@ public class AdminService {
         adidao.insertNotice(noticedto);
     }
 
+    public void updateNotice(NoticeDto noticedto) {
+        adidao.updateNotice(noticedto);
+    }
 
     public NoticeDto selectNoticeDetail(int nseq) {
         return adidao.selectNoticeDetail(nseq);
     }
+
+
+    public PayDto selectPay(int id) {
+        return adidao.selectPay(id);
+    }
+
+    public UserDto findUser(int id) {
+        return adidao.findUser(id);
+    }
+
+    public void insertPay(PayDto paydto, int id) {
+        adidao.insertPay(paydto, id);
+    }
+
+    public void updatePay(PayDto paydto, int id) {
+        adidao.updatePay(paydto, id);
+    }
+
+    public ArrayList<NoticeDto> currentNotice(int num) {
+        return adidao.currentNotice(num);
+    }
+
 }
