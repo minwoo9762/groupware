@@ -22,15 +22,18 @@ import java.util.List;
 public class HrController {
 
     @Autowired
-    HrService hs;
-
-
+    private HrService hs;
 
     @GetMapping("/attendance")
-    public String attendance(@RequestParam("aseq") int aseq, Model model) {
+    public String attendance(@RequestParam("aseq") int aseq, Model model, HttpServletRequest request) {
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if (loginUser == null) {
+            return "redirect:/";
+        }
+
         List<AttendanceDto> attendanceList = hs.selectAttendanceByUserId(aseq);
 
-        // 출근 퇴근 기준 시간
+        // 기준
         LocalTime cutoffLate = LocalTime.of(9, 30);
         LocalTime cutoffEarlyLeave = LocalTime.of(18, 30);
 
@@ -68,7 +71,6 @@ public class HrController {
 
             if (outdate != null) {
                 LocalTime outTime = outdate.toLocalDateTime().toLocalTime();
-
                 // 조퇴
                 if (outTime.isBefore(cutoffEarlyLeave)) {
                     att.setState(4);
@@ -77,14 +79,11 @@ public class HrController {
             }
         }
 
-        // 잔여 휴가 계산
-        int totalVacationDays = 15;  // 15일로 가정
+        // 잔여 휴가
+        int totalVacationDays = 15;
         int remainingVacation = totalVacationDays - vacationCount;
 
-        String userid = "";
-        if(!attendanceList.isEmpty()){
-            userid = attendanceList.get(0).getUserid();
-        }
+        String userid = attendanceList.isEmpty() ? "" : attendanceList.get(0).getUserid();
 
         model.addAttribute("attendanceList", attendanceList);
         model.addAttribute("aseq", aseq);
@@ -100,6 +99,10 @@ public class HrController {
 
     @GetMapping("/vacation")
     public String vacation(HttpServletRequest request, Model model) {
+        if(request.getSession().getAttribute("loginUser") == null) {
+            return "redirect:/";
+        }
+
         HashMap<String, Object> result = hs.selectVacation(request);
 
         model.addAttribute("vacationList", result.get("vacationList"));
@@ -110,30 +113,50 @@ public class HrController {
     }
 
     @GetMapping("/vacationDetail")
-    public String vacationDetail(@RequestParam("pseq") int pseq, Model model) {
+    public String vacationDetail(@RequestParam("pseq") int pseq, Model model, HttpServletRequest request) {
+        if(request.getSession().getAttribute("loginUser") == null) {
+            return "redirect:/";
+        }
+
         VacationDto vdto = hs.getVacation(pseq);
         model.addAttribute("vacationDetail", vdto);
 
         return "vacation/vacationDetail";
     }
 
+    @GetMapping("/deleteVacation")
+    public String deletePay(@RequestParam("pseq") int pseq){
+        hs.deleteVacation(pseq);
+        return "redirect:/vacation";
+    }
 
     @GetMapping("/paycheck")
     public String paycheck(HttpServletRequest request, Model model) {
-        HashMap<String, Object> result = hs.selectPay(request);
-        model.addAttribute("payList", result.get("payList"));
-        model.addAttribute("paging", result.get("paging"));
-        model.addAttribute("key", result.get("key"));
-
-        return "pay/payCheckList";
+        HttpSession session = request.getSession();
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        HashMap<String, Object> result = null;
+        String url = "redirect:/";
+        if (loginUser != null) {
+            url = "pay/payCheckList";
+            result = hs.selectPay(request);
+            model.addAttribute("payList", result.get("payList"));
+            model.addAttribute("paging", result.get("paging"));
+            model.addAttribute("key", result.get("key"));
+        }
+        return url;
     }
 
     @GetMapping("/payDetail")
-    public String payDetail(@RequestParam("pseq") int pseq, Model model) {
+    public String payDetail(@RequestParam("pseq") int pseq, Model model, HttpServletRequest request) {
+        if(request.getSession().getAttribute("loginUser") == null) {
+            return "redirect:/";
+        }
+
         PayDto pdto = hs.getPay(pseq);
-        model.addAttribute("PayDto", pdto);
+        model.addAttribute("payDetail", pdto);
 
         return "pay/payDetail";
     }
+
 
 }

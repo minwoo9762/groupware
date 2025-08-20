@@ -21,7 +21,9 @@ public interface HrDao {
 
     int getAllCountForVacation(String key);
 
-    ArrayList<PayDto> selectVacation(Paging paging, String key);
+    ArrayList<VacationDto> selectVacation(Paging paging, String key);
 
     VacationDto getVacation(int pseq);
+
+    void deleteVacation(int pseq);
 }
