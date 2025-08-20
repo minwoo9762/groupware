@@ -25,7 +25,7 @@ let leaveTime = {};
 function clickAttend(target) {
     let targetId = target.getAttribute("id");
     let currentTime = document.getElementById("clock").innerText;
-    target.classList.add("disable");
+
     if(targetId === "btnAttend") {
         attendTime.time = currentTime;
         attendTime.indate = formattedDate + " " + formattedClock;
@@ -35,7 +35,7 @@ function clickAttend(target) {
         console.log("출근 indate : " + attendTime.indate);
         console.log("출근상태 : " + attendTime.state);
 
-        ajaxAttend(attendTime);
+        ajaxAttend(attendTime, target);
     } else  if(targetId === "btnleave") {
         leaveTime.time = currentTime;
         leaveTime.indate = formattedDate + " " + formattedClock;
@@ -46,11 +46,11 @@ function clickAttend(target) {
         console.log("퇴근 indate : " + leaveTime.indate);
         console.log("퇴근상태 : " + leaveTime.state);
 
-        ajaxLeave(leaveTime);
+        ajaxLeave(leaveTime, target);
     };
 }
 
-function ajaxAttend(attendTime) {
+function ajaxAttend(attendTime, target) {
     let formData = {
         indate: attendTime.indate,
         state: attendTime.state
@@ -64,13 +64,17 @@ function ajaxAttend(attendTime) {
         processData: false,
         success: function (data) {
             alert("출근 체크가 완료되었습니다.");
+            target.classList.add("disable");
+            target.closest(".btnWrap").querySelector("#btnleave").remove();
+            let btn = `<button id="btnleave" class="btn btnleave" type="button" onclick="clickAttend(this);">퇴근</button>`;
+            target.closest(".btnWrap").insertAdjacentHTML("beforeend", btn);
         },
         error: function () {
             alert('파일업로드실패');
         }
     });
 }
-function ajaxLeave(leaveTime) {
+function ajaxLeave(leaveTime, target) {
 
     let formData = {outdate: leaveTime.indate, state: leaveTime.state}
     $.ajax({
@@ -82,6 +86,7 @@ function ajaxLeave(leaveTime) {
         processData: false,
         success: function (data) {
             alert("퇴근 체크가 완료되었습니다.");
+            target.classList.add("disable");
         },
         error: function () {
             alert('파일업로드실패');
