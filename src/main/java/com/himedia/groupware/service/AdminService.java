@@ -3,6 +3,7 @@ package com.himedia.groupware.service;
 import com.himedia.groupware.dao.AdminIDao;
 import com.himedia.groupware.dto.NoticeDto;
 import com.himedia.groupware.dto.Paging;
+import com.himedia.groupware.dto.PayDto;
 import com.himedia.groupware.dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -133,4 +134,19 @@ public class AdminService {
     }
 
 
+    public PayDto selectPay(int id) {
+            return adidao.selectPay(id);
+    }
+
+    public UserDto findUser(int id) {
+        return adidao.findUser(id);
+    }
+
+    public void insertPay(PayDto paydto, int id) {
+        adidao.insertPay(paydto, id);
+    }
+
+    public void updatePay(PayDto paydto, int id) {
+        adidao.updatePay(paydto, id);
+    }
 }

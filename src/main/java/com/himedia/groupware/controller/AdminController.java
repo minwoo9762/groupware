@@ -1,6 +1,7 @@
 package com.himedia.groupware.controller;
 
 import com.himedia.groupware.dto.NoticeDto;
+import com.himedia.groupware.dto.PayDto;
 import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.service.AdminService;
 import jakarta.servlet.ServletContext;
@@ -30,18 +31,18 @@ public class AdminController {
     @GetMapping("/admin")
     public String admin(HttpSession session, Model model, HttpServletRequest request) {
         String url = "redirect:/";
-        UserDto udto = (UserDto)session.getAttribute("loginUser");
-        if(udto != null) {
-            url = "admin/admin";
+        UserDto udto = (UserDto) session.getAttribute("loginUser");
+        if (udto != null) {
+            if (udto.getProvider() == 99) {
+                url = "admin/admin";
 
-            HashMap<String, Object> result = ads.getUser(request);
-            model.addAttribute("userList", result.get("userList"));
-            model.addAttribute("paging", result.get("paging"));
-            model.addAttribute("key", result.get("key"));
+                HashMap<String, Object> result = ads.getUser(request);
+                model.addAttribute("userList", result.get("userList"));
+                model.addAttribute("paging", result.get("paging"));
+                model.addAttribute("key", result.get("key"));
+            }
         }
-
         return url;
-
     }
 
     @GetMapping("/adminUserUpdate")
@@ -57,6 +58,59 @@ public class AdminController {
         return url;
     }
 
+    @GetMapping("/adminPay")
+    public String adminPay(@RequestParam("id") int id, HttpSession session, Model model) {
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            if (udto.getProvider() == 99) {
+
+                UserDto user = ads.findUser(id);
+                model.addAttribute("name", user.getName());
+                PayDto pdto = ads.selectPay(id);
+                if(pdto == null) {
+                    url = "admin/adminPayForm";
+                } else {
+                    url = "admin/adminPayFormUpdate";
+                    model.addAttribute("pdto", pdto);
+                };
+                model.addAttribute("id", id);
+            }
+        }
+        return url;
+    }
+    @PostMapping("/adminInsertPay")
+    public String adminInsertPay(@RequestBody PayDto paydto, @RequestParam("id") int id, HttpSession session, Model model) {
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            if (udto.getProvider() == 99) {
+                url = "redirect:/admin";
+
+                ads.insertPay(paydto, id);
+            }
+        }
+        return url;
+    }
+    @PostMapping("/adminUpdatePay")
+    public String adminUpdatePay(@RequestBody PayDto paydto, @RequestParam("id") int id, HttpSession session, Model model) {
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            if (udto.getProvider() == 99) {
+                url = "redirect:/admin";
+
+                ads.updatePay(paydto, id);
+            }
+        }
+        return url;
+    }
+
+
+
+
+
+    /* @@@@@@@@@@@@ 공지사항 @@@@@@@@@@@ */
     @GetMapping("/notice")
     public String notice(HttpSession session, Model model, HttpServletRequest request ) {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
@@ -90,7 +144,7 @@ public class AdminController {
 
 
     @PostMapping("/noticeWriteInsert")
-    public String noticeWriteInsert(@RequestBody @Valid NoticeDto noticedto, BindingResult result, HttpSession session, Model model) {
+    public String noticeWriteInsert(@RequestBody NoticeDto noticedto, HttpSession session, Model model) {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {

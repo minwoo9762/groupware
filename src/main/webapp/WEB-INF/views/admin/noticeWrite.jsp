@@ -14,7 +14,7 @@
                 <tbody>
                 <tr>
                     <th>제목</th>
-                    <td style="text-align: left;"><input id="title" type="text" value="" required></td>
+                    <td style="text-align: left;"><input id="title" class="inputStyle" type="text" value="" required></td>
                 </tr>
                 <tr>
                     <th>작성자</th>

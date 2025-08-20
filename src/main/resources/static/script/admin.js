@@ -128,3 +128,72 @@ function fileUp() {
 function updateNotice(nseq) {
     location.href = "/noticeUpdateForm?nseq=" + nseq;
 }
+
+
+function adminInsertPay(useridN) {
+    let id = useridN;
+    let updatePay = document.getElementById("updatePay").value;
+    let title = document.getElementById("title").value;
+    let content = document.getElementById("content").value;
+
+    if(!updatePay) {alert("급여를 작성해주세요."); document.getElementById("updatePay").focus(); return}
+    if(!title) {alert("제목을 작성해주세요."); document.getElementById("title"); return}
+    if(!content) {alert("내용을 작성해주세요."); document.getElementById("content").focus(); return}
+
+    let formData = {
+        pay: updatePay,
+        title: title,
+        content: content
+    }
+
+    $.ajax({
+        url: location.origin + "/adminInsertPay?id=" + id,
+        type: "POST",
+        contentType: 'application/json',
+        data:  JSON.stringify(formData),
+        timeout: 10000,
+        processData: false,
+        success: function (data) {
+            alert("급여 저장이 완료되었습니다.");
+            location.href="admin";
+        },
+        error: function () {
+            alert('파일업로드실패');
+        }
+    });
+
+}
+
+function adminUpdatePay(useridN) {
+    let id = useridN;
+    let updatePay = document.getElementById("updatePay").value;
+    let title = document.getElementById("title").value;
+    let content = document.getElementById("content").value;
+
+    if(!updatePay) {alert("급여를 작성해주세요."); document.getElementById("updatePay").focus(); return}
+    if(!title) {alert("제목을 작성해주세요."); document.getElementById("title"); return}
+    if(!content) {alert("내용을 작성해주세요."); document.getElementById("content").focus(); return}
+
+    let formData = {
+        pay: updatePay,
+        title: title,
+        content: content
+    }
+
+    $.ajax({
+        url: location.origin + "/adminUpdatePay?id=" + id,
+        type: "POST",
+        contentType: 'application/json',
+        data:  JSON.stringify(formData),
+        timeout: 10000,
+        processData: false,
+        success: function (data) {
+            alert("급여 수정이 완료되었습니다.");
+            location.href="admin";
+        },
+        error: function () {
+            alert('파일업로드실패');
+        }
+    });
+
+}
