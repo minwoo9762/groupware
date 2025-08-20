@@ -33,4 +33,6 @@ public interface AdminIDao {
     void insertPay(PayDto paydto, int id);
 
     void updatePay(PayDto paydto, int id);
+
+    ArrayList<NoticeDto> currentNotice(int num);
 }

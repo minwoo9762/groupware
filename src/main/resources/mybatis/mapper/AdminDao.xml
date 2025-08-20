@@ -48,4 +48,9 @@
         update pay set title=#{paydto.title}, pay=#{paydto.pay}, content=#{paydto.content} where id=#{id}
     </update>
 
+
+    <select id="currentNotice" resultType="com.himedia.groupware.dto.NoticeDto">
+        SELECT * FROM notice ORDER BY indate DESC LIMIT #{num}
+    </select>
+
 </mapper>

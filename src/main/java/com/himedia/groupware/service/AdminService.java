@@ -28,19 +28,19 @@ public class AdminService {
 
 
         int page = 1;
-        if(request.getParameter("page") != null) {
+        if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
             session.setAttribute("page", page);
-        } else if(session.getAttribute("page") != null) {
-            page = (Integer)session.getAttribute("page");
+        } else if (session.getAttribute("page") != null) {
+            page = (Integer) session.getAttribute("page");
         }
 
         String key = "";
-        if(request.getParameter("key") != null){
-            key=request.getParameter("key");
+        if (request.getParameter("key") != null) {
+            key = request.getParameter("key");
             session.setAttribute("key", key);
-        } else if(session.getAttribute("key") != null){
-            key=(String)session.getAttribute("key");
+        } else if (session.getAttribute("key") != null) {
+            key = (String) session.getAttribute("key");
         }
 
         Paging paging = new Paging();
@@ -52,7 +52,7 @@ public class AdminService {
         paging.setTotalCount(count);
         paging.calPaging();
 
-        if( page > paging.getEndPage() ) {
+        if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
@@ -80,19 +80,19 @@ public class AdminService {
 
 
         int page = 1;
-        if(request.getParameter("page") != null) {
+        if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
             session.setAttribute("page", page);
-        } else if(session.getAttribute("page") != null) {
-            page = (Integer)session.getAttribute("page");
+        } else if (session.getAttribute("page") != null) {
+            page = (Integer) session.getAttribute("page");
         }
 
         String key = "";
-        if(request.getParameter("key") != null){
-            key=request.getParameter("key");
+        if (request.getParameter("key") != null) {
+            key = request.getParameter("key");
             session.setAttribute("key", key);
-        } else if(session.getAttribute("key") != null){
-            key=(String)session.getAttribute("key");
+        } else if (session.getAttribute("key") != null) {
+            key = (String) session.getAttribute("key");
         }
 
         Paging paging = new Paging();
@@ -104,7 +104,7 @@ public class AdminService {
         paging.setTotalCount(count);
         paging.calPaging();
 
-        if( page > paging.getEndPage() ) {
+        if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
@@ -135,7 +135,7 @@ public class AdminService {
 
 
     public PayDto selectPay(int id) {
-            return adidao.selectPay(id);
+        return adidao.selectPay(id);
     }
 
     public UserDto findUser(int id) {
@@ -149,4 +149,9 @@ public class AdminService {
     public void updatePay(PayDto paydto, int id) {
         adidao.updatePay(paydto, id);
     }
+
+    public ArrayList<NoticeDto> currentNotice(int num) {
+        return adidao.currentNotice(num);
+    }
+
 }
