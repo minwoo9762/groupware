@@ -30,21 +30,14 @@ function clickAttend(target) {
         attendTime.time = currentTime;
         attendTime.indate = formattedDate + " " + formattedClock;
         attendTime.state = 1;
-        let attendTimeActive = document.getElementById("attendTime").innerText = attendTime.time;
-        console.log("출근시간 : " + attendTime.time);
-        console.log("출근 indate : " + attendTime.indate);
-        console.log("출근상태 : " + attendTime.state);
+        document.getElementById("attendTime").innerText = attendTime.time;
 
         ajaxAttend(attendTime, target);
     } else  if(targetId === "btnleave") {
         leaveTime.time = currentTime;
         leaveTime.indate = formattedDate + " " + formattedClock;
         leaveTime.state = 1;
-        let leaveTimeActive = document.getElementById("leaveTime").innerText = leaveTime.time;
-
-        console.log("퇴근시간 : " + leaveTime.time);
-        console.log("퇴근 indate : " + leaveTime.indate);
-        console.log("퇴근상태 : " + leaveTime.state);
+        document.getElementById("leaveTime").innerText = leaveTime.time;
 
         ajaxLeave(leaveTime, target);
     };
@@ -68,6 +61,10 @@ function ajaxAttend(attendTime, target) {
             target.closest(".btnWrap").querySelector("#btnleave").remove();
             let btn = `<button id="btnleave" class="btn btnleave" type="button" onclick="clickAttend(this);">퇴근</button>`;
             target.closest(".btnWrap").insertAdjacentHTML("beforeend", btn);
+
+            console.log("출근시간 : " + attendTime.time);
+            console.log("출근 indate : " + attendTime.indate);
+            console.log("출근상태 : " + attendTime.state);
         },
         error: function () {
             alert('파일업로드실패');
@@ -87,6 +84,10 @@ function ajaxLeave(leaveTime, target) {
         success: function (data) {
             alert("퇴근 체크가 완료되었습니다.");
             target.classList.add("disable");
+
+            console.log("퇴근시간 : " + leaveTime.time);
+            console.log("퇴근 indate : " + leaveTime.indate);
+            console.log("퇴근상태 : " + leaveTime.state);
         },
         error: function () {
             alert('파일업로드실패');

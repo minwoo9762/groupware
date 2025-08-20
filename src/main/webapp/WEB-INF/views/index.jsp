@@ -32,7 +32,27 @@
                 </div>
                 <div class="btnWrap">
                     <c:choose>
-                        <c:when test="${confirmAtd.indate == null}">
+                        <%--1. 오늘 출석 O, 오늘 퇴근 O--%>
+                        <c:when test="${indateTrue == 0 && outdateTrue == 0}">
+                            <button id="btnAttend" class="btn btnAttend disable" type="button">
+                                출근
+                            </button>
+                            <button id="btnleave" class="btn btnleave disable" type="button">
+                                퇴근
+                            </button>
+                        </c:when>
+                        <%--2. 오늘 출석 O, 오늘 퇴근 X--%>
+                         <c:when test="${indateTrue == 0 && outdateTrue == 1}">
+                            <button id="btnAttend" class="btn btnAttend disable" type="button">
+                                출근
+                            </button>
+                            <button id="btnleave" class="btn btnleave" type="button"
+                                    onclick="clickAttend(this);">
+                                퇴근
+                            </button>
+                        </c:when>
+                        <%--3. 오늘 출석 X, 오늘 퇴근 X--%>
+                        <c:when test="${indateTrue == 1 && outdateTrue == 0}">
                             <button id="btnAttend" class="btn btnAttend" type="button" onclick="clickAttend(this);">
                                 출근
                             </button>
@@ -41,25 +61,12 @@
                             </button>
                         </c:when>
                         <c:otherwise>
-                            <c:choose>
-                                <c:when test="${confirmAtd.indate != null && (confirmAtd.outdate == null)}">
-                                    <button id="btnAttend" class="btn btnAttend disable" type="button">
-                                        출근
-                                    </button>
-                                    <button id="btnleave" class="btn btnleave" type="button"
-                                            onclick="clickAttend(this);">
-                                        퇴근
-                                    </button>
-                                </c:when>
-                                <c:otherwise>
-                                    <button id="btnAttend" class="btn btnAttend disable" type="button">
-                                        출근
-                                    </button>
-                                    <button id="btnleave" class="btn btnleave disable" type="button">
-                                        퇴근
-                                    </button>
-                                </c:otherwise>
-                            </c:choose>
+                            <button id="btnAttend" class="btn btnAttend" type="button" onclick="clickAttend(this);">
+                                출근
+                            </button>
+                            <button id="btnleave" class="btn btnleave disable" type="button">
+                                퇴근
+                            </button>
                         </c:otherwise>
                     </c:choose>
 
