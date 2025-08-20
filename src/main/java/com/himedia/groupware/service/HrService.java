@@ -24,8 +24,8 @@ public class HrService {
     @Autowired
     HrDao hdao;
 
-    public List<AttendanceDto> getAttendanceListByUserId(int id) {
-        return hdao.selectAttendanceByUserId(id);
+    public List<AttendanceDto> selectAttendanceByUserId(int aseq) {
+        return hdao.selectAttendanceByUserId(aseq);
     }
 
     public HashMap<String, Object> selectPay(HttpServletRequest request) {

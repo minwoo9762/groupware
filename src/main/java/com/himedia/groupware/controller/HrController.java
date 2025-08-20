@@ -28,7 +28,7 @@ public class HrController {
 
     @GetMapping("/attendance")
     public String attendance(@RequestParam("aseq") int aseq, Model model) {
-        List<AttendanceDto> attendanceList = hs.getAttendanceListByUserId(aseq);
+        List<AttendanceDto> attendanceList = hs.selectAttendanceByUserId(aseq);
 
         // 출근 퇴근 기준 시간
         LocalTime cutoffLate = LocalTime.of(9, 30);
