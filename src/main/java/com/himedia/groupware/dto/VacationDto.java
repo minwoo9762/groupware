@@ -11,5 +11,6 @@ public class VacationDto {
     private String title;
     private String content;
     private Timestamp indate;
+    private Timestamp outdate; // 추가
     private String checkyn; // 추가
 }
