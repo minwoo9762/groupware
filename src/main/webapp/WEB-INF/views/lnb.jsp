@@ -21,7 +21,13 @@
                 <li><a href="#">전자결재</a></li>
             </ul>
         </li>
-        <li><span onclick="location.href='admin'" style="cursor: pointer;">관리자</span></li>
+        <li>
+            <span>관리자</span>
+            <ul class="depth">
+                <li><a href="admin">사원 관리</a></li>
+                <li><a href="notice">공지사항</a></li>
+            </ul>
+        </li>
     </ul>
 
 </div>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.himedia.groupware.dao.AdminIDao">
+
+    <select id="getAllCount" resultType="_int">
+        select count(*) from user where name like concat('%', #{key}, '%');
+    </select>
+    <select id="getUser" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user where name like concat('%', #{key}, '%') or part like concat('%', #{key}, '%') order by id desc limit #{paging.displayRow} offset #{paging.startNum};
+    </select>
+
+    <update id="updateUser" parameterType="com.himedia.groupware.dto.UserDto">
+        UPDATE user set part=#{part}, provider=#{provider} WHERE id = #{id}
+    </update>
+    
+    <select id="getNotice" resultType="com.himedia.groupware.dto.NoticeDto">
+        select * from notice where title like concat('%', #{key}, '%') or content like concat('%', #{key}, '%') order by nseq desc limit #{paging.displayRow} offset #{paging.startNum};
+    </select>
+
+    <select id="selectNoticeInfo" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="insertNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
+        insert into notice(title, userid, content, id, image, savefilename) values (#{title}, #{userid}, #{content}, #{id}, #{image}, #{savefilename} )
+    </insert>
+
+    <select id="selectNoticeDetail" parameterType="com.himedia.groupware.dto.NoticeDto">
+        select * from notice where nseq=#{nseq}
+    </select>
+
+</mapper>
