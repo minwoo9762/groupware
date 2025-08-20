@@ -33,6 +33,7 @@ public class AdminController {
         String url = "redirect:/";
         UserDto udto = (UserDto) session.getAttribute("loginUser");
         if (udto != null) {
+            url = "redirect:/home";
             if (udto.getProvider() == 99) {
                 url = "admin/admin";
 
@@ -116,14 +117,11 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            if (udto.getProvider() == 99) {
-                url = "admin/notice";
-
-                HashMap<String, Object> result = ads.getNotice(request);
-                model.addAttribute("noticeList", result.get("noticeList"));
-                model.addAttribute("paging", result.get("paging"));
-                model.addAttribute("key", result.get("key"));
-            }
+            url = "admin/notice";
+            HashMap<String, Object> result = ads.getNotice(request);
+            model.addAttribute("noticeList", result.get("noticeList"));
+            model.addAttribute("paging", result.get("paging"));
+            model.addAttribute("key", result.get("key"));
         }
         return url;
     }
@@ -133,6 +131,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/home";
             if (udto.getProvider() == 99) {
                 url = "admin/noticeWrite";
                 ads.selectNoticeInfo(udto);
@@ -148,6 +147,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/home";
             if (udto.getProvider() == 99) {
 
 
@@ -164,6 +164,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/home";
             if (udto.getProvider() == 99) {
                 url = "redirect:/admin";
                 ads.updateNotice(noticedto);
@@ -206,12 +207,12 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            if (udto.getProvider() == 99) {
-                url = "admin/noticeDetail";
-                NoticeDto notice = ads.selectNoticeDetail(nseq);
-                model.addAttribute("notice", notice);
-                model.addAttribute("name", udto.getName());
-            }
+
+            url = "admin/noticeDetail";
+            NoticeDto notice = ads.selectNoticeDetail(nseq);
+            model.addAttribute("notice", notice);
+            model.addAttribute("name", udto.getName());
+
         }
         return url;
     }
@@ -221,6 +222,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/home";
             if (udto.getProvider() == 99) {
                 url = "admin/noticeUpdate";
                 NoticeDto notice = ads.selectNoticeDetail(nseq);

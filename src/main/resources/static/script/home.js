@@ -94,30 +94,8 @@ function ajaxLeave(leaveTime, target) {
     });
 }
 
-
-
 // 🔹 달력에 표시될 이벤트 데이터 정의 (서버에서 가져온 것이라 가정)
-const eventData = [
-    {
-        title: "생일 🎉",
-        start: "2025-08-18",
-        allDay: true
-    },
-    {
-        title: "병가 🎉",
-        start: "2025-08-18",
-        end: "2025-08-19",
-        textColor: "#1e90ff",
-        backgroundColor: "yellow",
-        allDay: true
-    },
-    {
-        title: "휴가 🏖️",         // 이벤트 제목
-        start: "2025-08-01",       // 시작 날짜
-        end: "2025-08-04",         // 종료 날짜 (3일까지 포함되게 하려면 4일로 지정)
-        allDay: true               // 하루 종일 일정 표시
-    }
-];
+const eventData = vacationList;
 
 // 🔹 DOM이 모두 로드되면 캘린더를 생성
 document.addEventListener('DOMContentLoaded', function () {

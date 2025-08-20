@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class PayDto {
     private int pseq;
     private int id;
-    private int pay;
+    private String pay;
     private String title;
     private String content;
     private Timestamp indate;
