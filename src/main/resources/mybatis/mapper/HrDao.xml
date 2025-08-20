@@ -9,4 +9,28 @@
         SELECT * FROM attendance WHERE id = #{id}
     </select>
     
+    <select id="getAllCountForPay" resultType="_int">
+        select count(*) from pay where title like concat('%', #{key} , '%' )
+    </select>
+    
+    <select id="selectPay" resultType="com.himedia.groupware.dto.PayDto">
+        select * from pay where title like concat('%', #{key} , '%' )    order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
+    </select>
+
+    <select id="getPay" resultType="com.himedia.groupware.dto.PayDto">
+        select * from pay where pseq=#{pseq}
+    </select>
+
+    <select id="getAllCountForVacation" resultType="_int">
+        select count(*) from vacation where title like concat('%', #{key} , '%' )
+    </select>
+
+    <select id="selectVacation" resultType="com.himedia.groupware.dto.VacationDto">
+        select * from vacation where title like concat('%', #{key} , '%' )  order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
+    </select>
+
+    <select id="getVacation" resultType="com.himedia.groupware.dto.VacationDto">
+        select * from vacation where pseq=#{pseq}
+    </select>
+    
 </mapper>

@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Find Password</title>
+    <link rel="stylesheet" href="/css/login.css">
     <script src="script/jquery-3.7.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -32,7 +33,7 @@
                             $('#sendCheck').val('sended');
                     },
                     error: function() {
-                        alert(data.findPwdMsg);
+                        alert('에러 발생');
                     }
                 });
             });
@@ -55,13 +56,16 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        $('#confirmMsg').html("&nbsp;&nbsp;<span style='color:blue'>인증에 성공했습니다.</span>")
-                        if(data.state == 'confirmed')
+                        if(data.state == 'confirmed') {
+                            $('#confirmMsg').html("&nbsp;&nbsp;<span style='color:blue'>인증에 성공했습니다.</span>")
                             $('#codeCheck').val('confirmed');
-                        $('#changePwd').show();
+                            $('#changePwd').show();
+                        }else {
+                            alert(data.codeMsg);
+                        }
                     },
                     error: function() {
-                        alert(data.codeMsg);
+                        alert('에러 발생');
                     }
                 });
             });
@@ -69,16 +73,15 @@
     </script>
     <script type="text/javascript">
         function updatePwd() {
+            var pwdRegex = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()-+=]).{8,20}$/;
             if(document.findPwd.pwd.value==''){
                 alert('비밀번호를 입력하세요.');
-                return;
-            }
-            else if(document.findPwd.pwd.value != document.findPwd.confirmPwd.value) {
+            }else if(!pwdRegex.test(document.findPwd.pwd.value)) {
+                alert('올바른 비밀번호를 입력하세요.');
+            } else if(document.findPwd.pwd.value != document.findPwd.confirmPwd.value) {
                 alert('비밀번호 확인이 일치하지 않습니다.');
-                return;
             }else if(document.findPwd.codeCheck.value != 'confirmed') {
                 alert('이메일 인증을 완료하지 않았습니다.');
-                return;
             }else {
                 document.findPwd.action = "updatePwd";
                 document.findPwd.submit();
@@ -89,37 +92,45 @@
 <body>
 
 <form method="post" name="findPwd" id="findPwd">
-    <h2>Find Password</h2>
-    <div class="field">
-        <label>이름</label><input type="text" name="name">
-    </div>
-    <div class="field">
-        <label>이메일 인증</label>
-        <div>
-            <input type="text" name="email">
-            <input type="button" value="인증메일 보내기" id="sendMailForPwd">
-            <input type="hidden" name="sendCheck" id="sendCheck">
+    <div class="loginForm">
+        <h2>Find Password</h2>
+        <div class="field">
+            <label>이름</label><input type="text" name="name">
+        </div>
+        <div class="field">
+            <label>이메일 인증</label>
+            <div class="btn">
+                <input type="text" name="email">
+                <input type="button" value="인증메일 보내기" id="sendMailForPwd">
+                <input type="hidden" name="sendCheck" id="sendCheck">
+            </div>
+        </div>
+        <div class="field">
+            <label>인증번호 입력</label>
+            <div class="btn">
+                <input type="text" name="code">
+                <input type="button" value="인증하기" id="confirmCode">
+                <div id="confirmMsg"></div>
+                <input type="hidden" name="codeCheck" id="codeCheck">
+            </div>
+        </div>
+        <div class="btn">
+            <input type="button" value="돌아가기" onclick="location.href='/'">
         </div>
     </div>
-    <div class="field">
-        <label>인증번호 입력</label>
-        <div>
-            <input type="text" name="code">
-            <input type="button" value="인증하기" id="confirmCode">
-            <div id="confirmMsg"></div>
-            <input type="hidden" name="codeCheck" id="codeCheck">
-        </div>
-    </div>
-    <div id="changePwd" style="display: none">
+    <div class="loginForm" id="changePwd" style="display: none">
         <div class="field">
             <label>새 비밀번호</label>
             <input type="password" name="pwd">
+        </div>
+        <div style="font-size: 80%; color: gray">
+            비밀번호는 숫자와 특수문자를 포함한 8자 이상, 20자 이하의 영문으로 작성합니다.
         </div>
         <div class="field">
             <label>비밀번호 확인</label>
             <input type="password" name="confirmPwd">
         </div>
-        <div class="field">
+        <div class="btn">
             <input type="button" value="비밀번호 변경" onclick="updatePwd()">
         </div>
     </div>
