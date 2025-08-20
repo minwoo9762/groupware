@@ -18,10 +18,12 @@ public class UserDto {
     @NotNull @NotEmpty
     private String phone;
     private int part;
+    private int zipNum;
     @NotNull @NotEmpty
     private String address1;
     @NotNull @NotEmpty
     private String address2;
+    private String address3;
     private Timestamp indate;
     private int provider;
     private String profileimg;

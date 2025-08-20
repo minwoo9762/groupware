@@ -16,19 +16,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MyPageController {
     @Autowired
     MyPageService ms;
+    static String[] partList = {"", "1부서", "2부서", "3부서"};
+    static String[] providerList = {"관리자", "사원"};
 
     @GetMapping("/myPage")
     public String myPage(HttpSession session, Model model) {
         session.getAttribute("loginUser");
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        String[] partList = {"", "1부서", "2부서", "3부서"};
 
-        String[] providerList = {"관리자", "사원"};
         String url = "redirect:/";
-        if (loginUser != null)
+        if (loginUser != null) {
             model.addAttribute("partName", partList[loginUser.getPart()]);
             model.addAttribute("providerName", providerList[loginUser.getProvider()]);
             url = "myPage/profile";
+        }
         return url;
     }
 
@@ -74,5 +75,11 @@ public class MyPageController {
     public String changePwd(HttpSession session, Model model) {
         model.addAttribute("loginUser", session.getAttribute("loginUser"));
         return "myPage/changePwd";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session, Model model) {
+        session.removeAttribute("loginUser");
+        return "redirect:/";
     }
 }

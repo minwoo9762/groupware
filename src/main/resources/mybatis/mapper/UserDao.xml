@@ -7,14 +7,16 @@
         select * from user where email=#{email}
     </select>
     <insert id="insertUser" parameterType="com.himedia.groupware.dto.UserDto">
-        insert into user(email, pwd, name, phone, part, address1, address2, profileimg)
-        values(#{email}, #{pwd}, #{name}, #{phone}, #{part}, #{address1}, #{address2}, #{profileimg})
+        insert into user(email, pwd, name, phone, part, zipNum, address1, address2, address3, profileimg)
+        values(#{email}, #{pwd}, #{name}, #{phone}, #{part}, #{zipNum},
+               #{address1}, #{address2}, #{address3}, #{profileimg})
     </insert>
     <update id="updatePwd">
         update user set pwd=#{pwd} where email=#{email}
     </update>
     <update id="updateUser" parameterType="com.himedia.groupware.dto.UserDto">
-        update user set name=#{name}, phone=#{phone}, address1=#{address1}, address2=#{address2}
+        update user set name=#{name}, phone=#{phone}, zipNum=#{zipNum},
+                        address1=#{address1}, address2=#{address2}, address3=#{address3}
         where email=#{email}
     </update>
 </mapper>
