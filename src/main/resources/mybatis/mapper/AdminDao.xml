@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.himedia.groupware.dao.AdminIDao">
+
+    <select id="getAllCount" resultType="_int">
+        select count(*) from user where name like concat('%', #{key}, '%');
+    </select>
+    <select id="getUser" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user where name like concat('%', #{key}, '%') or part like concat('%', #{key}, '%') order by id desc limit #{paging.displayRow} offset #{paging.startNum};
+    </select>
+
+    <update id="updateUser" parameterType="com.himedia.groupware.dto.UserDto">
+        UPDATE user set part=#{part}, provider=#{provider} WHERE id = #{id}
+    </update>
+    
+    <select id="getNotice" resultType="com.himedia.groupware.dto.NoticeDto">
+        select * from notice where title like concat('%', #{key}, '%') or content like concat('%', #{key}, '%') order by nseq desc limit #{paging.displayRow} offset #{paging.startNum};
+    </select>
+
+    <select id="selectNoticeInfo" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="insertNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
+        insert into notice(title, userid, content, id, image, savefilename) values (#{title}, #{userid}, #{content}, #{id}, #{image}, #{savefilename} )
+    </insert>
+    <update id="updateNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
+        update notice set title=#{title}, userid=#{userid}, content=#{content}, id=#{id}, image=#{image}, savefilename=#{savefilename} where nseq=#{nseq}
+    </update>
+
+    <select id="selectNoticeDetail" parameterType="com.himedia.groupware.dto.NoticeDto">
+        select * from notice where nseq=#{nseq}
+    </select>
+
+    <select id="selectPay" parameterType="com.himedia.groupware.dto.PayDto">
+        select * from pay where id=#{id}
+    </select>
+    <select id="findUser" parameterType="com.himedia.groupware.dto.UserDto">
+        select * from user where id=#{id}
+    </select>
+    <insert id="insertPay" parameterType="com.himedia.groupware.dto.PayDto">
+        insert into pay(id, title, pay, content) values (#{id}, #{paydto.title}, #{paydto.pay}, #{paydto.content})
+    </insert>
+    <update id="updatePay" parameterType="com.himedia.groupware.dto.PayDto">
+        update pay set title=#{paydto.title}, pay=#{paydto.pay}, content=#{paydto.content} where id=#{id}
+    </update>
+
+
+    <select id="currentNotice" resultType="com.himedia.groupware.dto.NoticeDto">
+        SELECT * FROM notice ORDER BY indate DESC LIMIT #{num}
+    </select>
+
+</mapper>

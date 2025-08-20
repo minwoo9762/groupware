@@ -25,32 +25,25 @@ let leaveTime = {};
 function clickAttend(target) {
     let targetId = target.getAttribute("id");
     let currentTime = document.getElementById("clock").innerText;
-    target.classList.add("disable");
+
     if(targetId === "btnAttend") {
         attendTime.time = currentTime;
         attendTime.indate = formattedDate + " " + formattedClock;
         attendTime.state = 1;
-        let attendTimeActive = document.getElementById("attendTime").innerText = attendTime.time;
-        console.log("출근시간 : " + attendTime.time);
-        console.log("출근 indate : " + attendTime.indate);
-        console.log("출근상태 : " + attendTime.state);
+        document.getElementById("attendTime").innerText = attendTime.time;
 
-        ajaxAttend(attendTime);
+        ajaxAttend(attendTime, target);
     } else  if(targetId === "btnleave") {
         leaveTime.time = currentTime;
         leaveTime.indate = formattedDate + " " + formattedClock;
         leaveTime.state = 1;
-        let leaveTimeActive = document.getElementById("leaveTime").innerText = leaveTime.time;
+        document.getElementById("leaveTime").innerText = leaveTime.time;
 
-        console.log("퇴근시간 : " + leaveTime.time);
-        console.log("퇴근 indate : " + leaveTime.indate);
-        console.log("퇴근상태 : " + leaveTime.state);
-
-        ajaxLeave(leaveTime);
+        ajaxLeave(leaveTime, target);
     };
 }
 
-function ajaxAttend(attendTime) {
+function ajaxAttend(attendTime, target) {
     let formData = {
         indate: attendTime.indate,
         state: attendTime.state
@@ -64,13 +57,21 @@ function ajaxAttend(attendTime) {
         processData: false,
         success: function (data) {
             alert("출근 체크가 완료되었습니다.");
+            target.classList.add("disable");
+            target.closest(".btnWrap").querySelector("#btnleave").remove();
+            let btn = `<button id="btnleave" class="btn btnleave" type="button" onclick="clickAttend(this);">퇴근</button>`;
+            target.closest(".btnWrap").insertAdjacentHTML("beforeend", btn);
+
+            console.log("출근시간 : " + attendTime.time);
+            console.log("출근 indate : " + attendTime.indate);
+            console.log("출근상태 : " + attendTime.state);
         },
         error: function () {
             alert('파일업로드실패');
         }
     });
 }
-function ajaxLeave(leaveTime) {
+function ajaxLeave(leaveTime, target) {
 
     let formData = {outdate: leaveTime.indate, state: leaveTime.state}
     $.ajax({
@@ -82,6 +83,11 @@ function ajaxLeave(leaveTime) {
         processData: false,
         success: function (data) {
             alert("퇴근 체크가 완료되었습니다.");
+            target.classList.add("disable");
+
+            console.log("퇴근시간 : " + leaveTime.time);
+            console.log("퇴근 indate : " + leaveTime.indate);
+            console.log("퇴근상태 : " + leaveTime.state);
         },
         error: function () {
             alert('파일업로드실패');
@@ -89,30 +95,8 @@ function ajaxLeave(leaveTime) {
     });
 }
 
-
-
 // 🔹 달력에 표시될 이벤트 데이터 정의 (서버에서 가져온 것이라 가정)
-const eventData = [
-    {
-        title: "생일 🎉",
-        start: "2025-08-18",
-        allDay: true
-    },
-    {
-        title: "병가 🎉",
-        start: "2025-08-18",
-        end: "2025-08-19",
-        textColor: "#1e90ff",
-        backgroundColor: "yellow",
-        allDay: true
-    },
-    {
-        title: "휴가 🏖️",         // 이벤트 제목
-        start: "2025-08-01",       // 시작 날짜
-        end: "2025-08-04",         // 종료 날짜 (3일까지 포함되게 하려면 4일로 지정)
-        allDay: true               // 하루 종일 일정 표시
-    }
-];
+const eventData = vacationList;
 
 // 🔹 DOM이 모두 로드되면 캘린더를 생성
 document.addEventListener('DOMContentLoaded', function () {

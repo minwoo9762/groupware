@@ -13,6 +13,6 @@ public class ApprovalController {
 
     @GetMapping("approvalMain")
     public  String approvalMain() {
-        return "approvalMain";
+        return "approval/approvalMain";
     }
 }

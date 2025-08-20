@@ -5,12 +5,13 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public class VacationDto {
-    private int pseq;  // 수정
+public class NoticeDto {
+    private int nseq;
+    private int id;
     private String userid;
+    private Timestamp indate;
     private String title;
     private String content;
-    private Timestamp indate;
-    private Timestamp outdate; // 추가
-    private String checkyn; // 추가
+    private String image;
+    private String savefilename;
 }
