@@ -9,14 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class HrService {
@@ -24,45 +20,60 @@ public class HrService {
     @Autowired
     HrDao hdao;
 
-    public List<AttendanceDto> getAttendanceListByUserId(int id) {
-        return hdao.selectAttendanceByUserId(id);
+    public List<AttendanceDto> selectAttendanceByUserId(int aseq) {
+        return hdao.selectAttendanceByUserId(aseq);
     }
 
     public HashMap<String, Object> selectPay(HttpServletRequest request) {
         HashMap<String, Object> result = new HashMap<>();
         HttpSession session = request.getSession();
 
-        if( request.getParameter("first") != null ) {
+        if (request.getParameter("first") != null) {
             session.removeAttribute("page");
             session.removeAttribute("key");
         }
 
-        int page=1;
-        if(request.getParameter("page") != null){
-            page = Integer.parseInt(request.getParameter("page"));
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            try {
+                page = Integer.parseInt(request.getParameter("page"));
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+            if (page < 1) page = 1;
             session.setAttribute("page", page);
-        }else if( session.getAttribute("page") != null){
+        } else if (session.getAttribute("page") != null) {
             page = (Integer) session.getAttribute("page");
+            if (page < 1) page = 1;
         }
 
-        String key="";
-        if( request.getParameter("key") != null){
-            key=request.getParameter("key");
+        String key = "";
+        if (request.getParameter("key") != null) {
+            key = request.getParameter("key");
             session.setAttribute("key", key);
-        }else if( session.getAttribute("key") != null){
-            key = (String)session.getAttribute("key");
+        } else if (session.getAttribute("key") != null) {
+            key = (String) session.getAttribute("key");
         }
 
         Paging paging = new Paging();
         paging.setPage(page);
-        paging.setDisplayPage(5);
-        paging.setDisplayRow(5);
-        int count = hdao.getAllCountForPay( key );
+        paging.setDisplayPage(10);
+        paging.setDisplayRow(10);
+
+        int count = hdao.getAllCountForPay(key);
         paging.setTotalCount(count);
         paging.calPaging();
 
-        if( page > paging.getEndPage() ) {
-            paging.setPage( paging.getEndPage() );
+        int endPage = paging.getEndPage();
+        if (endPage < 1) endPage = 1;
+
+        if (page > endPage) {
+            paging.setPage(endPage);
+            paging.calPaging();
+        }
+
+        if (paging.getPage() < 1) {
+            paging.setPage(1);
             paging.calPaging();
         }
 
@@ -73,7 +84,6 @@ public class HrService {
         return result;
     }
 
-
     public PayDto getPay(int pseq) {
         return hdao.getPay(pseq);
     }
@@ -82,48 +92,68 @@ public class HrService {
         HashMap<String, Object> result = new HashMap<>();
         HttpSession session = request.getSession();
 
-        if( request.getParameter("first") != null ) {
+        if (request.getParameter("first") != null) {
             session.removeAttribute("page");
             session.removeAttribute("key");
         }
 
-        int page=1;
-        if(request.getParameter("page") != null){
-            page = Integer.parseInt(request.getParameter("page"));
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            try {
+                page = Integer.parseInt(request.getParameter("page"));
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+            if (page < 1) page = 1;
             session.setAttribute("page", page);
-        }else if( session.getAttribute("page") != null){
+        } else if (session.getAttribute("page") != null) {
             page = (Integer) session.getAttribute("page");
+            if (page < 1) page = 1;
         }
 
-        String key="";
-        if( request.getParameter("key") != null){
-            key=request.getParameter("key");
+        String key = "";
+        if (request.getParameter("key") != null) {
+            key = request.getParameter("key");
             session.setAttribute("key", key);
-        }else if( session.getAttribute("key") != null){
-            key = (String)session.getAttribute("key");
+        } else if (session.getAttribute("key") != null) {
+            key = (String) session.getAttribute("key");
         }
 
         Paging paging = new Paging();
         paging.setPage(page);
-        paging.setDisplayPage(5);
-        paging.setDisplayRow(5);
-        int count = hdao.getAllCountForVacation( key );
+        paging.setDisplayPage(10);
+        paging.setDisplayRow(10);
+
+        int count = hdao.getAllCountForVacation(key);
         paging.setTotalCount(count);
         paging.calPaging();
 
-        if( page > paging.getEndPage() ) {
-            paging.setPage( paging.getEndPage() );
+        int endPage = paging.getEndPage();
+        if (endPage < 1) endPage = 1;
+
+        if (page > endPage) {
+            paging.setPage(endPage);
             paging.calPaging();
         }
 
-        ArrayList<PayDto> list = hdao.selectVacation(paging, key);
+        if (paging.getPage() < 1) {
+            paging.setPage(1);
+            paging.calPaging();
+        }
+
+        ArrayList<VacationDto> list = hdao.selectVacation(paging, key);
         result.put("vacationList", list);
         result.put("paging", paging);
         result.put("key", key);
+
         return result;
     }
 
     public VacationDto getVacation(int pseq) {
         return hdao.getVacation(pseq);
+    }
+
+    public void deleteVacation(int pseq) {
+        hdao.deleteVacation(pseq);
     }
 }
