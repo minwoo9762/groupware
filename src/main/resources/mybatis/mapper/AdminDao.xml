@@ -27,6 +27,9 @@
     <insert id="insertNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
         insert into notice(title, userid, content, id, image, savefilename) values (#{title}, #{userid}, #{content}, #{id}, #{image}, #{savefilename} )
     </insert>
+    <update id="updateNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
+        update notice set title=#{title}, userid=#{userid}, content=#{content}, id=#{id}, image=#{image}, savefilename=#{savefilename} where nseq=#{nseq}
+    </update>
 
     <select id="selectNoticeDetail" parameterType="com.himedia.groupware.dto.NoticeDto">
         select * from notice where nseq=#{nseq}

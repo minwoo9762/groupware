@@ -14,7 +14,7 @@
                 <tbody>
                 <tr>
                     <th>제목</th>
-                    <td style="text-align: left;">${notice.title}</td>
+                    <td style="text-align: left;"><input id="title" type="text" value="${notice.title}" required></td>
                 </tr>
                 <tr>
                     <th>작성자</th>
@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td><textarea id="content" readonly disabled style="border: 0;">${notice.content}</textarea></td>
+                    <td><textarea id="content" required>${notice.content}</textarea></td>
                 </tr>
                 <tr>
                     <th>이미지</th>
@@ -33,19 +33,26 @@
                         <div class="fileWrap">
                             <div class="customFile">
                                 <div id="savefilename">${notice.savefilename}</div>
+                                <label class="btn" for="imageAddBtn">파일 업로드</label>
                             </div>
                             <div id="imagepreview" style="justify-content: flex-start;">
                                 <img width='150' height='150' style='margin-top:8px; object-fit: cover'
                                      src="images/${notice.image}"/>
                             </div>
                         </div>
+                        <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
+                            <input class="display-none" type="file" name="fileimage" id="imageAddBtn" value="파일을 선택하세요."
+                                   onchange="fileUp();">
+                        </form>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <div class="btnWrap topright">
-                <button type="button" class="btn btnWrite" onclick="updateNotice(${notice.nseq})">수정하기</button>
-                <button type="button" class="btn btnWrite" onclick="location.href='notice'">돌아가기</button>
+                <button type="button" class="btn btnWrite" onclick="writeUpdate(${notice.id}, ${notice.nseq})">수정완료</button>
+                <button type="button" class="btn btnWrite" onclick="location.href='noticeDetail?nseq='+${notice.nseq}">
+                    취소
+                </button>
             </div>
         </div>
     </div>

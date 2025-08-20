@@ -6,10 +6,12 @@ import com.himedia.groupware.service.AdminService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -88,13 +90,29 @@ public class AdminController {
 
 
     @PostMapping("/noticeWriteInsert")
-    public String noticeWriteInsert(@RequestBody NoticeDto noticedto, HttpSession session, Model model) {
+    public String noticeWriteInsert(@RequestBody @Valid NoticeDto noticedto, BindingResult result, HttpSession session, Model model) {
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            if (udto.getProvider() == 99) {
+
+
+                url = "redirect:/admin";
+                ads.insertNotice(noticedto);
+                model.addAttribute("msg", "작성완료.");
+
+            }
+        }
+        return url;
+    }
+    @PostMapping("/noticeWriteUpdate")
+    public String noticeWriteUpdate(@RequestBody NoticeDto noticedto, HttpSession session, Model model) {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
             if (udto.getProvider() == 99) {
                 url = "redirect:/admin";
-                ads.insertNotice(noticedto);
+                ads.updateNotice(noticedto);
             }
         }
         return url;
@@ -144,6 +162,20 @@ public class AdminController {
         return url;
     }
 
+    @GetMapping("/noticeUpdateForm")
+    public String noticeUpdate(@RequestParam("nseq") int nseq, HttpSession session, Model model){
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            if (udto.getProvider() == 99) {
+                url = "admin/noticeUpdate";
+                NoticeDto notice = ads.selectNoticeDetail(nseq);
+                model.addAttribute("notice", notice);
+                model.addAttribute("name", udto.getName());
+            }
+        }
+        return url;
+    }
 
 }
 

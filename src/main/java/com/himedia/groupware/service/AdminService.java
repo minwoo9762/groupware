@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,8 +124,13 @@ public class AdminService {
         adidao.insertNotice(noticedto);
     }
 
+    public void updateNotice(NoticeDto noticedto) {
+        adidao.updateNotice(noticedto);
+    }
 
     public NoticeDto selectNoticeDetail(int nseq) {
         return adidao.selectNoticeDetail(nseq);
     }
+
+
 }

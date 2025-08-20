@@ -20,7 +20,9 @@ public interface AdminIDao {
     void selectNoticeInfo(UserDto udto);
 
     void insertNotice(NoticeDto noticedto);
+    void updateNotice(NoticeDto noticedto);
 
 
     NoticeDto selectNoticeDetail(int nseq);
+
 }

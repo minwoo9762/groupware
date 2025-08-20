@@ -14,7 +14,7 @@
                 <tbody>
                 <tr>
                     <th>제목</th>
-                    <td style="text-align: left;"><input id="title" type="text" value=""></td>
+                    <td style="text-align: left;"><input id="title" type="text" value="" required></td>
                 </tr>
                 <tr>
                     <th>작성자</th>
@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td><textarea id="content"></textarea></td>
+                    <td><textarea id="content" required></textarea></td>
                 </tr>
                 <tr>
                     <th>이미지</th>

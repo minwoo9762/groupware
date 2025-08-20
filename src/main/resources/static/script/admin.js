@@ -27,8 +27,12 @@ function writeNotice(id) {
         let content = document.getElementById("content").value;
         let name = document.getElementById("name").innerText;
         let email = document.getElementById("email").innerText;
-        let image = document.getElementById("imageAddBtn").files[0].name;
+        let image = document.getElementById("imageAddBtn").files
         let savefilename = document.getElementById("savefilename").innerText;
+
+        if(title.length <1) {alert("제목을 입력해주세요."); return;}
+        if(content.length <1) {alert("내용을 입력해주세요."); return;}
+        if(image.length < 1) {alert("파일첨부는 필수입니다."); return;}
 
         let formData = {
             id:id,
@@ -40,6 +44,48 @@ function writeNotice(id) {
         }
         $.ajax({
             url: location.origin + "/noticeWriteInsert",
+            type: "POST",
+            contentType: 'application/json',
+            data:  JSON.stringify(formData),
+            timeout: 10000,
+            processData: false,
+            success: function (data) {
+                alert("작성이 완료되었습니다.");
+                location.href="notice";
+
+            },
+            error: function () {
+                alert('파일업로드실패');
+            }
+        });
+    }
+}
+
+function writeUpdate(id, nseq) {
+    if(confirm("수정을 완료하시겠습니까?")) {
+        let title = document.getElementById("title").value;
+        let content = document.getElementById("content").value;
+        let name = document.getElementById("name").innerText;
+        let email = document.getElementById("email").innerText;
+        let image = document.getElementById("imageAddBtn").files
+        let savefilename = document.getElementById("savefilename").innerText;
+
+        if(title.length <1) {alert("제목을 입력해주세요."); return;}
+        if(content.length <1) {alert("내용을 입력해주세요."); return;}
+        if(image.length < 1) {alert("파일첨부는 필수입니다."); return;}
+
+
+        let formData = {
+            nseq: nseq,
+            id:id,
+            title: title,
+            content: content,
+            userid: email,
+            savefilename: savefilename,
+            image: savefilename
+        }
+        $.ajax({
+            url: location.origin + "/noticeWriteUpdate",
             type: "POST",
             contentType: 'application/json',
             data:  JSON.stringify(formData),
@@ -77,4 +123,8 @@ function fileUp() {
             alert("실패");
         },
     });
+}
+
+function updateNotice(nseq) {
+    location.href = "/noticeUpdateForm?nseq=" + nseq;
 }
