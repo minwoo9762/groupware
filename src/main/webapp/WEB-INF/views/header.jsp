@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/lnb.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <link rel="stylesheet" type="text/css" href="/css/workBoard.css">
+    <link rel="stylesheet" type="text/css" href="/css/workboard.css">
     <script src="/script/workboard.js"></script>
 
 

@@ -4,7 +4,7 @@
 <section class="section admin">
     <%@include file="../lnb.jsp"%>
     <div class="main">
-        <h2 class="title" style="font-size:40px;">게시판</h2>
+        <h2 class="head" style="font-size:40px;">게시판</h2>
         <div class="searchWrap">
             부서명
             <select>
@@ -71,7 +71,7 @@
 					<a href="workBoar?page=${paging.endPage+1}">NEXT</a>&nbsp;
 				</c:if>
 			</div>
-
+    </div>
     </div>
 </section>
 </body>

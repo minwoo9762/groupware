@@ -26,7 +26,7 @@
     </select>
 
     <select id="selectVacation" resultType="com.himedia.groupware.dto.VacationDto">
-        select * from vacation where title like concat('%', #{key} , '%' )    order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
+        select * from vacation where title like concat('%', #{key} , '%' )  order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
     </select>
 
     <select id="getVacation" resultType="com.himedia.groupware.dto.VacationDto">
