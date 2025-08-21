@@ -5,7 +5,7 @@
     <div>
         <h2>Profile</h2>
         <div class="profile">
-            <img src="../images/noname.jpg" width="200" height="200">
+            <img src="/images/${loginUser.profileimg}" height="100">
         </div>
         <div class="field">
             <label>이름</label><div>${loginUser.name}</div>

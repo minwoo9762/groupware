@@ -16,7 +16,8 @@
     </update>
     <update id="updateUser" parameterType="com.himedia.groupware.dto.UserDto">
         update user set name=#{name}, phone=#{phone}, zipNum=#{zipNum},
-                        address1=#{address1}, address2=#{address2}, address3=#{address3}
+                        address1=#{address1}, address2=#{address2}, address3=#{address3},
+                        profileimg=#{profileimg}
         where email=#{email}
     </update>
 </mapper>

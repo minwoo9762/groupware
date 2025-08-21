@@ -5,8 +5,10 @@
     <form action="updateProfile" method="post">
         <div>
             <h2>Update Profile</h2>
-            <div class="profile">
-                <img src="../images/noname.jpg" width="200" height="200">
+            <div class="field">
+                <label>프로필 미리보기</label>
+                <div id="profileimgPrev"><img src="/images/${dto.profileimg}" height="100"></div>
+                <input type="hidden" name="profileimg" id="profileimg" value="${dto.profileimg}">
             </div>
             <div class="field">
                 <label>E-Mail</label>
@@ -102,6 +104,14 @@
             </div>
         </div>
         <div>${message}</div>
+    </form>
+    <form id="selectImg" method="post" enctype="multipart/form-data">
+        <div class="loginform" style="margin: 0">
+            <div class="field">
+                <label>프로필 이미지</label>
+                <input type="file" name="pfimg" id="pfimg" value="이미지 선택">
+            </div>
+        </div>
     </form>
 </section>
 </body>
