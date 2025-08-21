@@ -14,7 +14,14 @@
         </div>
 
         <div class="bar">
-          <div class="left" >${app.username}</div>
+          <div class="left" >${app.username}(<c:choose>
+                        <c:when test="${app.part == 1}">개발팀</c:when>
+                        <c:when test="${app.part == 2}">기획팀</c:when>
+                        <c:when test="${app.part == 3}">영업팀</c:when>
+                        <c:when test="${app.part == 4}">운영팀 </c:when>
+                        <c:when test="${app.part == 5}">인사팀 </c:when>
+                        <c:otherwise>알 수 없음</c:otherwise> </c:choose>)
+          </div>
           <div class="right">${app.title}</div>
         </div>
 
