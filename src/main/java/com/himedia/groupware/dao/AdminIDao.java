@@ -16,6 +16,7 @@ public interface AdminIDao {
 
     void updateUser(UserDto userdto);
 
+    int getAllCountNotice(String key);
     ArrayList<UserDto> getNotice(Paging paging, String key);
 
     void selectNoticeInfo(UserDto udto);

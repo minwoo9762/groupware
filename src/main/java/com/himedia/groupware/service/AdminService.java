@@ -100,7 +100,7 @@ public class AdminService {
         paging.setDisplayPage(5);
         paging.setDisplayRow(5);
 
-        int count = adidao.getAllCount(key);
+        int count = adidao.getAllCountNotice(key);
         paging.setTotalCount(count);
         paging.calPaging();
 

@@ -4,17 +4,24 @@
 
 
 <mapper namespace="com.himedia.groupware.dao.AttendanceIDao">
-    <select id="selectAttendance" parameterType="com.himedia.groupware.dto.UserDto">
+    <select id="selectAttendance" parameterType="com.himedia.groupware.dto.AttendanceDto">
         SELECT * FROM attendance where userid=#{email} ORDER BY aseq DESC LIMIT 1
     </select>
+    <select id="selectState" parameterType="com.himedia.groupware.dto.AttendanceDto">
+        SELECT state  FROM attendance where userid=#{email} ORDER BY aseq DESC LIMIT 1
+    </select>
 
-    <insert id="insertAttendance" parameterType="com.himedia.groupware.dto.UserDto">
+    <insert id="insertAttendance" parameterType="com.himedia.groupware.dto.AttendanceDto">
         insert into attendance (userid, indate, outdate, state)
-        values (#{email}, #{atddao.indate}, #{atddao.outdate}, #{atddao.state});
+        values (#{email}, #{atddto.indate}, #{atddto.outdate}, #{atddto.state});
     </insert>
 
-    <update id="updateAttendance" parameterType="com.himedia.groupware.dto.UserDto">
-        UPDATE attendance SET outdate = #{atddao.outdate}, state = 2 WHERE userid = #{email} AND outdate IS NULL;
+    <update id="updateAttendance" parameterType="com.himedia.groupware.dto.AttendanceDto">
+        UPDATE attendance SET outdate = #{atddto.outdate}, state = #{atddto.state} WHERE userid = #{email} AND outdate IS NULL;
     </update>
+
+    <insert id="insertAtdVct">
+        insert into attendance (userid, indate, outdate, state)  values (#{email}, #{startOnly}, #{startOnly}, #{i});
+    </insert>
 
 </mapper>
