@@ -8,8 +8,8 @@
         <h2 class="head" style="font-size:40px;">게시판</h2>
         <div class="searchWrap">
             부서명
-            <select id="department" onchange="searchPosts()">
-                <option value="">선택</option>
+            <select name="part">
+                <option value="0">부서명</option>
                 <option value="1">개발</option>
                 <option value="2">기획</option>
                 <option value="3">영업</option>
@@ -17,7 +17,7 @@
                 <option value="5">인사</option>
             </select>
             &nbsp;&nbsp;
-                <input type="text" name="key" placeholder="검색어 입력" value="${key}">
+                <input type="text" name="key" placeholder="검색할 제목 내용을 입력하세요" value="${key}">
                 <input type="button" name="btn_search" value="검색" onclick="go_searchWork('workBoard')" />
 
         </div>
@@ -36,7 +36,7 @@
             </div>
             <c:choose>
             <c:when test="${boardList.size()==0}">
-            목록이 없습니다
+            <h3>목록이 없습니다</h3>
             </c:when>
             <c:otherwise>
             <c:forEach items="${boardList}" var="board" varStatus="status">

@@ -62,7 +62,7 @@
       <div class="reply_titleAD">작성/삭제</div>
     </div>
 
-    <form action="addReply" method="post" name="addRep">
+    <form action="addBoardReply" method="post" name="addBoardRep">
       <input type="hidden" name="boardid" value="${board.id}" />
       <input type="hidden" name="userid" value="${loginUser.id}" />
       <input type="hidden" name="name" value="${loginUser.name}" />
@@ -74,7 +74,7 @@
         </div>
         <div class="reply_bodyContent"><input type="text" name="reply" size="80"></div>
         <div class="reply_btn">
-          <input type="submit" value="작성" onclick="return replyCheck();" />
+          <input type="submit" value="작성" onclick="return replyBoardCheck();" />
         </div>
       </div>
     </form>
@@ -90,7 +90,7 @@
             <div class="reply_bodyContent">${reply.reply}</div>
             <div class="reply_btn">
                 <c:if test="${reply.userid==loginUser.id}">
-                  <input type="button" value="삭제" onClick="deleteReply('${reply.id}','${board.id}')" />
+                  <input type="button" value="삭제" onClick="deleteBoardReply('${reply.id}','${board.id}')" />
                 </c:if>
             </div>
           </div>

@@ -12,7 +12,9 @@ public class ReplyService {
     @Autowired
     IReplyDao rdao;
 
-    public void insert(ReplyDto replydto) {rdao.insert(replydto);}
+    public void insertBoard(ReplyDto replydto) {rdao.insertBoard(replydto);}
+    public void insertApp(ReplyDto replydto) {rdao.insertApp(replydto);}
 
-    public void delete(int id) {rdao.delete(id);}
+    public void deleteBoard(int id) {rdao.deleteBoard(id);}
+    public void deleteApp(int id) {rdao.deleteApp(id);}
 }

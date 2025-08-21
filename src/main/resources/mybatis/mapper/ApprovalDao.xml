@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.himedia.groupware.dao.ApprovalDao">
+
     <select id="getAllCountForApp" resultType="_int">
         select count(*) from approval where title like concat('%',#{key},'%') and part like concat('%',#{part},'%')
     </select>
@@ -16,9 +17,19 @@
         select * from approval where id=#{id}
     </select>
 
-    <select id="getAppList" resultType="com.himedia.groupware.dto.ApprovalDto">
-        select * from approval
-    </select>
+    <delete id="delete">
+        delete from approval where id=#{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.himedia.groupware.dto.ApprovalDto">
+        insert into approval (id, username, title, category, content, status, part) values (#{id}, #{username}, #{title}, #{category}, #{content}, #{status}, #{part})
+    </insert>
+
+    <update id="updateStatus">
+        update approval set status=#{status} where id = #{id}
+    </update>
+
+
 
 
 </mapper>

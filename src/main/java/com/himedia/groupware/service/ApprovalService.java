@@ -1,11 +1,13 @@
 package com.himedia.groupware.service;
 
 import com.himedia.groupware.dao.ApprovalDao;
+import com.himedia.groupware.dao.IReplyDao;
 import com.himedia.groupware.dto.ApprovalDto;
 import com.himedia.groupware.dto.Paging;
 import com.himedia.groupware.dto.WorkBoardDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class ApprovalService {
 
     @Autowired
     ApprovalDao adao;
+
+    @Autowired
+    IReplyDao rdao;
 
     public HashMap<String, Object> selectApp(HttpServletRequest request) {
         HashMap<String, Object> result = new HashMap<>();
@@ -79,12 +84,18 @@ public class ApprovalService {
     public HashMap<String, Object> getApp(int id) {
         HashMap<String, Object> result = new HashMap<>();
 
-        result.put("app",adao.getApp(id));
+        result.put("app", adao.getApp(id));
+        result.put("replyList", rdao.selectAppReply(id));
+        System.out.println(id);
 
         return result;
     }
 
-    public ApprovalDto getAppList() {
-        return adao.getAppList();
+    public void delete(int id) {adao.delete(id);}
+
+    public void insert(@Valid ApprovalDto approvaldto) {adao.insert(approvaldto);}
+
+    public void updateStatus(int id, int status) {
+        adao.updateStatus(id, status);
     }
 }

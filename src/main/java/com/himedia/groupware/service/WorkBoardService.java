@@ -92,7 +92,7 @@ public class WorkBoardService {
 
         bdao.addReadCount(id);
         result.put("board",bdao.getBoard(id));
-        result.put("replyList", rdao.selectReply(id));
+        result.put("replyList", rdao.selectBoardReply(id));
 
 
 
@@ -107,9 +107,7 @@ public class WorkBoardService {
         HashMap<String, Object> result = new HashMap<>();
 
         result.put("board",bdao.getBoard(id));
-        System.out.println(bdao.getBoard(id));
-
-        result.put("replyList", rdao.selectReply(id));
+        result.put("replyList", rdao.selectBoardReply(id));
 
         return result;
     }

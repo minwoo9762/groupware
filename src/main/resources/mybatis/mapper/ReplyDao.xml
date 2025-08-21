@@ -8,15 +8,27 @@
         select count(*) from reply where boardid=#{id}
     </select>
 
-    <insert id="insert" parameterType="com.himedia.groupware.dto.ReplyDto">
+    <insert id="insertBoard" parameterType="com.himedia.groupware.dto.ReplyDto">
         insert into reply(boardid, userid, reply, name) values (#{boardid}, #{userid}, #{reply}, #{name})
     </insert>
 
-    <select id="selectReply" resultType="com.himedia.groupware.dto.ReplyDto">
+    <insert id="insertApp" parameterType="com.himedia.groupware.dto.ReplyDto">
+        insert into reply(appid, userid, reply, provider) values (#{appid}, #{userid}, #{reply}, #{provider})
+    </insert>
+
+    <select id="selectBoardReply" resultType="com.himedia.groupware.dto.ReplyDto">
         select * from reply where boardid=#{id} order by id desc
     </select>
 
-    <delete id="delete">
+    <select id="selectAppReply" resultType="com.himedia.groupware.dto.ReplyDto">
+        select * from reply where appid=#{id} order by id desc
+    </select>
+
+    <delete id="deleteBoard">
+        delete from reply where id=#{id}
+    </delete>
+
+    <delete id="deleteApp">
         delete from reply where id=#{id}
     </delete>
 

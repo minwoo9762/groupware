@@ -14,16 +14,29 @@ public class ReplyController {
     @Autowired
     ReplyService rs;
 
-    @PostMapping("/addReply")
-    public String addReply( ReplyDto replydto){
-        rs.insert(replydto);
+    @PostMapping("/addBoardReply")
+    public String addBoardReply( ReplyDto replydto){
+        rs.insertBoard(replydto);
         return "redirect:/boardViewWithoutCnt?id="+replydto.getBoardid();
     }
 
-    @GetMapping("/deleteReply")
-    public String deleteReply(@RequestParam("id") int id, @RequestParam("boardid") int boardid ) {
-        rs.delete(id);
+    @PostMapping("/addAppReply")
+    public String addAppReply( ReplyDto replydto){
+        rs.insertApp(replydto);
+        return "redirect:/appView?id="+replydto.getAppid();  // 오류날 수 있음
+    }
+
+    @GetMapping("/deleteBoardReply")
+    public String deleteBoardReply(@RequestParam("id") int id, @RequestParam("boardid") int boardid ) {
+        rs.deleteBoard(id);
         return "redirect:/boardViewWithoutCnt?id="+boardid;
     }
 
+    @GetMapping("/deleteAppReply")
+    public String deleteAppReply(@RequestParam("id") int id, @RequestParam("appid") int appid ) {
+        rs.deleteApp(id);
+        return "redirect:/AppView?id="+appid;
+    }
+
 }
+
