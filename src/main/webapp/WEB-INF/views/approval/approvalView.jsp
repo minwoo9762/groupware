@@ -20,14 +20,28 @@
 
         <div class="bodyBar">
           <div class="titleWriter" >카테고리</div>
-          <div class="titleTitle" >전자결제</div>
+          <div class="titleTitle" >결재내용</div>
         </div>
 
         <div class="contentBar">
           <div class="contentLeft">
-            <div class="first">${categoryName}</div>
+            <div class="first">
+                <c:choose>
+                        <c:when test="${app.category == 0}">휴가</c:when>
+                        <c:when test="${app.category == 1}">영수증</c:when>
+                        <c:when test="${app.category == 2}">법인차량</c:when>
+                        <c:otherwise>알 수 없음</c:otherwise>
+                    </c:choose>
+            </div>
             <div class="second">상 태</div>
-            <div class="imgField">${statusName}</div>
+            <div class="first">
+                <c:choose>
+                        <c:when test="${app.status == 0}">결재대기</c:when>
+                        <c:when test="${app.status == 1}">결재중</c:when>
+                        <c:when test="${app.status == 2}">결재완료</c:when>
+                        <c:otherwise>알 수 없음</c:otherwise>
+                    </c:choose>
+            </div>
           </div>
 
           <div class="contentBox">${app.content}</div>

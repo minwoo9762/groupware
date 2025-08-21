@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,8 +54,6 @@ public class WorkController {
             model.addAttribute("key", result.get("key"));
         }
 
-        String[] partList = {"", "1부서", "2부서", "3부서"};
-        model.addAttribute("partName", partList[loginUser.getPart()]);
 
         return url;
     }

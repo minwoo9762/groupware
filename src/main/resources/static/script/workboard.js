@@ -23,7 +23,7 @@ function selectImg(){
     window.open('selectimg','selectimg', opt);
 }
 
-function go_search(url){
+function go_searchWork(url){
     document.frm.action=url;
     document.frm.submit();
 }

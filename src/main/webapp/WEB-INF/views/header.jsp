@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/workBoard.css">
     <script src="/script/hr.js"></script>
+    <script src="/script/workboard.js"></script>
 
     <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
 </head>

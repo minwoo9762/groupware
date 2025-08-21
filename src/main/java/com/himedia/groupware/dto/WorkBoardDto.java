@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class WorkBoardDto {
     private int id;
     private int userid;
-    private int part;
+    private String part;
     private String content;
     private String name;
     private String title;
