@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>JOIN</title>
@@ -58,9 +59,9 @@
                         processData: false,
                         success: function(data) {
                             $('#profileimgPrev').html(
-                                "<img src='" + data.url + "' height='100'>"
+                                "<img src='/images/" + data.profileimg + "' height='100'>"
                             );
-                            $('#profileimg').val(data.url);
+                            $('#profileimg').val(data.profileimg);
                         },
                         error : function() {
                             alert('파일 업로드에 실패했습니다.');

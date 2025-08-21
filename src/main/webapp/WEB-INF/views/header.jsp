@@ -11,8 +11,35 @@
     <link rel="stylesheet" type="text/css" href="/css/workBoard.css">
     <script src="/script/hr.js"></script>
     <script src="/script/workboard.js"></script>
-
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#pfimg').change(function() {
+                var formSelector = $('#selectImg')[0];
+                var formData = new FormData(formSelector);
+                $.ajax(
+                    {
+                        url: "<%=request.getContextPath()%>/fileup",
+                        type: "POST",
+                        enctype: "multipart/form-data",
+                        data: formData,
+                        timeout: 10000,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            $('#profileimgPrev').html(
+                                "<img src='/images/" + data.profileimg + "' height='100'>"
+                            );
+                            $('#profileimg').val(data.profileimg);
+                        },
+                        error : function() {
+                            alert('파일 업로드에 실패했습니다.');
+                        }
+                    }
+                );
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="wrap">

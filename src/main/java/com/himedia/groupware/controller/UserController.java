@@ -3,6 +3,7 @@ package com.himedia.groupware.controller;
 import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.service.MailService;
 import com.himedia.groupware.service.UserService;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 
 @Controller
@@ -150,5 +154,33 @@ public class UserController {
         us.updatePwd(email, pwd);
         model.addAttribute("message", "비밀번호가 변경되었습니다. 다시 로그인하세요.");
         return "user/loginForm";
+    }
+
+    @Autowired
+    ServletContext context;
+    @PostMapping("/fileup")
+    @ResponseBody
+    public HashMap<String, Object> fileup(@RequestParam("pfimg") MultipartFile file){
+        String path = context.getRealPath("/images");
+        Calendar today = Calendar.getInstance();
+        long t = today.getTimeInMillis();
+        String filename = file.getOriginalFilename();
+
+        String fn1 = filename.substring(0, filename.indexOf("."));
+        String fn2 = filename.substring(filename.indexOf("."));
+        String savefilename = fn1 + t + fn2;
+        String uploadPath = path + "/" + savefilename;
+
+        try {
+            file.transferTo(new File(uploadPath));
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        result.put("profileimg", savefilename);
+        return result;
     }
 }
