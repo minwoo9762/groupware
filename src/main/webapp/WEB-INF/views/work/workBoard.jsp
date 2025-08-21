@@ -39,9 +39,9 @@
             목록이 없습니다
             </c:when>
             <c:otherwise>
-            <c:forEach items="${boardList}" var="board" >
+            <c:forEach items="${boardList}" var="board" varStatus="status">
                 <div class="tr">
-                    <div class="td" style="flex: 1">${board.id}</div>
+                    <div class="td">${(paging.page - 1) * paging.displayRow + status.index + 1}</div>
                     <div class="td" style="flex: 2">${board.name}</div>
                     <div class="td" style="flex: 2">
                     <c:choose>
