@@ -49,6 +49,7 @@ public class AdminService {
         paging.setDisplayRow(5);
 
         int count = adidao.getAllCount(key);
+        if(count == 0) count = 1;
         paging.setTotalCount(count);
         paging.calPaging();
 
@@ -101,6 +102,7 @@ public class AdminService {
         paging.setDisplayRow(5);
 
         int count = adidao.getAllCountNotice(key);
+        if(count == 0) count = 1;
         paging.setTotalCount(count);
         paging.calPaging();
 
