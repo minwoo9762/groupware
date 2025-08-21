@@ -2,6 +2,7 @@ package com.himedia.groupware.dao;
 
 import com.himedia.groupware.dto.NoticeDto;
 import com.himedia.groupware.dto.Paging;
+import com.himedia.groupware.dto.PayDto;
 import com.himedia.groupware.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,7 +21,18 @@ public interface AdminIDao {
     void selectNoticeInfo(UserDto udto);
 
     void insertNotice(NoticeDto noticedto);
+    void updateNotice(NoticeDto noticedto);
 
 
     NoticeDto selectNoticeDetail(int nseq);
+
+    PayDto selectPay(int id);
+
+    UserDto findUser(int id);
+
+    void insertPay(PayDto paydto, int id);
+
+    void updatePay(PayDto paydto, int id);
+
+    ArrayList<NoticeDto> currentNotice(int num);
 }

@@ -3,20 +3,22 @@
 <%@include file="../header.jsp"%>
 <section class="section admin">
     <%@include file="../lnb.jsp"%>
+    <form method="get" name="frm" class="main">
     <div class="main">
         <h2 class="head" style="font-size:40px;">게시판</h2>
         <div class="searchWrap">
             부서명
-            <select>
-                <option>선택</option>
-                <option>인사</option>
-                <option>영업</option>
-                <option>1팀</option>
-                <option>2팀</option>
+            <select id="department" onchange="searchPosts()">
+                <option value="">선택</option>
+                <option value="1">개발</option>
+                <option value="2">기획</option>
+                <option value="3">영업</option>
+                <option value="4">운영</option>
+                <option value="5">인사</option>
             </select>
             &nbsp;&nbsp;
                 <input type="text" name="key" placeholder="검색어 입력" value="${key}">
-                <input type="button" name="btn_search" value="검색" onclick="go_search('workBoard')" />
+                <input type="button" name="btn_search" value="검색" onclick="go_searchWork('workBoard')" />
 
         </div>
         <div class="tableWrap">
@@ -32,11 +34,25 @@
                     </div>
                 </div>
             </div>
+            <c:choose>
+            <c:when test="${boardList.size()==0}">
+            목록이 없습니다
+            </c:when>
+            <c:otherwise>
             <c:forEach items="${boardList}" var="board" >
                 <div class="tr">
                     <div class="td" style="flex: 1">${board.id}</div>
                     <div class="td" style="flex: 2">${board.name}</div>
-                    <div class="td" style="flex: 2">${partName}</div>
+                    <div class="td" style="flex: 2">
+                    <c:choose>
+                        <c:when test="${board.part == 1}">개발팀</c:when>
+                        <c:when test="${board.part == 2}">기획팀</c:when>
+                        <c:when test="${board.part == 3}">영업팀</c:when>
+                        <c:when test="${board.part == 4}">운영팀 </c:when>
+                        <c:when test="${board.part == 5}">인사팀 </c:when>
+                        <c:otherwise>알 수 없음</c:otherwise>
+                    </c:choose>
+                    </div>
                     <div class="td" style="flex: 6" >
                     <a href="boardView?id=${board.id}">
                     ${board.title}
@@ -46,6 +62,9 @@
                     <div class="td" style="flex: 2">댓 글${board.replycnt}</div>
                 </div>
            </c:forEach>
+           </c:otherwise>
+           </c:choose>
+
                 </div>
         <div class="writebutton">
             <input type="button" value="게시물 등록" onclick="location.href='boardWrite'" />
@@ -73,6 +92,7 @@
 			</div>
     </div>
     </div>
+    </form>
 </section>
 </body>
 </html>

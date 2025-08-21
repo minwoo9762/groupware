@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface WorkBoardDao {
@@ -13,7 +14,7 @@ public interface WorkBoardDao {
 
     int getAllCount();
 
-    ArrayList<WorkBoardDto> selectBoard(Paging paging, String key);
+    ArrayList<WorkBoardDto> selectBoard(Paging paging, String key, String part);
 
     void addReadCount(int id);
 
@@ -25,5 +26,6 @@ public interface WorkBoardDao {
 
     void delete(int id);
 
-    int getAllCountForBoard(String key);
+    int getAllCountForBoard(String key, String part);
+
 }

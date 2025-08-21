@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,10 +54,6 @@ public class WorkController {
             model.addAttribute("key", result.get("key"));
         }
 
-        String[] partList = {"", "1부서", "2부서", "3부서"};
-        String[] providerList = {"관리자", "사원"};
-        model.addAttribute("partName", partList[loginUser.getPart()]);
-        //  model.addAttribute("providerName", providerList[userdto.getProvider()]);
 
         return url;
     }
@@ -85,32 +82,67 @@ public class WorkController {
     @PostMapping("/fileupload")
     public String fileupload(@RequestParam("image") MultipartFile file,
                              HttpServletRequest request, Model model) {
-        String path = context.getRealPath("/images");
-        String filename = file.getOriginalFilename();
-        Calendar today = Calendar.getInstance();
-        long t = today.getTimeInMillis();
-        String fn1 = filename.substring(0, filename.indexOf(".")); //abc.jsp -> abc
-        String fn2 = filename.substring(filename.indexOf(".")); //abc.jsp -> .jsp
-        String savefilename = fn1 + t + fn2; //abc1234567.jsp
-        String uploadPath = path + "/"+ savefilename; //저장경로/abc1234567.jsp
-        try{
-            file.transferTo(new File(uploadPath)); //파일 업로드
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }catch (IllegalStateException e) {
-            e.printStackTrace();
+        String path = request.getServletContext().getRealPath("/images");
+
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs(); // 디렉토리 없으면 생성
         }
-        model.addAttribute("image", filename);
+
+        String filename = file.getOriginalFilename();
+        if (filename == null || filename.isEmpty()) {
+            model.addAttribute("error", "파일명이 비어 있습니다.");
+            return "errorPage"; // 예외 처리 뷰
+        }
+
+        int dotIndex = filename.lastIndexOf(".");
+        String fn1 = (dotIndex != -1) ? filename.substring(0, dotIndex) : filename;
+        String fn2 = (dotIndex != -1) ? filename.substring(dotIndex) : "";
+
+        long t = System.currentTimeMillis();
+        String savefilename = fn1 + t + fn2;
+
+        String uploadPath = path + "/" + savefilename;
+        try {
+            file.transferTo(new File(uploadPath));
+        } catch (IOException | IllegalStateException e) {
+            e.printStackTrace();
+            model.addAttribute("error", "파일 업로드 실패: " + e.getMessage());
+            return "errorPage";
+        }
+
+        model.addAttribute("image", filename); // 또는 sanitize 처리
         model.addAttribute("savefilename", savefilename);
         return "work/completeUpload";
-
     }
+
+//    @PostMapping("/fileupload")
+//    public String fileupload(@RequestParam("image") MultipartFile file,
+//                             HttpServletRequest request, Model model) {
+//        String path = context.getRealPath("/images");
+//        String filename = file.getOriginalFilename();
+//        Calendar today = Calendar.getInstance();
+//        long t = today.getTimeInMillis();
+//        String fn1 = filename.substring(0, filename.indexOf(".")); //abc.jsp -> abc
+//        String fn2 = filename.substring(filename.indexOf(".")); //abc.jsp -> .jsp
+//        String savefilename = fn1 + t + fn2; //abc1234567.jsp
+//        String uploadPath = path + "/"+ savefilename; //저장경로/abc1234567.jsp
+//        try{
+//            file.transferTo(new File(uploadPath)); //파일 업로드
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }catch (IllegalStateException e) {
+//            e.printStackTrace();
+//        }
+//        model.addAttribute("image", filename);
+//        model.addAttribute("savefilename", savefilename);
+//        return "work/completeUpload";
+//
+//    }
 
 
     @PostMapping("/writeBoard")
     public String writeBoard(@Valid @ModelAttribute("dto") WorkBoardDto boarddto, BindingResult result, Model model) {
-        System.out.println("Image: " + boarddto.getImage());
-        System.out.println("SaveFilename: " + boarddto.getSavefilename());
         String url = "/work/workBoardWrite";
         if(result.hasFieldErrors("title"))
             model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());

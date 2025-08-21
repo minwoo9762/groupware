@@ -13,7 +13,14 @@
         </div>
 
         <div class="bar">
-          <div class="left" >${board.name}</div>
+          <div class="left" >${board.name} (<c:choose>
+                        <c:when test="${board.part == 1}">개발팀</c:when>
+                        <c:when test="${board.part == 2}">기획팀</c:when>
+                        <c:when test="${board.part == 3}">영업팀</c:when>
+                        <c:when test="${board.part == 4}">운영팀 </c:when>
+                        <c:when test="${board.part == 5}">인사팀 </c:when>
+                        <c:otherwise>알 수 없음</c:otherwise>
+                    </c:choose>) </div>
           <div class="right"  >${board.title}</div>
         </div>
 

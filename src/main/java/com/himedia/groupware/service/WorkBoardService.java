@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class WorkBoardService {
@@ -32,6 +33,7 @@ public class WorkBoardService {
         if (request.getParameter("first") != null) {
             session.removeAttribute("page");
             session.removeAttribute("key");
+            session.removeAttribute("part");
         }
 
         int page = 1;
@@ -48,11 +50,22 @@ public class WorkBoardService {
         } else if (session.getAttribute("key") != null) {
             key = (String) session.getAttribute("key");
         }
+
+        String part = "";
+        if (request.getParameter("part") != null) {
+            part = request.getParameter("part");
+            session.setAttribute("part", part);
+        } else if (session.getAttribute("part") != null) {
+            part = (String) session.getAttribute("part");
+        }
+
+
         Paging paging = new Paging();
         paging.setPage(page);
         paging.setDisplayPage(10);
         paging.setDisplayRow(10);
-        int count = bdao.getAllCountForBoard(key);
+        int count = bdao.getAllCountForBoard(key,  part);
+        if(count < 1) count = 1;
         paging.setTotalCount(count);
         paging.calPaging();
 
@@ -61,10 +74,15 @@ public class WorkBoardService {
             paging.calPaging();
         }
 
-        ArrayList<WorkBoardDto> list = bdao.selectBoard(paging, key);
+        ArrayList<WorkBoardDto> list = bdao.selectBoard(paging, key, part);
+        for(WorkBoardDto bdto : list){
+            int cnt = rdao.getReplyCount(bdto.getId());
+            bdto.setReplycnt(cnt);
+        }
         result.put("boardList", list);
         result.put("paging", paging);
         result.put("key", key);
+        result.put("part", part);
         return result;
     }
 
@@ -106,7 +124,5 @@ public class WorkBoardService {
     }
 
     public void delete(int id) {bdao.delete(id);}
-
-
 
 }

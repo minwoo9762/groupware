@@ -7,8 +7,8 @@
         <h2 class="title">Admin</h2>
         <div class="searchWrap">
             <input type="text" class="inputStyle" id="key"/>
-            <button class="btn btnSearch" type="button" onClick="go_search(this)" />
-                검색
+            <button class="btn btnSearch" type="button" onClick="go_search(this)"/>
+            검색
             </button>
         </div>
         <div class="tableWrap">
@@ -27,13 +27,14 @@
                     <th>직급</th>
                     <th>부서</th>
                     <th>상태</th>
+                    <th>급여</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${userList}" var="user" varStatus="i">
                     <tr>
-                        <%--<td>${(userList.size() - i.count) + 1}</td>--%>
+                            <%--<td>${(userList.size() - i.count) + 1}</td>--%>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
                         <td>
@@ -65,6 +66,9 @@
                                 <option value="2" ${user.part == 2 ? 'selected' : ''}>퇴사</option>
                                 <option value="3" ${user.part == 3 ? 'selected' : ''}>휴직</option>
                             </select>
+                        </td>
+                        <td>
+                            <button class="btn" type="button" onclick="location.href='adminPay?id=' + ${user.id}">급여조정</button>
                         </td>
                         <td>
                             <button class="btn change" data-id="${user.id}" onclick="userUpdate(this)">저장하기</button>

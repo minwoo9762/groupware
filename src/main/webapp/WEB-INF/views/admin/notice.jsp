@@ -31,7 +31,7 @@
                 <c:forEach items="${noticeList}" var="notice" varStatus="i">
                     <tr>
                         <td>${notice.nseq}</td>
-                        <td class="content">${notice.title}</td>
+                        <td class="content" style="text-align: center;">${notice.title}</td>
                         <td class="content" style="text-align: left;"><a href="noticeDetail?nseq=${notice.nseq}"><c:out value="${notice.content}" /></a></td>
                         <td>
                             <fmt:formatDate value="${notice.indate}" pattern="yyyy-MM-dd HH:mm:ss"/>
