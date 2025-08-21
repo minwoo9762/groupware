@@ -6,7 +6,7 @@
 <mapper namespace="com.himedia.groupware.dao.HrDao">
 
     <select id="selectAttendanceByUserId" parameterType="int" resultType="com.himedia.groupware.dto.AttendanceDto">
-        SELECT * FROM attendance WHERE aseq = #{aseq}
+        SELECT * FROM attendance WHERE userid = #{userid}
     </select>
     
     <select id="getAllCountForPay" resultType="_int">
@@ -36,7 +36,5 @@
     <delete id="deleteVacation">
         delete from vacation where pseq=#{pseq}
     </delete>
-
-
     
 </mapper>

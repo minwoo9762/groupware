@@ -28,9 +28,9 @@
                     <div class="coltitle">확인/미확인</div>
                 </div>
 
-                <c:forEach items="${vacationList}" var="VacationDto">
+                <c:forEach items="${vacationList}" var="VacationDto" varStatus="status">
                     <div class="row">
-                        <div class="col">${VacationDto.pseq}</div>
+                        <div class="col">${(paging.page - 1) * paging.displayRow + status.index + 1}</div>
                         <div class="col">
                             <a href="vacationDetail?pseq=${VacationDto.pseq}" style="display: block; text-decoration: none; color: inherit; padding-left: 10px;">
                                ${VacationDto.title}

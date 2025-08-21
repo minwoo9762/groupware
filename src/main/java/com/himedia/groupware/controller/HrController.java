@@ -3,6 +3,7 @@ package com.himedia.groupware.controller;
 import com.himedia.groupware.dto.AttendanceDto;
 import com.himedia.groupware.dto.PayDto;
 import com.himedia.groupware.dto.VacationDto;
+import com.himedia.groupware.service.HomeServiece;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,9 +23,17 @@ public class HrController {
 
     @Autowired
     private HrService hs;
+    @Autowired
+    HomeServiece homes;
 
     @GetMapping("/attendance")
-    public String attendance(@RequestParam("aseq") int aseq, Model model) {
+    public String attendance(@RequestParam("aseq") int aseq, Model model,HttpSession session, HttpServletRequest request) {
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if (loginUser == null) {
+            return "redirect:/";
+        }
+
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
         List<AttendanceDto> attendanceList = hs.selectAttendanceByUserId(aseq);
 
         // 출근, 퇴근 기준 시간
@@ -86,6 +96,11 @@ public class HrController {
         model.addAttribute("earlyLeaveCount", earlyLeaveCount);
         model.addAttribute("vacationCount", vacationCount);
         model.addAttribute("remainingVacation", remainingVacation);
+
+        ArrayList<VacationDto> vacationList = homes.getVCT(udto.getId());
+        model.addAttribute("vacation", vacationList);
+
+        System.out.println("vacationList size: " + vacationList.size());
 
         return "attendance/attendance";
     }
