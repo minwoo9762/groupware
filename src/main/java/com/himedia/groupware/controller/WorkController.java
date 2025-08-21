@@ -53,8 +53,6 @@ public class WorkController {
             model.addAttribute("paging", result.get("paging"));
             model.addAttribute("key", result.get("key"));
         }
-
-
         return url;
     }
 
@@ -64,7 +62,6 @@ public class WorkController {
         HashMap<String, Object> result = bs.getBoard(id);
         mav.addObject("board", result.get("board"));
         mav.addObject("replyList", result.get("replyList"));
-        System.out.println(result.get("board"));
         mav.setViewName("work/workBoardView");
         return mav;
     }
@@ -115,31 +112,6 @@ public class WorkController {
         model.addAttribute("savefilename", savefilename);
         return "work/completeUpload";
     }
-
-//    @PostMapping("/fileupload")
-//    public String fileupload(@RequestParam("image") MultipartFile file,
-//                             HttpServletRequest request, Model model) {
-//        String path = context.getRealPath("/images");
-//        String filename = file.getOriginalFilename();
-//        Calendar today = Calendar.getInstance();
-//        long t = today.getTimeInMillis();
-//        String fn1 = filename.substring(0, filename.indexOf(".")); //abc.jsp -> abc
-//        String fn2 = filename.substring(filename.indexOf(".")); //abc.jsp -> .jsp
-//        String savefilename = fn1 + t + fn2; //abc1234567.jsp
-//        String uploadPath = path + "/"+ savefilename; //저장경로/abc1234567.jsp
-//        try{
-//            file.transferTo(new File(uploadPath)); //파일 업로드
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        }
-//        model.addAttribute("image", filename);
-//        model.addAttribute("savefilename", savefilename);
-//        return "work/completeUpload";
-//
-//    }
-
 
     @PostMapping("/writeBoard")
     public String writeBoard(@Valid @ModelAttribute("dto") WorkBoardDto boarddto, BindingResult result, Model model) {

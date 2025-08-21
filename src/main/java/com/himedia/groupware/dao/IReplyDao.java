@@ -7,11 +7,16 @@ import java.util.ArrayList;
 
 @Mapper
 public interface IReplyDao {
-    ArrayList<ReplyDto> selectReply(int id);
+    ArrayList<ReplyDto> selectBoardReply(int id);
+    ArrayList<ReplyDto> selectAppReply(int id);
 
-    void insert(ReplyDto replydto);
+    void insertBoard(ReplyDto replydto);
+    void insertApp(ReplyDto replydto);
 
-    void delete(int replydto);
+    void deleteBoard(int replydto);
+    void deleteApp(int replydto);
 
     int getReplyCount(int id);
+
+
 }

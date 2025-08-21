@@ -1,14 +1,28 @@
-function replyCheck(){
-    if(document.addRep.content.value==''){
+function replyBoardCheck(){
+    if(document.addBoardRep.content.value==''){
         alert('댓글 내용을 입력하세요');
         return false;
     }
     return true;
 }
 
-function deleteReply(id, boardid){
+function replyAppCheck(){
+    if(document.addAppRep.content.value==''){
+        alert('댓글 내용을 입력하세요');
+        return false;
+    }
+    return true;
+}
+
+function deleteBoardReply(id, boardid){
     if(confirm('댓글을 삭제하시겠습니까?')){
         location.href='deleteReply?id=' + id + '&boardid=' + boardid;
+    }
+}
+
+function deleteAppReply(id, appid){
+    if(confirm('댓글을 삭제하시겠습니까?')){
+        location.href='deleteReply?id=' + id + '&appid=' + appid;
     }
 }
 
@@ -26,5 +40,11 @@ function selectImg(){
 function go_searchWork(url){
     document.frm.action=url;
     document.frm.submit();
+}
+
+function deleteApp(id){
+    if(confirm('해당 신청서를 삭제하시겠습니까?')){
+        location.href='deleteApp?id='+id
+    }
 }
 

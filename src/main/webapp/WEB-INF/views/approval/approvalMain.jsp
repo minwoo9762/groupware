@@ -9,7 +9,7 @@
         <div class="searchWrap">
             부서명
             <select name="part">
-                <option value="0">선택</option>
+                <option value="0">부서명</option>
                 <option value="1">개발</option>
                 <option value="2">기획</option>
                 <option value="3">영업</option>
@@ -17,7 +17,7 @@
                 <option value="5">인사</option>
             </select>
             &nbsp;&nbsp;
-                <input type="text" name="key" placeholder="검색어 입력" value="${key}">
+                <input type="text" name="key" placeholder="검색할 제목 내용을 입력하세요" value="${key}">
                 <input type="button" name="btn_search" value="검색" onclick="go_searchWork('appMain')" />
 
         </div>
