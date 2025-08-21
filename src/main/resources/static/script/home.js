@@ -29,14 +29,14 @@ function clickAttend(target) {
     if(targetId === "btnAttend") {
         attendTime.time = currentTime;
         attendTime.indate = formattedDate + " " + formattedClock;
-        attendTime.state = 1;
+        attendTime.state = 2;
         document.getElementById("attendTime").innerText = attendTime.time;
 
         ajaxAttend(attendTime, target);
     } else  if(targetId === "btnleave") {
         leaveTime.time = currentTime;
         leaveTime.indate = formattedDate + " " + formattedClock;
-        leaveTime.state = 1;
+        leaveTime.state = 2;
         document.getElementById("leaveTime").innerText = leaveTime.time;
 
         ajaxLeave(leaveTime, target);

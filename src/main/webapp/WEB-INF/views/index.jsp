@@ -21,14 +21,31 @@
           </span>
 
                 <div class="attWrap">
-                    <div class="startTime">
-                        <span>출근시간</span>
-                        <span id="attendTime">00:00:00</span>
-                    </div>
-                    <div class="endTime">
-                        <span>퇴근시간</span>
-                        <span id="leaveTime">00:00:00</span>
-                    </div>
+                    <c:choose>
+                        <c:when test="${confirmAtd != null}">
+                            <div class="startTime">
+                                <span>출근시간</span>
+                                <span id="attendTime"><fmt:formatDate value="${confirmAtd.indate}"
+                                                                      pattern="HH:mm:ss"/></span>
+                            </div>
+                            <div class="endTime">
+                                <span>퇴근시간</span>
+                                <span id="leaveTime"><fmt:formatDate value="${confirmAtd.outdate}"
+                                                                     pattern="HH:mm:ss"/></span>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="startTime">
+                                <span>출근시간</span>
+                                <span id="attendTime">00:00:00</span>
+                            </div>
+                            <div class="endTime">
+                                <span>퇴근시간</span>
+                                <span id="leaveTime">00:00:00</span>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
                 <div class="btnWrap">
                     <c:choose>
@@ -42,7 +59,7 @@
                             </button>
                         </c:when>
                         <%--2. 오늘 출석 O, 오늘 퇴근 X--%>
-                         <c:when test="${indateTrue == 0 && outdateTrue == 1}">
+                        <c:when test="${indateTrue == 0 && outdateTrue == 1}">
                             <button id="btnAttend" class="btn btnAttend disable" type="button">
                                 출근
                             </button>
@@ -154,15 +171,15 @@
     // vacationList를 자바스크립트 객체 배열로 변환
     let vacationList = [
         <c:forEach items="${vacation}" var="vacation" varStatus="status">
-            {
-                "title": "<%--${vacation.title}--%>연차",
-                "start": "${vacation.indate}",
-                "end": "${vacation.outdate}",
-                "textColor": "#1e90ff",
-                "backgroundColor": "yellow",
-                "allDay": true
-            }
-            <c:if test="${!status.last}">, </c:if>
+        {
+            "title": "<%--${vacation.title}--%>연차",
+            "start": "${vacation.indate}",
+            "end": "${vacation.outdate}",
+            "textColor": "#1e90ff",
+            "backgroundColor": "yellow",
+            "allDay": true
+        }
+        <c:if test="${!status.last}">, </c:if>
         </c:forEach>
     ];
 

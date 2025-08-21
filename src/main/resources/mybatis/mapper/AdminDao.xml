@@ -15,7 +15,10 @@
     <update id="updateUser" parameterType="com.himedia.groupware.dto.UserDto">
         UPDATE user set part=#{part}, provider=#{provider} WHERE id = #{id}
     </update>
-    
+
+    <select id="getAllCountNotice" resultType="_int">
+        select count(*) from notice where title like concat('%', #{key}, '%');
+    </select>
     <select id="getNotice" resultType="com.himedia.groupware.dto.NoticeDto">
         select * from notice where title like concat('%', #{key}, '%') or content like concat('%', #{key}, '%') order by nseq desc limit #{paging.displayRow} offset #{paging.startNum};
     </select>
