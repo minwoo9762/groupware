@@ -3,13 +3,14 @@
 <%@include file="../header.jsp"%>
 <section class="section admin">
     <%@include file="../lnb.jsp"%>
+    <form method="get" name="frm" class="main">
     <div class="main">
         <h2 class="head" style="font-size:40px;">게시판</h2>
         <div class="searchWrap">
             부서명
             <select>
-                <option>선택</option>
-                <option>인사</option>
+                <option >선택</option>
+                <option value="1">인사</option>
                 <option>영업</option>
                 <option>1팀</option>
                 <option>2팀</option>
@@ -73,6 +74,7 @@
 			</div>
     </div>
     </div>
+    </form>
 </section>
 </body>
 </html>

@@ -153,7 +153,4 @@ public class HrService {
         return hdao.getVacation(pseq);
     }
 
-    public void deleteVacation(int pseq) {
-        hdao.deleteVacation(pseq);
-    }
 }

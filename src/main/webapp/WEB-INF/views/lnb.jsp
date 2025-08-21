@@ -18,7 +18,7 @@
             <ul class="depth">
                 <li><a href="workBoard">게시판</a></li>
                 <li><a href="#">메일</a></li>
-                <li><a href="approvalMain">전자결재</a></li>
+                <li><a href="#">자료실</a></li>
             </ul>
         </li>
         <li>
