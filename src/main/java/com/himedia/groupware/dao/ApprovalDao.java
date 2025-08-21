@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 @Mapper
 public interface ApprovalDao {
-    int getAllCountForApp(String key);
-    
+    int getAllCountForApp(String key, String part);
+
 
     ApprovalDto getApp(int id);
 
 
-    ArrayList<ApprovalDto> selectApp(Paging paging, String key);
+    ArrayList<ApprovalDto> selectApp(Paging paging, String key, String part);
 
     ApprovalDto getAppList();
 }

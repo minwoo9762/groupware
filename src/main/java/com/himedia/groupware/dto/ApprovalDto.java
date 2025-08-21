@@ -14,5 +14,6 @@ public class ApprovalDto {
     private Timestamp indate;
     private int category;
     private int status;
+    private String part;
 
 }

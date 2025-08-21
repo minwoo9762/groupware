@@ -13,12 +13,20 @@
         <div class="mainBox">
                 <div class="titleBar">
                   <div class="titleWriter">작성자</div>
-                  <div class="titleTitle">제 목</div>
+                    <div class="titleTitle">제 목</div>
                 </div>
 
                 <div class="bar">
                     <div class="left">${loginUser.name}</div>
                     <div class="right"><input type="text" class="inputText" name="title" placeholder="제목을 입력하세요" /></div>
+                    <div class="category">
+                        <section name="category">
+                            <option value="">선택</option>
+                            <option value="0">휴가</option>
+                            <option value="1">영수증</option>
+                            <option value="2">법인차량</option>
+                        </section>
+                    </div>
                 </div>
 
                 <div class="bodyBar">
@@ -29,27 +37,9 @@
                 <div class="contentBar" style="height:350px;">
                     <div class="contentLeft">
                         <div class="first">전자결재</div>
-                        <div class="second">이미지</div>
+                        <div class="second"></div>
                         <div class="imgField">
-                        <c:choose>
-                    <c:when test="${empty dto.savefilename}">
-                        <div>
-                            <img src="" id="previewimg"/>
                         </div>
-                        <input type="hidden" name="image" />
-                        <input type="hidden" name="savefilename" />
-                    </c:when>
-                    <c:otherwise>
-                        <div>
-                            <img src="/images/${dto.savefilename}" id="previewimg"/>
-                        </div>
-                        <input type="hidden" name="image" value="${dto.image}"/>
-                        <input type="hidden" name="savefilename" value="${dto.savefilename}"/>
-                    </c:otherwise>
-                </c:choose>
-
-                <input type="button" value="이미지 선택" onclick="selectImg()"/>
-                </div>
              </div>
 
                     <div class="contentBox"  ><textarea name="content" placeholder="내용을 입력하세요"></textarea> </div>

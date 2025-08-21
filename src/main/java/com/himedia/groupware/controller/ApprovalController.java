@@ -25,7 +25,7 @@ public class ApprovalController {
     public String appMain(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        ApprovalDto adto = as.getAppList();
+        // ApprovalDto adto = as.getAppList();
         HashMap<String, Object> result = null;
         String url = "user/loginForm";
 
@@ -34,15 +34,8 @@ public class ApprovalController {
             result = as.selectApp(request);
             model.addAttribute("appList", result.get("appList"));
             model.addAttribute("paging", result.get("paging"));
-            model.addAttribute("appKey", result.get("appKey"));
+            model.addAttribute("key", result.get("key"));
         }
-
-        String[] partList = {"", "1부서", "2부서", "3부서"};
-        String [] categoryList = {"휴가", "영수증", "법인차량"};
-        String [] statusList = {"결재요청", "결재중", "결재완료"};
-        model.addAttribute("partName", partList[loginUser.getPart()]);
-        model.addAttribute("categoryName", categoryList[adto.getCategory()]);
-        model.addAttribute("statusName", statusList[adto.getStatus()]);
 
         return url;
     }
@@ -63,6 +56,8 @@ public class ApprovalController {
     }
 
 //    @PostMapping("/insertApp")
+
+
 
 
 

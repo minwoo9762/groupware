@@ -26,6 +26,7 @@ public class ApprovalService {
         if (request.getParameter("first") != null) {
             session.removeAttribute("page");
             session.removeAttribute("key");
+            session.removeAttribute("part");
         }
 
         int page = 1;
@@ -35,6 +36,7 @@ public class ApprovalService {
         } else if (session.getAttribute("page") != null) {
             page = (Integer) session.getAttribute("page");
         }
+
         String key = "";
         if (request.getParameter("key") != null) {
             key = request.getParameter("key");
@@ -42,23 +44,35 @@ public class ApprovalService {
         } else if (session.getAttribute("key") != null) {
             key = (String) session.getAttribute("key");
         }
+
+        String part = "";
+        if (request.getParameter("part") != null) {
+            part = request.getParameter("part");
+            session.setAttribute("part", part);
+        } else if (session.getAttribute("part") != null) {
+            part = (String) session.getAttribute("part");
+        }
+
         Paging paging = new Paging();
         paging.setPage(page);
         paging.setDisplayPage(10);
         paging.setDisplayRow(10);
-        int count = adao.getAllCountForApp(key);
+        int count = adao.getAllCountForApp(key, part);
+        if(count < 1) count = 1;
         paging.setTotalCount(count);
         paging.calPaging();
+
 
         if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
 
-        ArrayList<ApprovalDto> list = adao.selectApp(paging, key);
+        ArrayList<ApprovalDto> list = adao.selectApp(paging, key, part);
         result.put("appList", list);
         result.put("paging", paging);
         result.put("key", key);
+        result.put("part", part);
         return result;
     }
 

@@ -5,11 +5,11 @@
 
 <mapper namespace="com.himedia.groupware.dao.ApprovalDao">
     <select id="getAllCountForApp" resultType="_int">
-        select count(*) from approval where title like concat('%',#{key},'%')
+        select count(*) from approval where title like concat('%',#{key},'%') and part like concat('%',#{part},'%')
     </select>
 
-    <select id="selectApp" parameterType="com.himedia.groupware.dto.Paging" resultType="com.himedia.groupware.dto.ApprovalDto">
-        select * from approval where title like concat ('%',#{key},'%') order by id desc limit #{paging.displayRow} offset #{paging.startNum}
+    <select id="selectApp" resultType="com.himedia.groupware.dto.ApprovalDto">
+        select * from approval where title like concat ('%',#{key},'%') and part like concat('%',#{part},'%') order by id desc limit #{paging.displayRow} offset #{paging.startNum}
     </select>
 
     <select id="getApp" resultType="com.himedia.groupware.dto.ApprovalDto">

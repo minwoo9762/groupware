@@ -8,7 +8,7 @@
             <ul class="depth">
 
                 <li><a href="attendance?aseq=${loginUser.id}">근태 조회</a></li>
-                <li><a href="vacation?id=${loginUser.id}">결재 조회</a></li>
+                <li><a href="appMain">전자 결재</a></li>
                 <li><a href="paycheck?=${loginUser.id}">급여 조회</a></li>
 
             </ul>

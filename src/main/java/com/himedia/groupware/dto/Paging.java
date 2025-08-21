@@ -28,5 +28,6 @@ public class Paging {
         prev = (beginPage == 1) ? false : true;
         startNum = (page - 1) * displayRow;
         endNum = page * displayRow;
+        System.out.println(page + "/" + totalPage + "/" + endPage);
     }
 }
