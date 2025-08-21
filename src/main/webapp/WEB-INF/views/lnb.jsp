@@ -7,9 +7,9 @@
             <span>인사관리</span></span>
             <ul class="depth">
 
-                <li><a href="attendance?aseq=${sessionScope.loginUser.id}">근태 조회</a></li>
-                <li><a href="appMain?id=${id}">전자 결재</a></li>
-                <li><a href="paycheck?=${sessionScope.loginUser.id}">급여 조회</a></li>
+                <li><a href="attendance?aseq=${loginUser.id}">근태 조회</a></li>
+                <li><a href="vacation?id=${loginUser.id}">결재 조회</a></li>
+                <li><a href="paycheck?=${loginUser.id}">급여 조회</a></li>
 
             </ul>
         </li>
