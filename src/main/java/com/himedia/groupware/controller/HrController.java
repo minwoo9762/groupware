@@ -2,10 +2,12 @@ package com.himedia.groupware.controller;
 
 import com.himedia.groupware.dto.AttendanceDto;
 import com.himedia.groupware.dto.PayDto;
+import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.dto.VacationDto;
 import com.himedia.groupware.service.HomeServiece;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class HrController {
     HomeServiece homes;
 
     @GetMapping("/attendance")
-    public String attendance(@RequestParam("aseq") int aseq, Model model,HttpSession session, HttpServletRequest request) {
+    public String attendance(@RequestParam("aseq") int aseq, Model model, HttpSession session, HttpServletRequest request) {
         Object loginUser = request.getSession().getAttribute("loginUser");
         if (loginUser == null) {
             return "redirect:/";
