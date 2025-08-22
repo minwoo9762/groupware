@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<link rel="stylesheet" type="text/css" href="/css/lnb.css">
 <div class="lnb">
     <ul>
-        <li><span onclick="location.href='home'" style="cursor: pointer;">HOME</span></li>
+        <li><span id="home" onclick="location.href='home'" style="cursor: pointer;">HOME</span></li>
         <li>
             <span>인사관리</span></span>
             <ul class="depth">

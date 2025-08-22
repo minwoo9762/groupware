@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="/css/payCheckList.css">
 
 <!-- ✅ layout 시작 -->
-<div class="layout" style="display: flex;">
+<div class="layout" style="display: flex;" id="main">
 
     <!-- ✅ 왼쪽 메뉴 -->
     <%@ include file="../lnb.jsp" %>
@@ -13,13 +13,13 @@
             <form method="get" name="fr">
                 <div class="tb">
                     <div class="row">
-                        <div class="col" style="display: flex; align-items: center;">
-                            제목&nbsp;<input type="text" name="key" value="${key}" />&nbsp;
+                        <div class="col search-box">
+                            제목&nbsp;<input type="text" name="key" value="${key}"/>&nbsp;
                             <input type="button" name="p_search" value="검색" onclick="go_search('paycheck')"/>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="header-row">
                         <div class="coltitle">번호</div>
                         <div class="coltitle">제목</div>
                         <div class="coltitle">등록일</div>

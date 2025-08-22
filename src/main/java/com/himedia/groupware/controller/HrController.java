@@ -152,7 +152,7 @@ public class HrController {
         }
 
         PayDto pdto = hs.getPay(pseq);
-        model.addAttribute("payDto", pdto);
+        model.addAttribute("payDetail", pdto);
 
         return "pay/payDetail";
     }
