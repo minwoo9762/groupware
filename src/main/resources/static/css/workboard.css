@@ -1,118 +1,252 @@
-* {margin: 0; padding: 0;}
-ul, li, ol {list-style-type: none;}
-a {text-decoration: none; color: #000;}
-button {border: none; background: none;}
 
-#wrap {min-width: 1440px; height: 100%;}
-.section {display: flex; height: calc(100% - 55px);}
-.main {width: calc(100% - 230px); }
-.home .main {display: flex; flex-direction: row; flex-flow: wrap; height: 100%; box-sizing: border-box;}
-.main .title {display: flex; align-items: center; flex-shrink: 0; padding:0 30px; width: 100%; height: 52px; box-sizing: border-box;}
 
-.main .cardTit {padding-bottom:14px;}
-.main .boardLeft {display: flex; flex-direction: column; flex-shrink: 0; gap: 30px; padding: 20px 15px 20px 30px; width: 430px; height: calc(100% - 52px); box-sizing: border-box;}
-.main #attend {flex-shrink: 0; padding: 20px; width: 100%; height:200px; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
-.main #attend .today {display: flex; gap:8px; margin-bottom: 16px; font-size: 14px; font-weight: 700; color:#ddd;}
-.main #attend .clock {margin-top: -18px; font-size: 32px; font-weight: 700; color: #555;}
-.main #attend .attWrap {display: flex; gap: 12px;}
-.main #attend .btnWrap {display: flex; gap: 10px;}
-.main #attend .btnWrap >.btn {margin-top: 10px; width: 50%; height: 32px; text-align: center; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 14px; font-weight: 700;}
 
-.main #calendar { flex-shrink: 0; padding: 20px; width: 100%; height:calc(100% - 230px); border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px; }
 
-.main .boardCenter {padding: 20px 15px 20px 15px; width: calc(100% - 750px); height: calc(100% - 52px); box-sizing: border-box;}
-.main #notice {flex-shrink: 0; padding: 20px; width: 100%; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
-.main #notice table {width: 100%; border-top:3px solid #555; border-bottom:3px solid #555; box-sizing: border-box;  border-collapse: collapse; table-layout: fixed;}
-.main #notice th {border-bottom: 1px solid #555; height: 55px; text-align: center;}
-.main #notice td {padding:0 10px; box-sizing: border-box; border-bottom: 1px solid #555; height: 48px; text-align: center;}
-.main #notice td.content {text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 
-.main .boardRight {flex-shrink: 0; padding: 20px 30px 20px 15px; width: 320px; height: calc(100% - 52px); box-sizing: border-box;}
-.main #mypage {display: flex; flex-direction: column; padding: 20px; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
-.main #mypage .top {display: flex; flex-direction: column;}
-.main #mypage .top > img {margin: 0 auto 10px; width: 160px; height: 160px; border-radius: 50%; overflow: hidden; object-fit: cover;}
-.main #mypage .top .name {margin-bottom: 5px; font-size: 22px; font-weight: 700; text-align: center;}
-.main #mypage .top .part {font-size: 14px; text-align: center; color: #ddd;}
-.main #mypage .top .util { display: flex; justify-content: center; margin-top:16px; gap: 12px; }
-.main #mypage .top .util .list {display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;}
-.main #mypage .top .util .list .num {font-size: 28px; font-weight: 700; color: aquamarine;}
-.main #mypage .top .util .list .txt {font-size: 14px; color: #aaa;}
 
-.line {margin: 24px 0; border: 1px solid #e5e5e5; box-sizing: border-box;}
+/*//-------------------------------------------------------------*/
+section{
+    width: 1280px;
+    margin: 0 auto;
+}
+.container {
+    margin: 30px auto;
+    font-family: "Noto Sans KR", sans-serif;
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 12px;
+}
 
-.admin .main {display: flex; flex-direction: column;}
-.admin .main .searchWrap {display: flex; justify-content: flex-end; align-items: center; gap: 5px; padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
+.head {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
 
-.admin .tableWrap {padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
-.admin .tableWrap .table {width: 100%; border-top:3px solid #555; border-bottom:3px solid #555; box-sizing: border-box;  border-collapse: collapse;}
-.admin .tableWrap .table .thead{display: flex; flex-direction: column;}
-.admin .tableWrap .tr {display: flex; flex-direction: row; justify-content: flex-start; align-items: center;}
-.admin .tableWrap .th {border-bottom: 1px solid #555; height: 55px; text-align: center;}
-.admin .tableWrap .td {padding:0 10px; box-sizing: border-box; border-bottom: 1px solid #555; height: 48px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.admin .writebutton {display:flex; justify-content: flex-end; align-items: center; margin-right: 20px;}
-.admin .writebutton input[type=button] {font-weight: bold; font-size:15px;}
-.admin #textarea {height: 133px;}
-
-img{object-fit:contain; width: 300px; height: 200px;}
-
-.formBundle{display: flex; flex-direction: column; width:90%; height: 90%;}
-.formBundle .container{{padding: 20px 30px 20px 30px; display: flex; flex-direction: column; width: 100%; height: 100%; justify-content: flex-start;}}
-.containerForm{width:100%; height: 100%;}
-.container{padding: 20px 30px 20px 30px; display: flex; flex-direction: column; width: 90%; height: 90%; justify-content: flex-start;}
-.head{margin-left:20px ; font-size:30px; font-weight: bold; padding-bottom: 10px}
-.mainBox{border-top: 3px solid silver; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column;
-                border-collapse: collapse; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); border-radius: 10px; width: 80%;
-                margin-left: 65px; overflow: hidden; height: 95%; padding: 10px 10px 10px 10px;}
-
-.titleBar {display: flex; height:55px; border-bottom: 3px solid silver; background: #6c757d; color: #e5e5e5; align-items: center;
-                font-weight: bold; font-size: 20px; border-radius: 10px 10px 0px 0px;}
+.titleBar, .bodyBar {
+    display: flex;
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 22px;
+}
 .titleWriter{flex: 2; text-align: center;}
 .titleTitle{flex: 5; text-align: center;}
+.first{text-align: center;}
+.second {text-align: center;}
+.left{flex: 2; text-align: center;}
+.right{flex: 5; text-align: center;}
 
-.bodyBar{display: flex; height:55px; border-bottom: 3px solid silver; background: #6c757d; color: #e5e5e5; align-items: center;
-    font-weight: bold; font-size: 20px;}
+.bar, .contentBar {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-left: 4px solid #3b82f6;
+    margin: 10px 0;
+    background: white;
+    border-radius: 8px;
+    align-items: center;
+}
 
-.bar{display: flex; height:55px; align-items: center; font-weight: bold; font-size: 15px; border-bottom: 1px solid silver;}
-.left{flex: 2; text-align: center; border-right: 1px solid silver; font-size: 20px;}
-.right{flex: 5; text-align: center; font-size: 20px;}
-.inputText{width:95%; height:95%; font-size: 20px; border: none;}
+.contentLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 122px;
+}
 
-.contentBar{display: flex; height:250px; align-items: center; font-weight: bold; font-size: 15px; border-bottom: 1px solid silver;}
-.contentLeft{flex: 2; text-align: center; display: flex; flex-direction: column; height: 98%}
-.contentBox{flex: 5; display: flex; height: 98%; border-left: 1px solid silver; align-items: center; justify-content: center;
-    font-size: 20px;}
-.contentBox textarea{width:95%; height: 95%; padding: 10px; font-size: 20px; border:none;}
-.contentLeft .first{flex:1; border-bottom: 3px solid silver; display: flex; align-items: center; justify-content: center;}
-.contentLeft .second{flex:1; display: flex; align-items: center; justify-content: center;}
-.contentLeft .imgField{flex:3; display: flex; align-items: center; justify-content: center; width: 95%; height: 95%; flex-direction: column;}
-.updateBtns{height: 60px; display: flex; justify-content: center; align-items: center; margin-top: 5px;}
-.updateBtns input[type=button]{background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
-    font-size: 18px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15);
-    margin: 0px 10px 0px 10px; width:100px; height: 50px;}
-.updateBtns input[type=button]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
-.updateBtns input[type=submit]{background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
-    font-size: 18px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15);
-    margin: 0px 10px 0px 10px; width:100px; height: 50px;}
-.updateBtns input[type=submit]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
+.contentLeft > div{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+.contentLeft .second {
+    background: #eff6ff;
+    font-size: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+}
 
-.reply_title{display: flex; height:30px; border-bottom: 3px solid silver; background: #6c757d; color: #e5e5e5; align-items: center;
-    font-weight: bold; font-size: 14px; border-radius: 10px 10px 0px 0px; margin-top: 10px;}
-.reply_titleDate{flex: 1; display: flex; justify-content: center; align-items: center;}
-.reply_titleContent{flex: 3; display: flex; justify-content: center; align-items: center;}
-.reply_titleWriter{flex: 1; display: flex; justify-content: center; align-items: center;}
-.reply_titleAD{flex: 1; display: flex; justify-content: center; align-items: center;}
+.contentBox {
+    flex: 3;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+    min-height: 100px;
+}
 
-.reply_body{display: flex; height:40px; border-bottom: 1px solid silver; align-items: center; font-size: 16px;}
-.reply_bodyWriter{flex: 1; display: flex; justify-content: center; align-items: center;}
-.reply_bodyDate{flex: 1; display: flex; justify-content: center; align-items: center;}
-.reply_bodyContent{flex: 3; display: flex; justify-content: center; align-items: center;}
-.reply_btn{flex: 1; display: flex; justify-content: center; align-items: center;}
-.reply_btn input[type=submit]{margin-right: 5px; background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
-    font-size: 15px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15); width: 48px; height: 28px;}
-.reply_btn input[type=button]{background: #82c8a0; color:white; text-align: center; box-shadow: 0px 4px 0px #87a86f; border: 1px solid rgba(0,0,0,0.21);
-    font-size: 15px; border-bottom: 4px solid rgba(0,0,0,0.21); border-radius: 4px; text-shadow: 0 1px 0 rgba(0,0,0,0.15); width: 48px; height: 28px;}
-.reply_btn input[type=submit]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
-.reply_btn input[type=button]:active{box-shadow: 0 0 #87a86f; background-color: #87a86f;}
+.updateBtns {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+.updateBtns input {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.updateBtns input:hover {
+    background: #1d4ed8;
+}
 
-.insertImg{display: flex; flex-direction: column; margin-top: 10px; margin-left: 30px;}
+.reply{display: flex; flex-direction: column;}
+.reply_title{
+    display: flex;
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+.reply_Writer{flex: 1;}
+.container {
+    width: 800px;
+    margin: 30px auto;
+    font-family: "Noto Sans KR", sans-serif;
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 12px;
+}
 
+.head {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
+
+.titleBar, .bodyBar {
+    display: flex;
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 22px;
+}
+.titleWriter{flex: 2; text-align: center;}
+.titleTitle{flex: 5; text-align: center;}
+.first{text-align: center;}
+.second {text-align: center;}
+.left{flex: 2; text-align: center;}
+.right{flex: 5; text-align: center;}
+
+.bar, .contentBar {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-left: 4px solid #3b82f6;
+    margin: 10px 0;
+    background: white;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.contentLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 122px;
+}
+
+.contentLeft > div{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+.contentLeft .second {
+    background: #eff6ff;
+    font-size: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.contentBox {
+    flex: 3;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+.updateBtns {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+.updateBtns input {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.updateBtns input:hover {
+    background: #1d4ed8;
+}
+
+.reply{display: flex; flex-direction: column;}
+.reply_title{
+    display: flex;
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+.reply_Writer{flex: 1;}
+.reply_Date{flex: 2;}
+.reply_Content{flex: 4;}
+.reply_AD{flex: 1;}
+
+.reply_body{
+    display: flex;
+    border: 1px solid #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+
+.reply_Content input[type=text]{
+    border: none;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.reply_msg{text-align: center;}
+.reply_AD input {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.reply_AD input:hover {
+    background: #1d4ed8;
+}
