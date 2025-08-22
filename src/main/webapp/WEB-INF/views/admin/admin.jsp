@@ -27,8 +27,8 @@
                     <th>직급</th>
                     <th>부서</th>
                     <th>상태</th>
+                    <th>정보 저장</th>
                     <th>급여</th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,10 +68,10 @@
                             </select>
                         </td>
                         <td>
-                            <button class="btn" type="button" onclick="location.href='adminPay?id=' + ${user.id}">급여조정</button>
+                            <button class="btn change" data-id="${user.id}" onclick="userUpdate(this)">저장하기</button>
                         </td>
                         <td>
-                            <button class="btn change" data-id="${user.id}" onclick="userUpdate(this)">저장하기</button>
+                            <button class="btn" type="button" onclick="location.href='adminPay?id=' + ${user.id}">급여조정</button>
                         </td>
                     </tr>
                 </c:forEach>

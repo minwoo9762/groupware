@@ -56,4 +56,16 @@
         SELECT * FROM notice ORDER BY indate DESC LIMIT #{num}
     </select>
 
+
+
+    <select id="getProvider" resultType="com.himedia.groupware.dto.AsInfoDto">
+        SELECT providerid AS id, providername AS name FROM provider
+    </select>
+    <select id="getPart" resultType="com.himedia.groupware.dto.AsInfoDto">
+        SELECT partid AS id, partname AS name FROM part
+    </select>
+    <select id="getState" resultType="com.himedia.groupware.dto.AsInfoDto">
+        SELECT stateid AS id, statename AS name FROM state
+    </select>
+
 </mapper>

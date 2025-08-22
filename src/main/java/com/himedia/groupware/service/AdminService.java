@@ -1,10 +1,7 @@
 package com.himedia.groupware.service;
 
 import com.himedia.groupware.dao.AdminIDao;
-import com.himedia.groupware.dto.NoticeDto;
-import com.himedia.groupware.dto.Paging;
-import com.himedia.groupware.dto.PayDto;
-import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,4 +153,17 @@ public class AdminService {
         return adidao.currentNotice(num);
     }
 
+    
+    /* 어드민 직책, 부서, 상태*/
+    public ArrayList<AsInfoDto> getProvider() {
+        return adidao.getProvider();
+    }
+
+    public ArrayList<AsInfoDto> getPart() {
+        return adidao.getPart();
+    }
+
+    public ArrayList<AsInfoDto> getState() {
+        return adidao.getState();
+    }
 }
