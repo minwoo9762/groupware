@@ -1,9 +1,6 @@
 package com.himedia.groupware.dao;
 
-import com.himedia.groupware.dto.NoticeDto;
-import com.himedia.groupware.dto.Paging;
-import com.himedia.groupware.dto.PayDto;
-import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -36,4 +33,10 @@ public interface AdminIDao {
     void updatePay(PayDto paydto, int id);
 
     ArrayList<NoticeDto> currentNotice(int num);
+
+    ArrayList<AsInfoDto> getProvider();
+
+    ArrayList<AsInfoDto> getPart();
+
+    ArrayList<AsInfoDto> getState();
 }

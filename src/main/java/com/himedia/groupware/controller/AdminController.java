@@ -1,8 +1,6 @@
 package com.himedia.groupware.controller;
 
-import com.himedia.groupware.dto.NoticeDto;
-import com.himedia.groupware.dto.PayDto;
-import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.dto.*;
 import com.himedia.groupware.service.AdminService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -230,6 +228,43 @@ public class AdminController {
                 model.addAttribute("name", udto.getName());
             }
         }
+        return url;
+    }
+
+    /*부서, 팀, 상태*/
+    @GetMapping("allInfoCtr")
+    public String allInfoCtr(@RequestParam("tabid") int tabid, HttpSession session, Model model){
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            url = "redirect:/home";
+            if (udto.getProvider() == 99) {
+                url = "admin/allInfoCtr";
+
+                if(tabid == 1) {
+                    ArrayList<AsInfoDto> providerList = ads.getProvider();
+                    model.addAttribute("infoList", providerList);
+                    model.addAttribute("title", "직책");
+                    model.addAttribute("parm", "1");
+                }
+
+                if(tabid == 2) {
+                    ArrayList<AsInfoDto> partList = ads.getPart();
+                    model.addAttribute("infoList", partList);
+                    model.addAttribute("title", "조직도");
+                    model.addAttribute("parm", "1");
+                }
+
+                if(tabid == 3) {
+                    ArrayList<AsInfoDto> stateList = ads.getState();
+                    model.addAttribute("infoList", stateList);
+                    model.addAttribute("title", "직원 상태");
+                    model.addAttribute("parm", "1");
+                }
+
+            }
+        }
+
         return url;
     }
 
