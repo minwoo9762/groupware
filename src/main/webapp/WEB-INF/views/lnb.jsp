@@ -26,6 +26,7 @@
             <ul class="depth">
                 <li><a href="admin">사원 관리</a></li>
                 <li><a href="notice">공지사항</a></li>
+                <li><a href="appMain">전자 결재</a></li>
             </ul>
         </li>
     </ul>

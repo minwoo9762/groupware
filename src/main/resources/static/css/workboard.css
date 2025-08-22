@@ -1,116 +1,60 @@
+* {margin: 0; padding: 0;}
+ul, li, ol {list-style-type: none;}
+a {text-decoration: none; color: #000;}
+button {border: none; background: none;}
 
+#wrap {min-width: 1440px; height: 100%;}
+.section {display: flex; height: calc(100% - 55px);}
+.main {width: calc(100% - 230px); }
+.home .main {display: flex; flex-direction: row; flex-flow: wrap; height: 100%; box-sizing: border-box;}
+.main .title {display: flex; align-items: center; flex-shrink: 0; padding:0 30px; width: 100%; height: 52px; box-sizing: border-box;}
 
+.main .cardTit {padding-bottom:14px;}
+.main .boardLeft {display: flex; flex-direction: column; flex-shrink: 0; gap: 30px; padding: 20px 15px 20px 30px; width: 430px; height: calc(100% - 52px); box-sizing: border-box;}
+.main #attend {flex-shrink: 0; padding: 20px; width: 100%; height:200px; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
+.main #attend .today {display: flex; gap:8px; margin-bottom: 16px; font-size: 14px; font-weight: 700; color:#ddd;}
+.main #attend .clock {margin-top: -18px; font-size: 32px; font-weight: 700; color: #555;}
+.main #attend .attWrap {display: flex; gap: 12px;}
+.main #attend .btnWrap {display: flex; gap: 10px;}
+.main #attend .btnWrap >.btn {margin-top: 10px; width: 50%; height: 32px; text-align: center; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 14px; font-weight: 700;}
 
+.main #calendar { flex-shrink: 0; padding: 20px; width: 100%; height:calc(100% - 230px); border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px; }
 
+.main .boardCenter {padding: 20px 15px 20px 15px; width: calc(100% - 750px); height: calc(100% - 52px); box-sizing: border-box;}
+.main #notice {flex-shrink: 0; padding: 20px; width: 100%; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
+.main #notice table {width: 100%; border-top:3px solid #555; border-bottom:3px solid #555; box-sizing: border-box;  border-collapse: collapse; table-layout: fixed;}
+.main #notice th {border-bottom: 1px solid #555; height: 55px; text-align: center;}
+.main #notice td {padding:0 10px; box-sizing: border-box; border-bottom: 1px solid #555; height: 48px; text-align: center;}
+.main #notice td.content {text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 
+.main .boardRight {flex-shrink: 0; padding: 20px 30px 20px 15px; width: 320px; height: calc(100% - 52px); box-sizing: border-box;}
+.main #mypage {display: flex; flex-direction: column; padding: 20px; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
+.main #mypage .top {display: flex; flex-direction: column;}
+.main #mypage .top > img {margin: 0 auto 10px; width: 160px; height: 160px; border-radius: 50%; overflow: hidden; object-fit: cover;}
+.main #mypage .top .name {margin-bottom: 5px; font-size: 22px; font-weight: 700; text-align: center;}
+.main #mypage .top .part {font-size: 14px; text-align: center; color: #ddd;}
+.main #mypage .top .util { display: flex; justify-content: center; margin-top:16px; gap: 12px; }
+.main #mypage .top .util .list {display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;}
+.main #mypage .top .util .list .num {font-size: 28px; font-weight: 700; color: aquamarine;}
+.main #mypage .top .util .list .txt {font-size: 14px; color: #aaa;}
 
-/*//-------------------------------------------------------------*/
-section{
-    width: 1280px;
-    margin: 0 auto;
-}
-.container {
-    margin: 30px auto;
-    font-family: "Noto Sans KR", sans-serif;
-    background: #f8fafc;
-    padding: 25px;
-    border-radius: 12px;
-}
+.line {margin: 24px 0; border: 1px solid #e5e5e5; box-sizing: border-box;}
 
-.head {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #1e40af;
-}
+.admin .main {display: flex; flex-direction: column;}
+.admin .main .searchWrap {display: flex; justify-content: flex-end; align-items: center; gap: 5px; padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
 
-.titleBar, .bodyBar {
-    display: flex;
-    background: #eff6ff;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 22px;
-}
-.titleWriter{flex: 2; text-align: center;}
-.titleTitle{flex: 5; text-align: center;}
-.first{text-align: center;}
-.second {text-align: center;}
-.left{flex: 2; text-align: center;}
-.right{flex: 5; text-align: center;}
+.admin .tableWrap {padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
+.admin .tableWrap .table {width: 100%; border-top:3px solid #555; border-bottom:3px solid #555; box-sizing: border-box;  border-collapse: collapse;}
+.admin .tableWrap .table .thead{display: flex; flex-direction: column;}
+.admin .tableWrap .tr {display: flex; flex-direction: row; justify-content: flex-start; align-items: center;}
+.admin .tableWrap .th {border-bottom: 1px solid #555; height: 55px; text-align: center;}
+.admin .tableWrap .td {padding:0 10px; box-sizing: border-box; border-bottom: 1px solid #555; height: 48px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.admin .writebutton {display:flex; justify-content: flex-end; align-items: center; margin-right: 20px;}
+.admin .writebutton input[type=button] {font-weight: bold; font-size:15px;}
+.admin #textarea {height: 133px;}
 
-.bar, .contentBar {
-    display: flex;
-    gap: 15px;
-    padding: 15px;
-    border-left: 4px solid #3b82f6;
-    margin: 10px 0;
-    background: white;
-    border-radius: 8px;
-    align-items: center;
-}
+/*여기서 부터 */
 
-.contentLeft {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 122px;
-}
-
-.contentLeft > div{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items:  center;
-}
-.contentLeft .second {
-    background: #eff6ff;
-    font-size: 20px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.contentBox {
-    flex: 3;
-    padding: 15px;
-    background: #f9fafb;
-    border-radius: 8px;
-    min-height: 100px;
-}
-
-.updateBtns {
-    margin: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items:  center;
-}
-.updateBtns input {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    margin-right: 8px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-}
-.updateBtns input:hover {
-    background: #1d4ed8;
-}
-
-.reply{display: flex; flex-direction: column;}
-.reply_title{
-    display: flex;
-    background: #eff6ff;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 16px;
-    text-align: center;
-}
-.reply_Writer{flex: 1;}
 .container {
     width: 800px;
     margin: 30px auto;
