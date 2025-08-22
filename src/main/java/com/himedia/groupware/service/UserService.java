@@ -5,6 +5,7 @@ import com.himedia.groupware.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 @Service
@@ -31,5 +32,9 @@ public class UserService {
         if(pwd == null)
             return false;
         return pattern.matcher(pwd).matches();
+    }
+
+    public ArrayList<UserDto> getAllUser() {
+        return udao.getAllUser();
     }
 }
