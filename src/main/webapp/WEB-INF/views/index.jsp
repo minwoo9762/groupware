@@ -89,24 +89,17 @@
 
                 </div>
             </div>
-            <div id="calendar"></div>
-        </div>
 
-        <div class="boardCenter">
             <div id="notice">
                 <h3 class="cardTit">공지사항</h3>
                 <table>
                     <colgroup>
-                        <col width="44px">
-                        <col width="200px">
                         <col width="">
                         <col width="180px">
                     </colgroup>
                     <thead>
                     <tr>
-                        <th>No.</th>
                         <th>제목</th>
-                        <th>내용</th>
                         <th>작성날짜</th>
                     </tr>
                     </thead>
@@ -121,10 +114,10 @@
                             <c:forEach items="${notice}" var="ndto">
                                 <tr onclick="location.href='noticeDetail?nseq=' + ${ndto.nseq}"
                                     style="cursor: pointer;">
-                                    <td>${ndto.nseq}</td>
+   <%--                                 <td>${ndto.nseq}</td>--%>
                                     <td class="content">${ndto.title}</td>
                                     <td class="content">${ndto.content}</td>
-                                    <td><fmt:formatDate value="${ndto.indate}" pattern="yyyy-MM-dd HH:mm"/></td>
+<%--                                    <td><fmt:formatDate value="${ndto.indate}" pattern="yyyy-MM-dd HH:mm"/></td>--%>
                                 </tr>
                             </c:forEach>
                         </c:otherwise>
@@ -132,9 +125,12 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
 
-        <div class="boardRight">
+        <div class="boardCenter">
+            <div id="calendar"></div>
+
             <div id="mypage">
                 <div class="top">
                     <h3 class="cardTit">내 정보</h3>
@@ -163,6 +159,10 @@
                 </div>
             </div>
         </div>
+
+<%--        <div class="boardRight">
+
+        </div>--%>
 
     </div>
 </section>
