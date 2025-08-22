@@ -1,53 +1,96 @@
-body{
-    width:99vw;
-    margin:2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background: linear-gradient(turquoise, white);
-}
-.container{
-    height: 70vh;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f9;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.loginForm{
-    width:800px;
-    margin-top:50px;
-    min-width: 500px;
-    border:5px solid deepskyblue;
-    border-radius : 20px;
-    padding:15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: white;
-}
-.loginForm .field, .loginForm .btn{
-    width:100%;
-    display: flex;
-    margin:5px 0;
+    height: 100vh;
 }
 
-.loginForm .field label, .field label{
-    flex:1;
-    font-weight: bold;
-    margin:5px 0;
+.container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    box-sizing: border-box;
 }
-.loginForm .field input, .loginForm .field div{
-    flex:4; border-radius: 10px;
+
+.loginForm h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0e2957;
 }
-.loginForm .btn input[type=button], .loginForm .btn input[type=submit]{
-    flex:1;
-    height:30px;
-    margin-right:5px;
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.field label {
+    margin-bottom: 6px;
     font-weight: bold;
-    border:none;
-    padding:5px;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    color:white;
-    background-color: black;
+    color: #333;
+}
+
+.field input[type="text"],
+.field input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.btn {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #0e2957;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn input[type="submit"]:hover {
+    background-color: #12336f;
+}
+
+.sub-buttons {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.sub-buttons input[type="button"] {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.sub-buttons input[type="button"]:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    color: red;
+    font-size: 14px;
 }
