@@ -90,7 +90,7 @@ label.btn {flex-shrink: 0; padding: 0 10px; height: 100%; line-height: 30px; box
 .admin .fncTable > .tr > .tableHeader {font-size: 16px; color: #222; font-weight: 700;}
 .admin .fncTable > .tr > .td > input {padding: 0px 8px; width: 108px; height: 28px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px;}
 .admin .fncTable .bthWrap {display: flex; justify-content: flex-end; margin-top: 20px; width: 100%;}
-.admin .fncTable .bthWrap #infoSave {width: 82px; height: 28px; border: 1px solid #555; border-radius: 8px; box-sizing: border-box; text-align: center; font-size: 14px; font-weight: 700;}
+.admin .fncTable .bthWrap #infoSave {width: 82px; height: 28px; border: 1px solid #555; border-radius: 4px; box-sizing: border-box; text-align: center; font-size: 14px; font-weight: 400;}
 
 
 /*
