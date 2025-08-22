@@ -20,4 +20,7 @@
                         profileimg=#{profileimg}
         where email=#{email}
     </update>
+    <select id="getAllUser" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user order by name;
+    </select>
 </mapper>

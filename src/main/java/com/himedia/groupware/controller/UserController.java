@@ -1,7 +1,9 @@
 package com.himedia.groupware.controller;
 
+import com.himedia.groupware.dto.InfoDto;
 import com.himedia.groupware.dto.UserDto;
-import com.himedia.groupware.service.MailService;
+import com.himedia.groupware.service.ExMailService;
+import com.himedia.groupware.service.InfoService;
 import com.himedia.groupware.service.UserService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
@@ -12,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -23,7 +27,9 @@ public class UserController {
     @Autowired
     UserService us;
     @Autowired
-    MailService mailService;
+    InfoService is;
+    @Autowired
+    ExMailService exMailService;
     private static int number;
 
     @GetMapping("/")
@@ -74,8 +80,7 @@ public class UserController {
     @PostMapping("/join")
     public String join(@ModelAttribute("dto") @Valid UserDto userdto, BindingResult result,
     @RequestParam(value="emailCheck", required=false, defaultValue = "") String emailCheck,
-    @RequestParam(value="pwdCheck", required=false, defaultValue = "") String pwdCheck,
-    @RequestParam("part") int part, Model model) {
+    @RequestParam(value="pwdCheck", required=false, defaultValue = "") String pwdCheck, Model model) {
         model.addAttribute("emailCheck", emailCheck);
         String url = "user/joinForm";
         if (result.hasFieldErrors("email"))
@@ -92,8 +97,6 @@ public class UserController {
             model.addAttribute("message", "이름을 입력하세요.");
         else if (result.hasFieldErrors("phone"))
             model.addAttribute("message", "전화번호를 입력하세요.");
-        else if (part == 0)
-            model.addAttribute("message", "부서를 입력하세요.");
         else if (result.hasFieldErrors("address1"))
             model.addAttribute("message", "주소를 입력하세요.");
         else {
@@ -122,7 +125,7 @@ public class UserController {
             result.put("findPwdMsg", "해당 이름의 사원이 존재하지 않습니다.");
         else {
             number = (int)(Math.random()*90000)+100000;
-            mailService.sendMail(email, number);
+            exMailService.sendMail(email, number);
             result.put("findPwdMsg", "이메일을 발송했습니다.");
             result.put("state", "sended");
         }
@@ -182,5 +185,23 @@ public class UserController {
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("profileimg", savefilename);
         return result;
+    }
+
+    @GetMapping("/address")
+    public String address(HttpSession session, Model model) {
+        String url = "user/loginForm";
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        if(loginUser != null) {
+            ArrayList<UserDto> userList = us.getAllUser();
+            ArrayList<InfoDto> infoList = new ArrayList<>();
+            for (UserDto udto : userList) {
+                InfoDto idto = is.getInfo(udto.getName());
+                infoList.add(idto);
+            }
+            model.addAttribute("userList", userList);
+            model.addAttribute("infoList", infoList);
+            url = "user/address";
+        }
+        return url;
     }
 }

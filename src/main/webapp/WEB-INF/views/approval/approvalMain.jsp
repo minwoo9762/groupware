@@ -9,7 +9,7 @@
         <div class="searchWrap">
             부서명
             <select name="part">
-                <option value="0">부서명</option>
+                <option value="">부서명</option>
                 <option value="1">개발</option>
                 <option value="2">기획</option>
                 <option value="3">영업</option>
