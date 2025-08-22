@@ -1,7 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/css/payCheckList.css">
 
 <!-- ✅ layout 시작 -->
 <div class="layout" style="display: flex;" id="main">
@@ -29,7 +28,7 @@
                         <div class="row">
                             <div class="col">${PayDto.pseq}</div>
                             <div class="col">
-                                <a href="payDetail?pseq=${PayDto.pseq}" style="display: block; text-decoration: none; color: inherit; padding-left: 10px;">
+                                <a href="payDetail?pseq=${PayDto.pseq}" style="text-decoration: none; color: inherit;">
                                     ${PayDto.title}
                                 </a>
                             </div>

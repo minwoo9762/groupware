@@ -24,7 +24,6 @@ article {
 .col.search-box input[type="text"] {
     height: 36px;
     font-size: 16px;
-    padding: 4px 10px;
     box-sizing: border-box;
 }
 
@@ -82,3 +81,4 @@ article {
     text-decoration: none;
     color: inherit;
 }
+

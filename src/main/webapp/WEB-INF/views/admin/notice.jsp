@@ -1,8 +1,12 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="../header.jsp"%>
 
-<%@include file="../header.jsp" %>
-<section class="section admin">
+<div class="layout" style="display: flex;" id="main">
+
     <%@include file="../lnb.jsp" %>
+
+
     <div class="main">
         <h2 class="title">Admin</h2>
         <div class="searchWrap">
@@ -63,8 +67,6 @@
             <%--페이지의 끝--%>
         </div>
     </div>
-</section>
+</div>
 
-<script src="/script/admin.js"></script>
-</body>
-</html>
+<%@ include file="../footer.jsp" %>
