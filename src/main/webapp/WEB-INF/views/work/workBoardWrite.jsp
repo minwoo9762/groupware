@@ -1,15 +1,15 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@include file="../header.jsp"%>
-<section class="section admin">
+<div class="layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
 
+    <article>
     <form class="containerForm" name="updateBoard" id="writeBoard" method="post" action="writeBoard" >
         <input type="hidden" name="userid" value="${loginUser.id}" />
         <input type="hidden" name="name" value="${loginUser.name}" />
         <input type="hidden" name="part" value="${loginUser.part}" />
     <div class="container">
-        <h2 class="head">게시글 등록</h2>
         <div class="mainBox">
                 <div class="titleBar">
                   <div class="titleWriter">작성자</div>
@@ -26,9 +26,10 @@
                     <div class="titleTitle" >내 용</div>
                 </div>
 
-                <div class="contentBar" style="height:350px;">
+                <div class="contentBar">
                     <div class="contentLeft">
-                        <div class="first">게시판</div>
+                        <div class="second">게시판</div>
+                        <div class="first">게시물 등록</div>
                         <div class="second">이미지</div>
                         <div class="imgField">
                         <c:choose>
@@ -62,7 +63,7 @@
         </div>
     </div>
     </form>
+    </article>
+</div>
 
-</section>
-</body>
-</html>
+<%@ include file="../footer.jsp" %>

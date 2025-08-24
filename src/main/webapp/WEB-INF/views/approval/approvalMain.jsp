@@ -9,9 +9,9 @@
 <article>
     <form method="get" name="frm">
         <div class="tb">
-            <div class="row">
-            <select name="part">
-                <option value="">부서명</option>
+            <div class="find-box">
+            <select name="part" class="dropdown">
+                <option value="" disabled selected hidden>부서명</option>
                 <option value="1">개발</option>
                 <option value="2">기획</option>
                 <option value="3">영업</option>
@@ -19,7 +19,7 @@
                 <option value="5">인사</option>
             </select>
             <div class="col search-box">
-                <input type="text" name="key" placeholder="검색할 제목 내용을 입력하세요" value="${key}">
+                <input type="text" name="key" placeholder="검색 제목 입력" value="${key}">
                 <input type="button" name="btn_search" value="검색" onclick="go_searchWork('appMain')" />
                 <input type="button" value="결재 신청" onclick="location.href='appWrite'" />
             </div>

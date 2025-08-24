@@ -19,7 +19,7 @@
             <ul class="depth">
                 <li><a href="workBoard?first=y">게시판</a></li>
                 <li><a href="#">메일</a></li>
-                <li><a href="#">자료실</a></li>
+                <li><a href="fileMain?first=y">자료실</a></li>
             </ul>
         </li>
         <c:if test="${loginUser.provider != 1}">

@@ -31,6 +31,7 @@
 .second {text-align: center;}
 .left{flex: 2; text-align: center;}
 .right{flex: 5; text-align: center;}
+.right input[type=text]{border: none; font-size: 14px;}
 
 .bar, .contentBar {
     display: flex;
@@ -69,6 +70,14 @@
     background: #f9fafb;
     border-radius: 8px;
     min-height: 100px;
+}
+
+.contentBox textarea{
+    border: none;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 .updateBtns {
@@ -138,4 +147,39 @@
 }
 .reply_AD input:hover {
     background: #1d4ed8;
+}
+
+img{
+    object-fit: cover;
+    width:160px;
+    height:125px;
+    margin-top: 5px;
+    display: block;}
+
+.dropdown{
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.dropdown:focus {
+    border-color: #5b9bd5;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+    outline: none;
+}
+
+.find-box{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 16px; /* 기존 12px → 8px로 줄임 */
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    gap: 5px;
+    width: 100%;
+    margin-right: 0px;
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.groupware.dao.FileDao">
+
+    <select id="getAllCountForFile" resultType="_int">
+        select count(*) from files where title like concat('%',#{key},'%') and part like concat('%',#{part},'%')
+    </select>
+
+    <select id="selectFile" parameterType="com.himedia.groupware.dto.Paging" resultType="com.himedia.groupware.dto.FileDto">
+        select*from files where title like concat ('%',#{key},'%') and part like concat('%',#{part},'%') order by id desc limit #{paging.displayRow} offset #{paging.startNum}
+    </select>
+
+    <insert id="insert" parameterType="com.himedia.groupware.dto.FileDto">
+        insert into files (userid, name, title, originalname, savedname, part) values (#{userid}, #{name}, #{title}, #{originalname}, #{savedname}, #{part})
+    </insert>
+
+    <delete id="delete">
+        delete from files where id=#{id}
+    </delete>
+</mapper>

@@ -32,9 +32,20 @@ function deleteBoard(id){
     }
 }
 
+function deleteFile(id){
+    if(confirm('파일을 삭제하시겠습니까? ')){
+        location.href='deleteFile?id='+id
+    }
+}
+
+
 function selectImg(){
     var opt="toolbar=no, menubar=no, resizable=no, width=450, height=200";
     window.open('selectimg','selectimg', opt);
+}
+
+function selectFile(){
+    document.getElementById("fileInput").click();
 }
 
 function go_searchWork(url){
@@ -45,6 +56,18 @@ function go_searchWork(url){
 function deleteApp(id){
     if(confirm('해당 신청서를 삭제하시겠습니까?')){
         location.href='deleteApp?id='+id
+    }
+}
+
+function updateFileName() {
+    const fileInput = document.getElementById("fileInput");
+    const fileNameDisplay = document.getElementById("fileNameDisplay");
+
+    if (fileInput.files.length > 0) {
+        // 선택된 파일 이름 표시
+        fileNameDisplay.textContent = fileInput.files[0].name;
+    } else {
+        fileNameDisplay.textContent = "선택된 파일 없음";
     }
 }
 

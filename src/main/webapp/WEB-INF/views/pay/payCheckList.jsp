@@ -13,7 +13,7 @@
                 <div class="tb">
                     <div class="row">
                         <div class="col search-box">
-                            제목&nbsp;<input type="text" name="key" value="${key}"/>&nbsp;
+                            <input type="text" name="key" value="${key}" placeholder="검색 제목 입력" />&nbsp;
                             <input type="button" name="p_search" value="검색" onclick="go_search('paycheck')"/>
                         </div>
                     </div>
