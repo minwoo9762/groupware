@@ -6,7 +6,6 @@
     <%@include file="../lnb.jsp"%>
 
 <div class="container">
-    <h2 class="head">게시글 상세보기</h2>
     <div class="mainBox">
 
         <div class="titleBar">
@@ -34,14 +33,13 @@
 
         <div class="contentBar">
           <div class="contentLeft">
-              <div class="게시판"></div>
-              <div class="first">글쓰기</div>
+              <div class="second">게시판</div>
+              <div class="first">상세보기</div>
               <div class="second">이미지</div>
       <div class="imgField">
         <c:choose>
           <c:when test="${empty board.savefilename}">
             <img src="/images/noname.jpg" /><br>
-            이미지가 없습니다
           </c:when>
           <c:otherwise>
             <img src="/images/${board.savefilename}" />
