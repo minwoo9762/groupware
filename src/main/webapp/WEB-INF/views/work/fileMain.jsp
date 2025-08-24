@@ -50,9 +50,9 @@
         <div class="col">${file.title}</div>
         <div class="col">${file.uploadtime}</div>
         <div class="col">
-        <a href="">
-        ${file.savedname}
-        </a>
+            <a href="${pageContext.request.contextPath}/filedownload?filename=${file.savedname}">
+                ${file.originalname}
+            </a>
         </div>
         <div class="col">
             <div class="updateBtns">

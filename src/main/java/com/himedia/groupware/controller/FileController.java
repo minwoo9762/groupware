@@ -5,20 +5,20 @@ import com.himedia.groupware.dto.FileDto;
 import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.util.HashMap;
 
 @Controller
@@ -47,36 +47,30 @@ public class FileController {
     @GetMapping("/fileInsertForm")
     public String fileInsertForm() {return "work/fileInsertForm";}
 
-    @PostMapping("/insertFile")
-    public String insertFile(@Valid @ModelAttribute("dto") FileDto filedto, BindingResult result, Model model) {
-        String url = "work/fileInsertForm";
-        if(result.hasFieldErrors("title"))
-            model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
-        else{
-            url = "redirect:/fileMain";
-            fs.insert(filedto);
-        }
-        model.addAttribute("dto", filedto);
-        return url;
-    }
-
     @GetMapping("/selectfile")
     public String selectfile(){return "work/selectfile";}
 
-    @PostMapping("/fileinsert")
-    public String fileinsert(@RequestParam("originalname")MultipartFile file,
-                             HttpServletRequest request, Model model){
-        String path = request.getServletContext().getRealPath("/files");
+    @PostMapping("/fileInsert")
+    public String fileInsert(@Valid @ModelAttribute("dto") FileDto filedto,
+                             BindingResult result,
+                             @RequestParam("file") MultipartFile file,
+                             HttpServletRequest request,
+                             Model model) {
+        if (result.hasFieldErrors("title")) {
+            model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
+            return "work/fileInsertForm";
+        }
 
+        String path = request.getServletContext().getRealPath("/files");
         File dir = new File(path);
         if (!dir.exists()) {
-            dir.mkdirs(); // 디렉토리 없으면 생성
+            dir.mkdirs();
         }
 
         String filename = file.getOriginalFilename();
         if (filename == null || filename.isEmpty()) {
             model.addAttribute("error", "파일명이 비어 있습니다.");
-            return "errorPage"; // 예외 처리 뷰
+            return "errorPage";
         }
 
         int dotIndex = filename.lastIndexOf(".");
@@ -87,6 +81,7 @@ public class FileController {
         String savefilename = fn1 + t + fn2;
 
         String uploadPath = path + "/" + savefilename;
+
         try {
             file.transferTo(new File(uploadPath));
         } catch (IOException | IllegalStateException e) {
@@ -95,10 +90,40 @@ public class FileController {
             return "errorPage";
         }
 
-        model.addAttribute("originalname", filename); // 또는 sanitize 처리
-        model.addAttribute("savedname", savefilename);
-        return "work/filecomplete";
+        // DB에 저장할 파일명 DTO에 세팅
+        filedto.setOriginalname(filename);
+        filedto.setSavedname(savefilename);
 
+        // 파일 정보와 게시글 정보 DB에 저장 (fs.insert는 서비스 호출)
+        fs.insert(filedto);
+
+        return "redirect:/fileMain";  // 업로드 완료 후 목록으로 리다이렉트
+    }
+
+//    파일 다운로드 ---------------------------------------------------------
+
+    @GetMapping("/filedownload")
+    public void fileDownload(@RequestParam("filename") String filename,
+                             HttpServletResponse response,
+                             HttpServletRequest request) throws IOException {
+
+        // webapp/files 폴더 경로 가져오기
+        String uploadDir = request.getServletContext().getRealPath("/files/");
+        File file = new File(uploadDir, filename);
+
+        if (!file.exists()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        // 응답에 다운로드용 헤더 세팅
+        response.setContentType("application/octet-stream");
+        String encodedFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedFilename + "\"");
+
+        // 파일을 response outputStream에 복사
+        Files.copy(file.toPath(), response.getOutputStream());
+        response.getOutputStream().flush();
     }
 
     @GetMapping("/deleteFile")

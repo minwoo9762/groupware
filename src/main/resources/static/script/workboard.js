@@ -58,16 +58,3 @@ function deleteApp(id){
         location.href='deleteApp?id='+id
     }
 }
-
-function updateFileName() {
-    const fileInput = document.getElementById("fileInput");
-    const fileNameDisplay = document.getElementById("fileNameDisplay");
-
-    if (fileInput.files.length > 0) {
-        // 선택된 파일 이름 표시
-        fileNameDisplay.textContent = fileInput.files[0].name;
-    } else {
-        fileNameDisplay.textContent = "선택된 파일 없음";
-    }
-}
-
