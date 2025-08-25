@@ -46,11 +46,11 @@
 <body>
     <div id="wrap">
         <header id="header">
-            <h1 class="logo">
+            <h2 class="logo">
 
                 <%--<img src="" />--%>
-                GROUPWARE
-            </h1>
+                    The Quintessence of Connectivity
+            </h2>
 
 
             <div class="util">
