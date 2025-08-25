@@ -39,32 +39,23 @@
                         <td>${user.name}</td>
                         <td>
                             <select class="providerSelect btn">
-                                <option value="0" ${user.provider == 0 ? 'selected' : ''}>선택</option>
-                                <option value="1" ${user.provider == 1 ? 'selected' : ''}>사원</option>
-                                <option value="2" ${user.provider == 2 ? 'selected' : ''}>주임</option>
-                                <option value="3" ${user.provider == 3 ? 'selected' : ''}>대리</option>
-                                <option value="4" ${user.provider == 4 ? 'selected' : ''}>과장</option>
-                                <option value="5" ${user.provider == 5 ? 'selected' : ''}>부장</option>
-                                <option value="6" ${user.provider == 99 ? 'selected' : ''}>대표(관리자)</option>
+                                <c:forEach items="${providerList}" var="list">
+                                    <option value="${list.id}" ${user.provider == list.id ? 'selected' : ''}>${list.name}</option>
+                                </c:forEach>
                             </select>
                         </td>
                         <td>
                             <select class="partSelect btn">
-                                <option value="0" ${user.part == 0 ? 'selected' : ''}>선택</option>
-                                <option value="1" ${user.part == 1 ? 'selected' : ''}>개발팀</option>
-                                <option value="2" ${user.part == 2 ? 'selected' : ''}>기획팀</option>
-                                <option value="3" ${user.part == 3 ? 'selected' : ''}>영업팀</option>
-                                <option value="4" ${user.part == 4 ? 'selected' : ''}>운영팀</option>
-                                <option value="5" ${user.part == 5 ? 'selected' : ''}>인사팀</option>
-                                <option value="6" ${user.part == 6 ? 'selected' : ''}>미정</option>
+                                <c:forEach items="${partList}" var="list">
+                                    <option value="${list.id}" ${user.part == list.id ? 'selected' : ''}>${list.name}</option>
+                                </c:forEach>
                             </select>
                         </td>
                         <td>
                             <select class="stateSelect btn">
-                                <option value="0" ${user.state == 0 ? 'selected' : ''}>선택</option>
-                                <option value="1" ${user.state == 1 ? 'selected' : ''}>재직</option>
-                                <option value="2" ${user.state == 2 ? 'selected' : ''}>퇴사</option>
-                                <option value="3" ${user.state == 3 ? 'selected' : ''}>휴직</option>
+                                <c:forEach items="${stateList}" var="list">
+                                    <option value="${list.id}" ${user.state == list.id ? 'selected' : ''}>${list.name}</option>
+                                </c:forEach>
                             </select>
                         </td>
                         <td>
@@ -99,6 +90,5 @@
     </div>
 </section>
 
-<script src="/script/admin.js"></script>
 </body>
 </html>

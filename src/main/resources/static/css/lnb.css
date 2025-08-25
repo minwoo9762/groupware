@@ -1,5 +1,5 @@
 .lnb {
-
+    flex-shrink: 0;
     width: 210px;
     background: linear-gradient(180deg, #0f172a, #1e293b); /* 딥 네이비 → 짙은 차콜 블루 */
     font-family: 'Noto Sans KR', sans-serif;
