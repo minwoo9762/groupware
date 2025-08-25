@@ -7,11 +7,13 @@ import java.sql.Timestamp;
 @Data
 public class MailDto {
     private int id;
-    private int sender;
-    private int receiver;
+    private int senderId;
+    private String senderName;
+    private int receiverId;
+    private String receiverName;
     private String subject;
     private String content;
     private Timestamp indate;
     private boolean read;
-    private boolean reply;
+    private int reply;
 }
