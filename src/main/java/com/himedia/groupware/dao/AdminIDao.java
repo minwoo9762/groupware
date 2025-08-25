@@ -41,10 +41,16 @@ public interface AdminIDao {
     ArrayList<AsInfoDto> getState();
 
 
+
+
+    void insertProvider(int id, String name);
+    void insertPart(int id, String name);
+    void insertState(int id, String name);
+
+
     void replaceProvider(int id, String name);
     void replacePart(int id, String name);
     void replaceState(int id, String name);
-
 
 
     void userReplaceProvider(int deleteid);void deleteProvider(int deleteid);
@@ -52,4 +58,7 @@ public interface AdminIDao {
     void userReplaceState(Integer deleteid);void deleteState(Integer deleteid);
 
     void userReplacePart(Integer deleteid);void deletePart(Integer deleteid);
+
+
+    ArrayList<AsInfoDto> userAllInfoList();
 }
