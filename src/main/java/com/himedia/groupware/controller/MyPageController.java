@@ -1,6 +1,8 @@
 package com.himedia.groupware.controller;
 
+import com.himedia.groupware.dto.InfoDto;
 import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.service.InfoService;
 import com.himedia.groupware.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MyPageController {
     @Autowired
     MyPageService ms;
-    static String[] partList = {"", "1부서", "2부서", "3부서"};
-    static String[] providerList = {"관리자", "사원"};
+    @Autowired
+    InfoService is;
 
     @GetMapping("/myPage")
     public String myPage(HttpSession session, Model model) {
@@ -26,8 +28,8 @@ public class MyPageController {
 
         String url = "redirect:/";
         if (loginUser != null) {
-            model.addAttribute("partName", partList[loginUser.getPart()]);
-            model.addAttribute("providerName", providerList[loginUser.getProvider()]);
+            InfoDto idto = is.getInfo(loginUser.getName());
+            model.addAttribute("info", idto);
             url = "myPage/profile";
         }
         return url;
@@ -36,13 +38,11 @@ public class MyPageController {
     @GetMapping("/updateProfileForm")
     public String updateProfile(HttpSession session, Model model) {
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-        String[] partList = {"", "1부서", "2부서", "3부서"};
-        String[] providerList = {"관리자", "사원"};
         String url = "redirect:/";
         if(loginUser != null){
             model.addAttribute("dto", loginUser);
-            model.addAttribute("partName", partList[loginUser.getPart()]);
-            model.addAttribute("providerName", providerList[loginUser.getProvider()]);
+            InfoDto idto = is.getInfo(loginUser.getName());
+            model.addAttribute("info", idto);
             model.addAttribute("oldImage", loginUser.getProfileimg());
             url = "myPage/updateProfileForm";
         }
@@ -53,10 +53,8 @@ public class MyPageController {
     public String updateProfile(@ModelAttribute("dto") @Valid UserDto userdto, BindingResult result,
                                 HttpSession session, Model model) {
         String url = "myPage/updateProfileForm";
-        String[] partList = {"", "1부서", "2부서", "3부서"};
-        String[] providerList = {"관리자", "사원"};
-        model.addAttribute("partName", partList[userdto.getPart()]);
-        model.addAttribute("providerName", providerList[userdto.getProvider()]);
+        InfoDto idto = is.getInfo(userdto.getName());
+        model.addAttribute("info", idto);
         if (result.hasFieldErrors("name"))
             model.addAttribute("message", "이름을 입력하세요.");
         else if (result.hasFieldErrors("phone"))

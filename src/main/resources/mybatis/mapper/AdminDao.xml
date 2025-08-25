@@ -68,4 +68,37 @@
         SELECT stateid AS id, statename AS name FROM state
     </select>
 
+    <!--프로바이더-->
+    <update id="replaceProvider" parameterType="com.himedia.groupware.dto.InfoDto">
+        update provider set providername=#{name} where providerid=#{id}
+    </update>
+    <update id="userReplaceProvider" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set provider=0  where provider=#{deleteid}
+    </update>
+    <delete id="deleteProvider" parameterType="com.himedia.groupware.dto.InfoDto">
+        delete from provider where providerid=#{deleteid}
+    </delete>
+
+    <!--파트-->
+    <update id="replacePart" parameterType="com.himedia.groupware.dto.InfoDto">
+        update part set partname=#{name} where partid=#{id}
+    </update>
+    <update id="userReplacePart" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set part=0  where part=#{deleteid}
+    </update>
+    <delete id="deletePart" parameterType="com.himedia.groupware.dto.InfoDto">
+        delete from part where partid=#{deleteid}
+    </delete>
+
+    <!--스테이트-->
+    <update id="replaceState" parameterType="com.himedia.groupware.dto.InfoDto">
+        update state set statename=#{name} where stateid=#{id}
+    </update>
+    <update id="userReplaceState" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set state=0  where state=#{deleteid}
+    </update>
+    <delete id="deleteState" parameterType="com.himedia.groupware.dto.InfoDto">
+        delete from state where stateid=#{deleteid}
+    </delete>
+
 </mapper>

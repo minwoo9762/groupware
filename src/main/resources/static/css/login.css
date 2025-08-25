@@ -1,8 +1,10 @@
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
     background-color: #f4f6f9;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +26,9 @@ body {
     color: #0e2957;
 }
 
+
 .field {
+
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;

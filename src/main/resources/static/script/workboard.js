@@ -32,9 +32,20 @@ function deleteBoard(id){
     }
 }
 
+function deleteFile(id){
+    if(confirm('파일을 삭제하시겠습니까? ')){
+        location.href='deleteFile?id='+id
+    }
+}
+
+
 function selectImg(){
     var opt="toolbar=no, menubar=no, resizable=no, width=450, height=200";
     window.open('selectimg','selectimg', opt);
+}
+
+function selectFile(){
+    document.getElementById("fileInput").click();
 }
 
 function go_searchWork(url){
@@ -47,4 +58,3 @@ function deleteApp(id){
         location.href='deleteApp?id='+id
     }
 }
-

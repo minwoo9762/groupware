@@ -1,32 +1,29 @@
 package com.himedia.groupware.service;
 
-import com.himedia.groupware.dao.IMailDao;
-import com.himedia.groupware.dto.ApprovalDto;
-import com.himedia.groupware.dto.MailDto;
+import com.himedia.groupware.dao.FileDao;
+import com.himedia.groupware.dto.FileDto;
 import com.himedia.groupware.dto.Paging;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+;import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
-public class MailService {
+public class FileService {
+
     @Autowired
-    IMailDao mdao;
+    FileDao fdao;
 
-    public HashMap<String, Object> getRecentMail(int id) {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("sendList",  mdao.getRecentSendMail(id));
-        result.put("receiveList", mdao.getRecentReceiveMail(id));
-        return result;
-    }
 
-    public HashMap<String, Object> selectMail(HttpServletRequest request) {
-        HashMap<String, Object> result = new HashMap<>();
-        HttpSession session = request.getSession();
+    public HashMap<String, Object> selectFile(HttpServletRequest request) {
+       HashMap<String, Object> result = new HashMap<>();
+
+       HttpSession session = request.getSession();
+
         if (request.getParameter("first") != null) {
             session.removeAttribute("page");
             session.removeAttribute("key");
@@ -40,7 +37,6 @@ public class MailService {
         } else if (session.getAttribute("page") != null) {
             page = (Integer) session.getAttribute("page");
         }
-
         String key = "";
         if (request.getParameter("key") != null) {
             key = request.getParameter("key");
@@ -61,26 +57,25 @@ public class MailService {
         paging.setPage(page);
         paging.setDisplayPage(10);
         paging.setDisplayRow(10);
-        int count = mdao.getAllCountForMail(key);
+        int count = fdao.getAllCountForFile(key,  part);
         if(count < 1) count = 1;
         paging.setTotalCount(count);
         paging.calPaging();
-
 
         if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
-        int id = Integer.parseInt((String) session.getAttribute("id"));
-        ArrayList<MailDto> sendList = mdao.getSendMail(id);
-        ArrayList<MailDto> receiveList = mdao.getReceiveMail(id);
 
-        result.put("sendList", sendList);
-        result.put("receiveList", receiveList);
+        ArrayList<FileDto> list = fdao.selectFile(paging, key, part);
+        result.put("fileList", list);
         result.put("paging", paging);
         result.put("key", key);
         result.put("part", part);
         return result;
     }
 
+    public void insert(@Valid FileDto filedto) {fdao.insert(filedto);}
+
+    public void delete(int id) {fdao.delete(id);}
 }

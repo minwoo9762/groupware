@@ -26,5 +26,6 @@ public class UserDto {
     private String address3;
     private Timestamp indate;
     private int provider;
+    private int state;
     private String profileimg;
 }

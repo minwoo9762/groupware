@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.groupware.dao.IMailDao">
+    <select id="getRecentSendMail" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where senderid=#{id}
+        order by indate desc limit 3
+    </select>
+    <select id="getRecentReceiveMail" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where receiverid=#{id}
+        order by indate desc limit 3
+    </select>
+    <select id="getAllCountForMail" resultType="_int">
+        select count(*)
+    </select>
+    <select id="getSendMail" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where senderid=#{id}
+        order by indate desc
+    </select>
+    <select id="getReceiveMail" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where receiverid=#{id}
+        order by indate desc
+    </select>
+</mapper>

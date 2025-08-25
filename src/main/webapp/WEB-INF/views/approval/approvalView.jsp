@@ -1,4 +1,6 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="../header.jsp"%>
 <script type="text/javascript">
     const appId = ${app.id};  // JSP EL 결과가 숫자라면 숫자 그대로 할당됨
 
@@ -25,8 +27,7 @@
     }
 </script>
 
-<%@include file="../header.jsp"%>
-<section class="section admin">
+<div class=" layout" style="display: flex;" id="main">
   <%@include file="../lnb.jsp"%>
 
 <div class="container">
@@ -155,7 +156,6 @@
 </div>
 
 
-</section>
+</div>
 
-</body>
-</html>
+<%@ include file="../footer.jsp" %>

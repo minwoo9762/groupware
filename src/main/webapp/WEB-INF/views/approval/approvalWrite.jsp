@@ -1,13 +1,15 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@include file="../header.jsp"%>
-<section class="section admin">
+
+<div class=" layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
 
     <form class="containerForm" name="updateBoard" method="post" action="insertApp" >
         <input type="hidden" name="userid" value="${loginUser.id}" />
         <input type="hidden" name="username" value="${loginUser.name}" />
         <input type="hidden" name="part" value="${loginUser.part}" />
+
     <div class="container">
         <h2 class="head">전자결재 신청</h2>
         <div class="mainBox">
@@ -23,21 +25,21 @@
 
                 <div class="bodyBar">
                     <div class="titleWriter" >카테고리</div>
-                    <div class="titleTitle" >내 용</div>
+                    <div class="titleTitle" >결재내용</div>
                 </div>
 
-                <div class="contentBar" style="height:350px;">
+                <div class="contentBar">
                     <div class="contentLeft">
+                        <div class="second">결재분류</div>
                         <div class="first">
-                            <select name="category">
-                                <option value="">선택</option>
+                            <select name="category" class="dropdown">
+                                <option value="" disabled selected hidden="">결재분류</option>
                                 <option value="0">휴가</option>
                                 <option value="1">영수증</option>
                                 <option value="2">법인차량</option>
                             </select>
                         </div>
-                        <div class="second"></div>
-             </div>
+                    </div>
 
                     <div class="contentBox"  ><textarea name="content" placeholder="내용을 입력하세요"></textarea> </div>
                 </div>
@@ -50,6 +52,6 @@
     </div>
     </form>
 
-</section>
+</div>>
 </body>
 </html>

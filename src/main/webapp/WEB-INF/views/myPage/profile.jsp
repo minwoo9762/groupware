@@ -17,13 +17,13 @@
             <label>전화번호</label><div>${loginUser.phone}</div>
         </div>
         <div class="field">
-            <label>부서</label><div>${partName}</div>
+            <label>부서</label><div>${info.partName}</div>
         </div>
         <div class="field">
             <label>주소</label><div>${loginUser.address1} ${loginUser.address2} ${loginUser.address3}</div>
         </div>
         <div class="field">
-            <label>권한</label><div>${providerName}</div>
+            <label>권한</label><div>${info.providerName}</div>
         </div>
         <div class="btn">
             <input type="button" value="프로필 수정" onclick="location.href='updateProfileForm'">
