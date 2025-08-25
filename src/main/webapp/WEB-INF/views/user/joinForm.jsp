@@ -101,15 +101,6 @@
             <input type="text" name="name" value="${dto.name}">
         </div>
         <div class="field">
-            <label>부서</label>
-            <select name="part">
-                <option value="0">선택하세요</option>
-                <option value="1">1부서</option>
-                <option value="2">2부서</option>
-                <option value="3">3부서</option>
-            </select>
-        </div>
-        <div class="field">
             <label>전화번호</label>
             <input type="text" name="phone" value="${dto.phone}">
         </div>

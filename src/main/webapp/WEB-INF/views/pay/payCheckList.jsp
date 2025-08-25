@@ -1,7 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/css/payCheckList.css">
 
 <!-- ✅ layout 시작 -->
 <div class="layout" style="display: flex;" id="main">
@@ -14,7 +13,7 @@
                 <div class="tb">
                     <div class="row">
                         <div class="col search-box">
-                            제목&nbsp;<input type="text" name="key" value="${key}"/>&nbsp;
+                            <input type="text" name="key" value="${key}" placeholder="검색 제목 입력" />&nbsp;
                             <input type="button" name="p_search" value="검색" onclick="go_search('paycheck')"/>
                         </div>
                     </div>
@@ -29,7 +28,7 @@
                         <div class="row">
                             <div class="col">${PayDto.pseq}</div>
                             <div class="col">
-                                <a href="payDetail?pseq=${PayDto.pseq}" style="display: block; text-decoration: none; color: inherit; padding-left: 10px;">
+                                <a href="payDetail?pseq=${PayDto.pseq}" style="text-decoration: none; color: inherit;">
                                     ${PayDto.title}
                                 </a>
                             </div>

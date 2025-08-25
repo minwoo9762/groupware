@@ -1,116 +1,5 @@
+/*여기서 부터 */
 
-
-
-
-
-
-/*//-------------------------------------------------------------*/
-section{
-    width: 1280px;
-    margin: 0 auto;
-}
-.container {
-    margin: 30px auto;
-    font-family: "Noto Sans KR", sans-serif;
-    background: #f8fafc;
-    padding: 25px;
-    border-radius: 12px;
-}
-
-.head {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #1e40af;
-}
-
-.titleBar, .bodyBar {
-    display: flex;
-    background: #eff6ff;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 22px;
-}
-.titleWriter{flex: 2; text-align: center;}
-.titleTitle{flex: 5; text-align: center;}
-.first{text-align: center;}
-.second {text-align: center;}
-.left{flex: 2; text-align: center;}
-.right{flex: 5; text-align: center;}
-
-.bar, .contentBar {
-    display: flex;
-    gap: 15px;
-    padding: 15px;
-    border-left: 4px solid #3b82f6;
-    margin: 10px 0;
-    background: white;
-    border-radius: 8px;
-    align-items: center;
-}
-
-.contentLeft {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 122px;
-}
-
-.contentLeft > div{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items:  center;
-}
-.contentLeft .second {
-    background: #eff6ff;
-    font-size: 20px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.contentBox {
-    flex: 3;
-    padding: 15px;
-    background: #f9fafb;
-    border-radius: 8px;
-    min-height: 100px;
-}
-
-.updateBtns {
-    margin: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items:  center;
-}
-.updateBtns input {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    margin-right: 8px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-}
-.updateBtns input:hover {
-    background: #1d4ed8;
-}
-
-.reply{display: flex; flex-direction: column;}
-.reply_title{
-    display: flex;
-    background: #eff6ff;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 16px;
-    text-align: center;
-}
-.reply_Writer{flex: 1;}
 .container {
     width: 800px;
     margin: 30px auto;
@@ -142,6 +31,7 @@ section{
 .second {text-align: center;}
 .left{flex: 2; text-align: center;}
 .right{flex: 5; text-align: center;}
+.right input[type=text]{border: none; font-size: 14px;}
 
 .bar, .contentBar {
     display: flex;
@@ -180,6 +70,14 @@ section{
     background: #f9fafb;
     border-radius: 8px;
     min-height: 100px;
+}
+
+.contentBox textarea{
+    border: none;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 .updateBtns {
@@ -249,4 +147,39 @@ section{
 }
 .reply_AD input:hover {
     background: #1d4ed8;
+}
+
+img{
+    object-fit: cover;
+    width:160px;
+    height:125px;
+    margin-top: 5px;
+    display: block;}
+
+.dropdown{
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.dropdown:focus {
+    border-color: #5b9bd5;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+    outline: none;
+}
+
+.find-box{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 16px; /* 기존 12px → 8px로 줄임 */
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    gap: 5px;
+    width: 100%;
+    margin-right: 0px;
 }

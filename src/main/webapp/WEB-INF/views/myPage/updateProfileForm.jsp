@@ -24,7 +24,7 @@
             </div>
             <div class="field">
                 <label>부서</label>
-                <input type="text" name="partName" value="${partName}" readonly>
+                <input type="text" value="${info.partName}" readonly>
                 <input type="hidden" name="part" value="${dto.part}">
             </div>
             <div class="field">
@@ -95,7 +95,7 @@
             </script>
             <div class="field">
                 <label>권한</label>
-                <input type="text" name="providerName" value="${providerName}" readonly>
+                <input type="text" value="${info.providerName}" readonly>
                 <input type="hidden" name="provider" value="${dto.provider}">
             </div>
             <div class="btn">
