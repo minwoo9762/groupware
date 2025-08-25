@@ -105,21 +105,19 @@
             <div class="input-row">
                 <input type="text" name="email" class="input-text-fixed">
                 <input type="button" value="인증메일 보내기" id="sendMailForPwd" class="btn-common">
-                <input type="hidden" name="sendCheck" id="sendCheck">
             </div>
         </div>
+
         <div class="field">
             <label>인증번호 입력</label>
             <div class="input-row">
                 <input type="text" name="code" class="input-text-fixed">
                 <input type="button" value="인증하기" id="confirmCode" class="btn-common">
-                <div id="confirmMsg"></div>
-                <input type="hidden" name="codeCheck" id="codeCheck">
             </div>
         </div>
 
         <div class="btn">
-            <input type="button" value="돌아가기" onclick="location.href='/'" class="btn-common">
+            <input type="button" value="돌아가기" onclick="location.href='/'" class="btn-common" id="backButton">
         </div>
     </div>
 

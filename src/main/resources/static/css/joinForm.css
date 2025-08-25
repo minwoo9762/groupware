@@ -44,17 +44,47 @@ form {
 .field input[type="password"],
 .field input[type="file"],
 .field select {
-    padding: 10px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
     width: 100%;
     box-sizing: border-box;
+    height: 40px;
 }
 
-.field select {
-    background-color: white;
-    appearance: none;
+.field input[type="text"].address,
+.field input[type="text"].detail-address {
+    height: 40px;
+}
+
+.field input[type="button"],
+.field input[type="submit"] {
+    padding: 0;
+    font-size: 14px;
+    background-color: #0e2957;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.field input[type="button"]:hover,
+.field input[type="submit"]:hover {
+    background-color: #1a3c87;
+}
+
+.field input[type="text"]:focus,
+.field input[type="password"]:focus,
+.field input[type="button"]:focus {
+    outline: none;
+    border-color: #0e2957;
 }
 
 input[readonly] {
@@ -72,7 +102,7 @@ input[readonly] {
 .btn input[type="submit"],
 .btn input[type="button"] {
     flex: 1;
-    padding: 12px;
+    padding: 0;
     font-size: 16px;
     background-color: #0e2957;
     color: white;
@@ -80,6 +110,10 @@ input[readonly] {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn input[type="button"]:not([value="중복검사"]) {
@@ -98,16 +132,20 @@ input[readonly] {
 #duplication {
     background-color: #0e2957;
     color: white;
-    padding: 10px 16px;
-    font-size: 13px;
+    padding: 0;
+    font-size: 16px;
     border-radius: 6px;
     border: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #duplication:hover {
-    background-color: #217dbb;
+    background-color: #1a3c87;
 }
 
 #duplicationMsg {
@@ -137,7 +175,7 @@ div[style*="font-size: 80%"] {
     font-size: 14px;
 }
 
-.message{
+.message {
     margin-top: 6px;
     font-size: 13px;
     color: #d00;
