@@ -1,57 +1,55 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="../header.jsp"%>
 
-<%@include file="../header.jsp" %>
-<section class="section admin">
-    <%@include file="../lnb.jsp" %>
-    <div class="main">
-        <h2 class="title">Admin</h2>
-        <div class="tableWrap">
-            <table>
-                <colgroup>
-                    <col width="150px">
-                    <col width="">
-                </colgroup>
-                <tbody>
-                <tr>
-                    <th>제목</th>
-                    <td style="text-align: left;">${notice.title}</td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td style="text-align: left;"><span id="name">${name}</span><span id="email"
-                                                                                      class="display-none">${notice.userid}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td><textarea id="content" readonly disabled style="border: 0;">${notice.content}</textarea></td>
-                </tr>
-                <tr>
-                    <th>이미지</th>
-                    <td style="height: auto; text-align: left;">
+<div class=" layout" style="display: flex;" id="main">
+    <%@include file="../lnb.jsp"%>
 
-                        <div class="fileWrap">
-                            <div class="customFile">
-                                <div id="savefilename">${notice.savefilename}</div>
-                            </div>
-                            <div id="imagepreview" style="justify-content: flex-start;">
-                                <img width='150' height='150' style='margin-top:8px; object-fit: cover'
-                                     src="images/${notice.image}"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="btnWrap topright">
-                <button type="button" class="btn btnWrite" onclick="updateNotice(${notice.nseq})">수정하기</button>
-                <button type="button" class="btn btnWrite" onclick="location.href='notice'">돌아가기</button>
-            </div>
+<div class="container">
+    <h2 class="head">공지사항 상세보기</h2>
+    <div class="mainBox">
+
+        <div class="titleBar">
+            <div class="titleWriter">작성자</div>
+            <div class="titleTitle">제목</div>
         </div>
-    </div>
-</section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/script/admin.js"></script>
-</body>
-</html>
+        <div class="bar">
+            <div class="left">${notice.userid}</div>
+            <div class="right">${notice.title}</div>
+        </div>
+
+        <div class="bodyBar">
+            <div class="titleWriter">카테고리</div>
+            <div class="titleTitle">내 용</div>
+        </div>
+
+        <div class="contentBar">
+            <div class="contentLeft">
+                <div class="second">공지사항</div>
+                <div class="first">상세보기</div>
+                <div class="second">이미지</div>
+                <div class="imgField">
+        <c:choose>
+          <c:when test="${empty notice.savefilename}">
+            <img src="/images/noname.jpg" /><br>
+          </c:when>
+          <c:otherwise>
+            <img src="/images/${notice.savefilename}" />
+          </c:otherwise>
+        </c:choose>
+      </div>
+            </div>
+            <div class="contentBox">${notice.content}</div>
+        </div>
+
+            <div class="updateBtns">
+                <button type="button" onclick="updateNotice(${notice.nseq})">수정하기</button>
+                <button type="button" onclick="location.href='notice'">돌아가기</button>
+            </div>
+    </div>
+</div>
+</div>
+
+
+<%@ include file="../footer.jsp" %>

@@ -37,3 +37,18 @@
 
 </div>
 
+<script>
+    document.querySelectorAll('.lnb li').forEach(li => {
+        const submenu = li.querySelector('ul.depth');
+        if (!submenu) return;
+
+        li.addEventListener('mouseenter', () => {
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+        });
+
+        li.addEventListener('mouseleave', () => {
+            submenu.style.maxHeight = '0';
+        });
+    });
+</script>
+

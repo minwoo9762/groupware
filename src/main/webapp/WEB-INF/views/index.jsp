@@ -1,15 +1,14 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@include file="./header.jsp"%>
 
 <!-- FullCalendar 라이브러리 로드 -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
 
 
-<%@include file="header.jsp" %>
 <section class="section home">
     <%@include file="lnb.jsp" %>
     <div class="main">
-        <h2 class="title">HOME</h2>
         <div class="boardLeft">
             <div id="attend">
                 <h3 class="cardTit">근태관리</h3>
@@ -93,22 +92,19 @@
             <div id="notice">
                 <h3 class="cardTit">공지사항</h3>
                 <table>
-                    <colgroup>
-                        <col width="">
-                        <col width="180px">
-                    </colgroup>
                     <thead>
                     <tr>
                         <th>제목</th>
-                        <th>작성날짜</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:choose>
                         <c:when test="${notice.size() == 0}">
-                            <div style="display:flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700;">
-                                공지사항을 등록해주세요.
-                            </div>
+                          <tr>
+                            <td colspan="1" style="text-align:center; height: 80px; vertical-align: middle; font-size: 20px; font-weight: bold;">
+                              공지사항을 등록해주세요.
+                            </td>
+                          </tr>
                         </c:when>
                         <c:otherwise>
                             <c:forEach items="${notice}" var="ndto">
@@ -116,7 +112,6 @@
                                     style="cursor: pointer;">
    <%--                                 <td>${ndto.nseq}</td>--%>
                                     <td class="content">${ndto.title}</td>
-                                    <td class="content">${ndto.content}</td>
 <%--                                    <td><fmt:formatDate value="${ndto.indate}" pattern="yyyy-MM-dd HH:mm"/></td>--%>
                                 </tr>
                             </c:forEach>
@@ -125,16 +120,10 @@
                     </tbody>
                 </table>
             </div>
-
-        </div>
-
-        <div class="boardCenter">
-            <div id="calendar"></div>
-
             <div id="mypage">
                 <div class="top">
-                    <h3 class="cardTit">내 정보</h3>
                     <img src="/images/${loginUser.profileimg}" alt="프로필사진"/>
+                    <div class="npm">
                     <span class="name">
                         ${loginUser.name}
                         ${loginUser.provider == 1 ? "사원" : loginUser.provider == 2 ? "주임" : loginUser.provider == 3 ? "대리" : loginUser.provider == 4 ? "과장" : loginUser.provider == 5 ? "부장" : loginUser.provider == 99 ? "대표(관리자)" : "미정"}
@@ -152,12 +141,20 @@
                             <span class="txt">오늘의 일정</span>
                         </div>
                     </div>
+                    </div>
                 </div>
                 <span class="line"></span>
                 <div class="bottom">
 
                 </div>
             </div>
+
+        </div>
+
+        <div class="boardCenter">
+            <div id="calendar"></div>
+
+
         </div>
 
 <%--        <div class="boardRight">
