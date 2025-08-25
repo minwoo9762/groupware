@@ -1,47 +1,68 @@
-
 .lnb {
-    flex-shrink: 0;
-    width: 240px;
-    box-sizing: border-box;
+
+    width: 210px;
+    background: linear-gradient(180deg, #0f172a, #1e293b); /* 딥 네이비 → 짙은 차콜 블루 */
+    font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-right: 20px;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.3); /* 그림자도 좀 더 진하게 */
+
 }
 
-.lnb > ul {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 0;  /* 상단/하단 간격 최소화 */
-    box-sizing: border-box;
+/* 상위 메뉴 */
+.lnb span,
+.lnb a {
+    display: block;
+    padding: 14px 18px;
+    color: #60a5fa; /* 민트빛 블루 */
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 12px;
+    margin: 4px;
+    text-align: center;
 }
 
-.lnb > ul > li {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 30px;
-    box-sizing: border-box;
-    height: auto;
-    margin-bottom: 40px; /* 기본 메뉴 간격 */
+/* hover 시 효과 */
+.lnb span:hover,
+.lnb a:hover {
+    background: rgba(96, 165, 250, 0.4); /* 민트 블루 반투명 */
+    color: #e0e7ff; /* 연한 퍼플톤 블루 */
+    transform: translateX(5px);
 }
 
-.lnb > ul > li > span {
-    font-size: 28px;
-    font-weight: 700;
+/* depth (서브메뉴) */
+.lnb ul.depth {
+    background: #e0e7ff; /* 연한 퍼플 블루 */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out;
+    border-radius: 12px;
+    margin: 4px;
 }
 
-.lnb > ul > li > .depth {
-    display: flex;
-    flex-direction: column;
+/* hover 시 depth 펼쳐짐 */
+.lnb li:hover > ul.depth {
+    max-height: 500px;
 }
 
-.lnb > ul > li > .depth > li {
-    padding:8px 14px;
-    box-sizing: border-box;
+/* depth 메뉴 항목 */
+.lnb ul.depth li a {
+    font-size: 14px;
+    color: #0c4a6e; /* 짙은 민트 네이비 */
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.7s ease-in-out;
+    border-radius: 10px;
+    margin: 2px 6px;
+    text-align: center;
+    padding: 12px;
 }
 
-.lnb > ul > li > .depth > li > a {
-    font-size: 18px;
-}
-
-#home {
-    margin-top: 0;        /* 위쪽 간격 제거 */
-    margin-bottom: 10px;  /* 인사관리와의 간격 좁게 */
-    padding: 5px 0;       /* 글자 위/아래 여백 최소화 */
+/* depth 메뉴 등장 애니메이션 */
+.lnb li:hover > ul.depth li a {
+    opacity: 1;
+    transform: translateX(0);
 }

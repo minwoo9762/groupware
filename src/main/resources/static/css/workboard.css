@@ -96,8 +96,22 @@
     cursor: pointer;
     font-weight: bold;
 }
-.updateBtns input:hover {
+.updateBtns input:active {
     background: #1d4ed8;
+}
+
+.fileDelete input{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 8px;
+    background: #0f172a;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.fileDelete input:active{
+    background: #1e293b;
 }
 
 .reply{display: flex; flex-direction: column;}

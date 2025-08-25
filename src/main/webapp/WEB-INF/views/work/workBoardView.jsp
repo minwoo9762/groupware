@@ -6,6 +6,7 @@
     <%@include file="../lnb.jsp"%>
 
 <div class="container">
+    <h2 class="head">게시글 상세보기</h2>
     <div class="mainBox">
 
         <div class="titleBar">
