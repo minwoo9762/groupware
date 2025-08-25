@@ -9,14 +9,14 @@ button {border: none; background: none; cursor: pointer;}
 .display-none {display: none !important;}
 
 body #wrap {min-width: 1260px; height: 100%;}
-.section {display: flex; height: calc(100% - 140px);}
-.main {width: calc(100% - 300px); }
+.section {display: flex; margin: 0 auto; max-width: 1280px; height: calc(100% - 140px);}
+.main {margin-bottom: 30px; width: calc(100% - 240px);}
 .home .main {display: flex; flex-direction: row; flex-flow: wrap; height: 100%; box-sizing: border-box; overflow: auto;}
-.main .title {display: flex; align-items: center; flex-shrink: 0; padding:0 30px; width: 100%; height: 52px; box-sizing: border-box;}
+.main .title {display: flex; align-items: center; flex-shrink: 0; padding:0 30px 0 0; width: 100%; height: 52px; box-sizing: border-box;}
 
 .main .cardTit {padding-bottom:14px;}
 
-.main .boardLeft {display: flex; flex-direction: column; flex-shrink: 0; gap: 30px; padding: 20px 15px 20px 30px; width: 450px; height: calc(100% - 52px); box-sizing: border-box;}
+.main .boardLeft {display: flex; flex-direction: column; flex-shrink: 0; gap: 30px; padding: 20px 15px 20px 0px; width: 450px; height: calc(100% - 52px); box-sizing: border-box;}
 
 .main #attend {flex-shrink: 0; padding: 20px; width: 100%; height:200px; border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;}
 .main #attend .today {display: flex; gap:8px; margin-bottom: 16px; font-size: 14px; font-weight: 700; color:#ddd;}

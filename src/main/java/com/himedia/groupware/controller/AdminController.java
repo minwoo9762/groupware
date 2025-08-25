@@ -26,12 +26,17 @@ public class AdminController {
     @Autowired
     AdminService ads;
 
+    @GetMapping("/alert")
+    public String alert() {
+        return "admin/alert";
+    }
+
     @GetMapping("/admin")
     public String admin(HttpSession session, Model model, HttpServletRequest request) {
         String url = "redirect:/";
         UserDto udto = (UserDto) session.getAttribute("loginUser");
         if (udto != null) {
-            url = "redirect:/home";
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "admin/admin";
 
@@ -49,6 +54,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "redirect:/admin";
                 ads.updateUser(userdto);
@@ -62,6 +68,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
 
                 UserDto user = ads.findUser(id);
@@ -96,6 +103,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "redirect:/admin";
 
@@ -129,7 +137,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            url = "redirect:/home";
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "admin/noticeWrite";
                 ads.selectNoticeInfo(udto);
@@ -145,7 +153,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            url = "redirect:/home";
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
 
 
@@ -162,7 +170,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            url = "redirect:/home";
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "redirect:/admin";
                 ads.updateNotice(noticedto);
@@ -220,7 +228,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            url = "redirect:/home";
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "admin/noticeUpdate";
                 NoticeDto notice = ads.selectNoticeDetail(nseq);
@@ -233,11 +241,14 @@ public class AdminController {
 
     /*부서, 팀, 상태*/
     @GetMapping("allInfoCtr")
-    public String allInfoCtr(@RequestParam("tabid") int tabid, HttpSession session, Model model){
+    public String allInfoCtr(@RequestParam("tabid") int tabid,
+                             @RequestParam(value = "delete", required = false, defaultValue = "false") Boolean delete,
+                             @RequestParam(value = "deleteid", required = false) Integer deleteid,
+                             HttpSession session, Model model){
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            url = "redirect:/home";
+            url = "redirect:/alert";
             if (udto.getProvider() == 99) {
                 url = "admin/allInfoCtr";
 
@@ -245,21 +256,76 @@ public class AdminController {
                     ArrayList<AsInfoDto> providerList = ads.getProvider();
                     model.addAttribute("infoList", providerList);
                     model.addAttribute("title", "직책");
-                    model.addAttribute("parm", "1");
+                    model.addAttribute("parms", "1");
+
+                    if(delete) {
+                        ads.userReplaceProvider(deleteid);
+                        ads.deleteProvider(deleteid);
+                        url = "redirect:/allInfoCtr?tabid=1";
+                    }
                 }
 
                 if(tabid == 2) {
                     ArrayList<AsInfoDto> partList = ads.getPart();
                     model.addAttribute("infoList", partList);
                     model.addAttribute("title", "조직도");
-                    model.addAttribute("parm", "1");
+                    model.addAttribute("parms", "2");
+
+                    if(delete) {
+                        ads.userReplacePart(deleteid);
+                        ads.deletePart(deleteid);
+                        url = "redirect:/allInfoCtr?tabid=2";
+                    }
                 }
 
                 if(tabid == 3) {
                     ArrayList<AsInfoDto> stateList = ads.getState();
                     model.addAttribute("infoList", stateList);
                     model.addAttribute("title", "직원 상태");
-                    model.addAttribute("parm", "1");
+                    model.addAttribute("parms", "3");
+
+                    if(delete) {
+                        ads.userReplaceState(deleteid);
+                        ads.deleteState(deleteid);
+                        url = "redirect:/allInfoCtr?tabid=3";
+                    }
+                }
+
+            }
+        }
+        return url;
+    }
+
+    @PostMapping("allInfoCtrAction")
+    public String allInfoCtrAction(
+            @RequestParam("tabid") int tabid,
+            @RequestParam("id") int[] ids,
+            @RequestParam("name") String[] names,
+            HttpSession session) {
+
+        UserDto udto = (UserDto) session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if (udto != null) {
+            url = "redirect:/alert";
+            if (udto.getProvider() == 99) {
+
+                if(tabid == 1) {
+                    url = "redirect:/allInfoCtr?tabid=1";
+                    for(int i=0; i<ids.length; i++) {
+                        ads.replaceProvider(ids[i], names[i]);
+                    }
+                }
+                if(tabid == 2) {
+                    url = "redirect:/allInfoCtr?tabid=2";
+                    for(int i=0; i<ids.length; i++) {
+                        ads.replacePart(ids[i], names[i]);
+                    }
+                }
+                if(tabid == 3) {
+                    url = "redirect:/allInfoCtr?tabid=3";
+                    for(int i=0; i<ids.length; i++) {
+                        ads.replaceState(ids[i], names[i]);
+                    }
                 }
 
             }

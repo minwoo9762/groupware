@@ -61,10 +61,10 @@
                         </td>
                         <td>
                             <select class="stateSelect btn">
-                                <option value="0" ${user.part == 0 ? 'selected' : ''}>선택</option>
-                                <option value="1" ${user.part == 1 ? 'selected' : ''}>재직</option>
-                                <option value="2" ${user.part == 2 ? 'selected' : ''}>퇴사</option>
-                                <option value="3" ${user.part == 3 ? 'selected' : ''}>휴직</option>
+                                <option value="0" ${user.state == 0 ? 'selected' : ''}>선택</option>
+                                <option value="1" ${user.state == 1 ? 'selected' : ''}>재직</option>
+                                <option value="2" ${user.state == 2 ? 'selected' : ''}>퇴사</option>
+                                <option value="3" ${user.state == 3 ? 'selected' : ''}>휴직</option>
                             </select>
                         </td>
                         <td>

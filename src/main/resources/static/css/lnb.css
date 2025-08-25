@@ -1,6 +1,7 @@
 
 .lnb {
-    width: 300px;
+    flex-shrink: 0;
+    width: 240px;
     box-sizing: border-box;
 }
 

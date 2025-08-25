@@ -197,3 +197,10 @@ function adminUpdatePay(useridN) {
     });
 
 }
+
+function deleteInfo(target) {
+    let tr = target.parentElement.parentElement;
+    let tl = tr.querySelector(".tl").querySelector("input[name=id]").value;
+    tr.remove();
+    location.href = location.pathname + location.search + "&delete=true&deleteid=" + tl;
+}
