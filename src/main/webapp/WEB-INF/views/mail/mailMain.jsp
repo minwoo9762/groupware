@@ -5,42 +5,75 @@
     <%@include file="../lnb.jsp"%>
 
     <div class="main">
-        <h2 class="title" style="font-size:40px;">이메일</h2>
-        <div class="searchWrap">
-            <input type="text" />
-            <input type="button" />
-                검색
+        <h2 class="title" style="font-size:40px;">Mail</h2>
+        <form class="searchWrap" action="mail">
+            <input type="text" name="key" placeholder="제목 검색" value="${key}">
+            <input type="submit" value="검색">
+        </form>
+        <div class="writebutton" style="display: flex; justify-content: flex-end">
+            <input type="button" value="메일 작성" onclick="location.href='writeMail'">
         </div>
-        <div class="tableWrap">
-            <div class="table">
-                <div class="thead">
-                    <div class="tr">
-                        <div class="th" style="flex: 1">No.</div>
-                        <div class="th"  style="flex: 2">보낸이</div>
-                        <div class="th"  style="flex: 8">내 용</div>
-                        <div class="th"  style="flex: 2"></div>
+        <div class="content" style="display: flex; flex-direction: column; justify-content: space-around">
+            <div class="mailList">
+                <h2><a href="location.href='inbox'">최근 받은메일함</a></h2>
+                <div class="tableWrap">
+                    <div class="table">
+                        <div class="thead" style="display: flex">
+                            <div class="th" style="flex: 1">보낸사람</div>
+                            <div class="th" style="flex: 4">제목</div>
+                            <div class="th" style="flex: 2">작성일</div>
+                            <div class="th" style="flex: 1">답장여부</div>
+                        </div>
+                        <c:forEach items="${receiveList}" var="receive">
+                            <div class="tr" style="display: flex; color:${receive.read ? 'gray' : 'black'}">
+                                <div class="td" style="flex: 1">${receive.senderName}</div>
+                                <div class="td" style="flex: 4">${receive.subject}</div>
+                                <div class="td" style="flex: 2">
+                                    <fmt:formatDate value="${receive.indate}" type="date" />
+                                </div>
+                                <c:choose>
+                                    <c:when test="${receive.reply} != 0">
+                                        <div class="td" style="flex: 1">○</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="td" style="flex: 1">×</div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="writebutton">
-            <input type="button" value="이메일 보내기" onclick="location.href='writeEmail'" />
-        </div>
-    <div style="display: flex; justify-content: center; font-size: 105%">
-            <c:if test="${paging.prev}" >
-                <a href="main?page=${paging.beginPage-1}">PREV</a>&nbsp;
-            </c:if>
-            <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-                <c:if test="${index!=paging.page}">
-                    <a href="main?page=${index}">${index}</a>&nbsp;
-                </c:if>
-                <c:if test="${index==paging.page}">
-                    <span style="color:red">${index}&nbsp;</span>
-                </c:if>
-            </c:forEach>
-            <c:if test="${paging.next}" >
-                <a href="main?page=${paging.endPage+1}">NEXT</a>&nbsp;
-            </c:if>
+            <div class="mailList">
+                <h2><a href="location.href='sent'">최근 보낸메일함</a></h2>
+                <div class="tableWrap">
+                    <div class="table">
+                        <div class="thead" style="display: flex">
+                            <div class="th" style="flex: 1">받은사람</div>
+                            <div class="th" style="flex: 4">제목</div>
+                            <div class="th" style="flex: 2">작성일</div>
+                            <div class="th" style="flex: 1">답장여부</div>
+                        </div>
+                        <c:forEach items="${sendList}" var="send">
+                            <div class="tr" style="display: flex; color:${send.read ? 'gray' : 'black'}">
+                                <div class="td" style="flex: 1">${send.receiverName}</div>
+                                <div class="td" style="flex: 4">${send.subject}</div>
+                                <div class="td" style="flex: 2">
+                                    <fmt:formatDate value="${send.indate}" type="date" />
+                                </div>
+                                <c:choose>
+                                    <c:when test="${send.reply} != 0">
+                                        <div class="td" style="flex: 1">○</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="td" style="flex: 1">×</div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

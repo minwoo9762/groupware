@@ -18,7 +18,7 @@
             <span>업무관리</span>
             <ul class="depth">
                 <li><a href="workBoard?first=y">게시판</a></li>
-                <li><a href="#">메일</a></li>
+                <li><a href="mail">메일</a></li>
                 <li><a href="fileMain?first=y">자료실</a></li>
             </ul>
         </li>
