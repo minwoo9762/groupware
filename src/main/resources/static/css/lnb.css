@@ -1,4 +1,5 @@
 .lnb {
+
     width: 210px;
     background: linear-gradient(180deg, #0f172a, #1e293b); /* 딥 네이비 → 짙은 차콜 블루 */
     font-family: 'Noto Sans KR', sans-serif;
@@ -6,6 +7,7 @@
     overflow: hidden;
     margin-right: 20px;
     box-shadow: 2px 4px 10px rgba(0,0,0,0.3); /* 그림자도 좀 더 진하게 */
+
 }
 
 /* 상위 메뉴 */
