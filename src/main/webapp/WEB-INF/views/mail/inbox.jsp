@@ -56,8 +56,8 @@
                     <a href="main?page=${paging.endPage+1}">NEXT</a>&nbsp;
                 </c:if>
             </div>
+        </div>
     </div>
 </section>
-
 </body>
 </html>
