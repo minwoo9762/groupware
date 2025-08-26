@@ -8,4 +8,7 @@
         select * from vacation where userid=#{id}
     </select>
 
+    <select id="userAllInfoList" parameterType="com.himedia.groupware.dto.InfoDto">
+        select * from allinfo where id=#{id}
+    </select>
 </mapper>

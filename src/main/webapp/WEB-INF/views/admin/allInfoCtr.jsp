@@ -36,7 +36,7 @@
                     </c:forEach>
                 </div>
 
-                <form class="table fncTable" action="allInfoCtrAction?tabid=${parms}" method="post">
+                <form class="table fncTable" action="allInfoCtrAction?tabid=${parms}" method="post" name="infoForm">
                     <h3 class="tableTitle">변경 구성</h3>
                     <div class="tr">
                         <div class="tl tableHeader">
@@ -64,6 +64,13 @@
                                         </button>
                                     </div>
                                 </c:when>
+                                <c:when test="${i.index==1 && parms==1}">
+                                     <div class="td delete">
+                                        <button type="button" class="deleteInfo disable">
+                                            삭제
+                                        </button>
+                                    </div>
+                                </c:when>
                                 <c:otherwise>
                                     <div class="td delete">
                                         <button type="button" class="deleteInfo" onclick="deleteInfo(this)">
@@ -75,7 +82,8 @@
                         </div>
                     </c:forEach>
                     <div class="bthWrap">
-                        <button id="infoSave" type="submit">저장</button>
+                        <button id="infoAdd" type="button" class="addInfo" onclick="addInfo(this)">+ 추가</button>
+                        <button id="infoSave" type="button" onclick="saveInfo('${title}')">저장</button>
                     </div>
                 </form>
             </div>
@@ -83,6 +91,5 @@
     </div>
 </section>
 
-<script src="/script/admin.js"></script>
 </body>
 </html>

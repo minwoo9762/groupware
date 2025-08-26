@@ -126,10 +126,11 @@
                     <div class="npm">
                     <span class="name">
                         ${loginUser.name}
-                        ${loginUser.provider == 1 ? "대표(관리자)" : loginUser.provider == 2 ? "부장" : loginUser.provider == 3 ? "과장" : loginUser.provider == 4 ? "대리" : loginUser.provider == 5 ? "주임" : loginUser.provider == 6 ? "사원" : "미정"}
+                        ${info.providerName}
+
                     </span>
                     <span class="part">
-                        ${loginUser.part == 1 ? "개발팀" : loginUser.part == 2 ? "기획팀" : loginUser.part == 3 ? "영업팀" : loginUser.part == 4 ? "운영팀" : loginUser.part == 5 ? "인사팀" : "미정"}
+                        ${user.partName}
                     </span>
                     <div class="util">
                         <div class="list armMail">
@@ -142,10 +143,6 @@
                         </div>
                     </div>
                     </div>
-                </div>
-                <span class="line"></span>
-                <div class="bottom">
-
                 </div>
             </div>
 
@@ -163,6 +160,11 @@
 
     </div>
 </section>
+
+<div id="dim" onclick="popupClose();"></div>
+<div id="popupApprovalWrite">
+    <%@include file="./popupApproval.jsp"%>
+</div>
 
 <script>
     // vacationList를 자바스크립트 객체 배열로 변환

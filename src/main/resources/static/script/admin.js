@@ -1,17 +1,14 @@
 function userUpdate(target) {
-    let userid = target.getAttribute("data-id");
-    let subject = target.parentElement.parentElement;
-
-    let partSelect = subject.querySelector(".partSelect").value;
-    let providerSelect = subject.querySelector(".providerSelect").value;
-    let stateSelect = subject.querySelector(".stateSelect").value;
-    console.log(partSelect.value, providerSelect.value, stateSelect.value);
-
     if(confirm("사용자의 정보를 변경하시겠습니까?")) {
-        location.href= `adminUserUpdate?id=${userid}&part=${partSelect}&provider=${providerSelect}`;
-        /*location.href= `adminUserUpdate?id=${userid}&part=${partSelect}&provider=${providerSelect}&state=${stateSelect}`;*/
-    }
+        let userid = target.getAttribute("data-id");
+        let subject = target.parentElement.parentElement;
 
+        let partSelect = subject.querySelector(".partSelect").value;
+        let providerSelect = subject.querySelector(".providerSelect").value;
+        let stateSelect = subject.querySelector(".stateSelect").value;
+        console.log(partSelect.value, providerSelect.value, stateSelect.value);
+        location.href= `adminUserUpdate?id=${userid}&part=${partSelect}&provider=${providerSelect}&state=${stateSelect}`;
+    }
     return;
 }
 
@@ -138,14 +135,57 @@ function adminUpdatePay(useridN) {
 
 }
 
-function deleteInfo(target) {
-    let tr = target.parentElement.parentElement;
-    let tl = tr.querySelector(".tl").querySelector("input[name=id]").value;
+
+let insertWhether=0;
+function addInfo(target) {
+    let form = target.parentElement.parentElement;
+    let trSize = form.querySelectorAll('.tr').length;
+    let trLastVal = form.querySelectorAll('.tr')[trSize-1].querySelector('.tl').querySelector("input[name=id]").value;
+    let trtd = `<div class="tr"><div class="tl">+<input type="hidden" name="id" value="${Number(trLastVal)+1}"></div><div class="td fnc"><input type="text" name="name" value="" maxlength="10"></div><div class="td delete"><button type="button" class="deleteInfo" onclick="deleteTr(this);">지우기</button></div></div>`;
+    const buttonWrap = form.querySelector('.bthWrap');
+    buttonWrap.insertAdjacentHTML('beforebegin', trtd);
+    insertWhether ++;
+}
+function deleteTr(btn) {
+    let tr = btn.closest('.tr');
     tr.remove();
+
+    insertWhether --;
+}
+function deleteInfo(target) {
+    if(confirm("해당 행의 데이터가 즉시 삭제됩니다. 정말 삭제하시겠습니까?")) {
+        let tr = target.parentElement.parentElement;
+        let tl = tr.querySelector(".tl").querySelector("input[name=id]").value;
+        tr.remove();
+        location.href = location.pathname + location.search + "&delete=true&deleteid=" + tl;
+    }
+}
+function saveInfo(title) {
+    let input = document.querySelectorAll("input[name=name]");
+    for (const a of input) {
+        if(a.value == "") {
+            alert(title + " 명을 작성해주세요.");
+            a.focus();
+            return;  // 함수 전체 종료
+        }
+    }
+
+
+    if(confirm("저장 하시겠습니까?")) {
+        if(insertWhether == 0) {
+            document.infoForm.submit();
+        } else  {
+            let url = document.infoForm.action;
+            document.infoForm.action = url + "&insert=true";
+            document.infoForm.submit();
+        }
+    }
+
     location.href = location.pathname + location.search + "&delete=true&deleteid=" + tl;
 }
 
 function noticeImg(){
     var opt="toolbar=no, menubar=no, resizable=no, width=450, height=200";
     window.open('noticeimg','noticeimg', opt);
+
 }

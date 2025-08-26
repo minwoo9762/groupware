@@ -169,6 +169,22 @@ public class AdminService {
     }
 
 
+
+
+
+
+
+    /*추가(인설트)*/
+    public void insertProvider(int id, String name) {
+        adidao.insertProvider(id, name);
+    }
+    public void insertPart(int id, String name) {
+        adidao.insertPart(id, name);
+    }
+    public void insertState(int id, String name) {
+        adidao.insertState(id, name);
+    }
+
     /*업데이트*/
     public void replaceProvider(int id, String name) {
         adidao.replaceProvider(id, name);
@@ -205,6 +221,7 @@ public class AdminService {
         adidao.deleteState(deleteid);
     }
 
+
     public NoticeDto getNoticeOne(int nseq) {
         return adidao.getNoticeOne(nseq);
     }
@@ -212,4 +229,5 @@ public class AdminService {
     public void update(@Valid NoticeDto noticedto) {
         adidao.update(noticedto);
     }
+
 }

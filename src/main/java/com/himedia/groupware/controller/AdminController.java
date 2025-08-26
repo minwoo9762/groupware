@@ -39,13 +39,21 @@ public class AdminController {
         UserDto udto = (UserDto) session.getAttribute("loginUser");
         if (udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "admin/admin";
 
                 HashMap<String, Object> result = ads.getUser(request);
                 model.addAttribute("userList", result.get("userList"));
                 model.addAttribute("paging", result.get("paging"));
                 model.addAttribute("key", result.get("key"));
+
+                ArrayList<AsInfoDto> providerList = ads.getProvider();
+                ArrayList<AsInfoDto> partList = ads.getPart();
+                ArrayList<AsInfoDto> stateList = ads.getState();
+
+                model.addAttribute("providerList", providerList);
+                model.addAttribute("partList", partList);
+                model.addAttribute("stateList", stateList);
             }
         }
         return url;
@@ -57,7 +65,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "redirect:/admin";
                 ads.updateUser(userdto);
             }
@@ -71,7 +79,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
 
                 UserDto user = ads.findUser(id);
                 model.addAttribute("name", user.getName());
@@ -92,7 +100,7 @@ public class AdminController {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "redirect:/admin";
 
                 ads.insertPay(paydto, id);
@@ -106,7 +114,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "redirect:/admin";
 
                 ads.updatePay(paydto, id);
@@ -141,7 +149,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "admin/noticeWrite";
                 ads.selectNoticeInfo(udto);
                 model.addAttribute("user", udto);
@@ -161,7 +169,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
 
                 if(result.hasFieldErrors("title"))
                     model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
@@ -186,7 +194,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "redirect:/admin";
                 ads.updateNotice(noticedto);
             }
@@ -250,6 +258,7 @@ public class AdminController {
     }
 
     @GetMapping("/noticeUpdateForm")
+
     public ModelAndView noticeUpdateForm(@RequestParam("nseq") int nseq) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("dto", ads.getNoticeOne(nseq));
@@ -295,7 +304,7 @@ public class AdminController {
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
                 url = "admin/allInfoCtr";
 
                 if(tabid == 1) {
@@ -314,7 +323,7 @@ public class AdminController {
                 if(tabid == 2) {
                     ArrayList<AsInfoDto> partList = ads.getPart();
                     model.addAttribute("infoList", partList);
-                    model.addAttribute("title", "조직도");
+                    model.addAttribute("title", "부서");
                     model.addAttribute("parms", "2");
 
                     if(delete) {
@@ -345,6 +354,7 @@ public class AdminController {
     @PostMapping("allInfoCtrAction")
     public String allInfoCtrAction(
             @RequestParam("tabid") int tabid,
+            @RequestParam(value = "insert", required = false, defaultValue ="false") boolean insert,
             @RequestParam("id") int[] ids,
             @RequestParam("name") String[] names,
             HttpSession session) {
@@ -353,22 +363,43 @@ public class AdminController {
         String url = "redirect:/";
         if (udto != null) {
             url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
+            if (udto.getProvider() == 1) {
 
                 if(tabid == 1) {
                     url = "redirect:/allInfoCtr?tabid=1";
+
+                    if(insert) {
+                        for(int i=0; i<ids.length; i++) {
+                            ads.insertProvider(ids[i], names[i]);
+                        }
+                    }
+
                     for(int i=0; i<ids.length; i++) {
                         ads.replaceProvider(ids[i], names[i]);
                     }
                 }
                 if(tabid == 2) {
                     url = "redirect:/allInfoCtr?tabid=2";
+
+                    if(insert) {
+                        for(int i=0; i<ids.length; i++) {
+                            ads.insertPart(ids[i], names[i]);
+                        }
+                    }
+
                     for(int i=0; i<ids.length; i++) {
                         ads.replacePart(ids[i], names[i]);
                     }
                 }
                 if(tabid == 3) {
                     url = "redirect:/allInfoCtr?tabid=3";
+
+                    if(insert) {
+                        for(int i=0; i<ids.length; i++) {
+                            ads.insertState(ids[i], names[i]);
+                        }
+                    }
+
                     for(int i=0; i<ids.length; i++) {
                         ads.replaceState(ids[i], names[i]);
                     }

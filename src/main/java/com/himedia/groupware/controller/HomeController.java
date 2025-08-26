@@ -1,9 +1,6 @@
 package com.himedia.groupware.controller;
 
-import com.himedia.groupware.dto.AttendanceDto;
-import com.himedia.groupware.dto.NoticeDto;
-import com.himedia.groupware.dto.UserDto;
-import com.himedia.groupware.dto.VacationDto;
+import com.himedia.groupware.dto.*;
 import com.himedia.groupware.service.AdminService;
 import com.himedia.groupware.service.AttendanceService;
 import com.himedia.groupware.service.HomeServiece;
@@ -141,6 +138,9 @@ public class HomeController {
                 }
             }
 
+            // 마이페이지 정보 조회
+            InfoDto infoDto = homes.userAllInfoList(udto.getId());
+            model.addAttribute("info", infoDto);
 
         }
         return url;
