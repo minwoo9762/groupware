@@ -115,13 +115,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // 🔹 날짜를 클릭했을 때 실행되는 함수
         dateClick: function(info) {
             // 클릭한 날짜 정보는 info.date 또는 info.dateStr에 들어 있음
-            alert("선택한 날짜는: " + info.dateStr);
+            if(confirm("전자결재 문서를 작성하시겠습니까?")) {
+                document.getElementById("popupApprovalWrite").classList.add("active");
+                document.getElementById("dim").classList.add("active");
+            }
         }
     });
 
     // 캘린더 화면에 렌더링
     calendar.render();
 });
+
+function popupClose() {
+    document.getElementById("popupApprovalWrite").classList.remove("active");
+    document.getElementById("dim").classList.remove("active");
+}
 
 
 

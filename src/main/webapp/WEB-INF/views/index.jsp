@@ -160,6 +160,11 @@
     </div>
 </section>
 
+<div id="dim" onclick="popupClose();"></div>
+<div id="popupApprovalWrite">
+    <%@include file="./popupApproval.jsp"%>
+</div>
+
 <script>
     // vacationList를 자바스크립트 객체 배열로 변환
     let vacationList = [
