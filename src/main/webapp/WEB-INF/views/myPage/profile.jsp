@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../header.jsp"%>
-<section class="section myPage">
+<div class="layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
-    <div>
+
+    <article>
+    <div class="myPage_title">
         <h2>Profile</h2>
         <div class="profile">
             <img src="/images/${loginUser.profileimg}" height="100">
@@ -30,7 +32,8 @@
             <input type="button" value="비밀번호 변경" onclick="location.href='changePwd'">
         </div>
     </div>
-</section>
+    </article>
+</div>
 
 </body>
 </html>

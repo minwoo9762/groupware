@@ -1,6 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../header.jsp"%>
+
 <div class="layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
 
@@ -10,6 +11,7 @@
         <input type="hidden" name="name" value="${loginUser.name}" />
         <input type="hidden" name="part" value="${loginUser.part}" />
     <div class="container">
+        <h2 class="head">게시글 작성</h2>
         <div class="mainBox">
                 <div class="titleBar">
                   <div class="titleWriter">작성자</div>

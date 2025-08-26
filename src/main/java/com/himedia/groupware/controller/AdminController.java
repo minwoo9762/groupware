@@ -7,12 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.apache.catalina.User;
+import com.himedia.groupware.dto.NoticeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -133,7 +135,8 @@ public class AdminController {
     }
 
     @GetMapping("/noticeWrite")
-    public String noticeWrite(HttpSession session, Model model) {
+    public String noticeWrite(@Valid @ModelAttribute("dto") NoticeDto noticedto,
+            HttpSession session, Model model) {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
@@ -144,22 +147,34 @@ public class AdminController {
                 model.addAttribute("user", udto);
             }
         }
+
+
         return url;
     }
 
 
     @PostMapping("/noticeWriteInsert")
-    public String noticeWriteInsert(@RequestBody NoticeDto noticedto, HttpSession session, Model model) {
+    public String noticeWriteInsert(@Valid @ModelAttribute("dto") NoticeDto noticedto,
+                                    BindingResult result,
+                                    HttpSession session, Model model) {
         UserDto udto = (UserDto)session.getAttribute("loginUser");
         String url = "redirect:/";
         if(udto != null) {
             url = "redirect:/alert";
             if (udto.getProvider() == 99) {
 
+                if(result.hasFieldErrors("title"))
+                    model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
+                else if(result.hasFieldErrors("content"))
+                    model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
+                else{
 
-                url = "redirect:/admin";
-                ads.insertNotice(noticedto);
+                    url = "redirect:/notice?first=y";
+
+                    ads.insertNotice(noticedto);
+                }
                 model.addAttribute("msg", "작성완료.");
+                model.addAttribute("dto", noticedto);
 
             }
         }
@@ -180,31 +195,42 @@ public class AdminController {
     }
     @Autowired
     ServletContext context;
+
     @PostMapping("/adminFileup")
-    @ResponseBody
-    public HashMap<String, Object> adminFileup(@RequestParam("fileimage") MultipartFile file){
-        String path = context.getRealPath("/images");
-        Calendar today = Calendar.getInstance();
-        long t = today.getTimeInMillis();
-        String filename = file.getOriginalFilename();
+    public String adminFileup(@RequestParam("image") MultipartFile file,
+                                               HttpServletRequest request, Model model) {
+        String path = request.getServletContext().getRealPath("/images");
 
-        String fn1 = filename.substring(0, filename.indexOf("."));
-        String fn2 = filename.substring(filename.indexOf("."));
-        String savefilename = fn1 + t + fn2;
-        String uploadPath = path + "/" + savefilename;
-
-        try {
-            file.transferTo(new File(uploadPath));
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs(); // 디렉토리 없으면 생성
         }
 
-        HashMap<String, Object> result = new HashMap<String, Object>();
-        result.put("image", filename);
-        result.put("savefilename", savefilename);
-        return result;
+        String filename = file.getOriginalFilename();
+        if (filename == null || filename.isEmpty()) {
+            model.addAttribute("error", "파일명이 비어 있습니다.");
+            return ""; // 예외 처리 뷰
+        }
+
+        int dotIndex = filename.lastIndexOf(".");
+        String fn1 = (dotIndex != -1) ? filename.substring(0, dotIndex) : filename;
+        String fn2 = (dotIndex != -1) ? filename.substring(dotIndex) : "";
+
+        long t = System.currentTimeMillis();
+        String savefilename = fn1 + t + fn2;
+
+        String uploadPath = path + "/" + savefilename;
+        try {
+            file.transferTo(new File(uploadPath));
+        } catch (IOException | IllegalStateException e) {
+            e.printStackTrace();
+            model.addAttribute("error", "파일 업로드 실패: " + e.getMessage());
+            return "";
+        }
+
+        model.addAttribute("image", filename); // 또는 sanitize 처리
+        model.addAttribute("savefilename", savefilename);
+        return "admin/noticeComplete";
     }
 
 
@@ -224,20 +250,40 @@ public class AdminController {
     }
 
     @GetMapping("/noticeUpdateForm")
-    public String noticeUpdate(@RequestParam("nseq") int nseq, HttpSession session, Model model){
-        UserDto udto = (UserDto)session.getAttribute("loginUser");
-        String url = "redirect:/";
-        if(udto != null) {
-            url = "redirect:/alert";
-            if (udto.getProvider() == 99) {
-                url = "admin/noticeUpdate";
-                NoticeDto notice = ads.selectNoticeDetail(nseq);
-                model.addAttribute("notice", notice);
-                model.addAttribute("name", udto.getName());
-            }
+    public ModelAndView noticeUpdateForm(@RequestParam("nseq") int nseq) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("dto", ads.getNoticeOne(nseq));
+        mav.addObject("oldfilename",ads.getNoticeOne(nseq).getSavefilename());
+        mav.setViewName("admin/noticeUpdate");
+        return mav;
+    }
+
+    @PostMapping("/noticeUpdate")
+    public String updateBoard(@ModelAttribute("dto") @Valid NoticeDto noticedto, BindingResult result,
+                              @RequestParam("oldfilename") String oldfilename, Model model){
+        model.addAttribute("oldfilename", oldfilename);
+        String url="admin/noticeUpdate";
+//        WorkBoardDto bdto = bs.getBoardOne(boarddto.getId());
+
+        if (result.hasFieldErrors("title"))
+            model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
+        else if (result.hasFieldErrors("content"))
+            model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
+        else{
+            url="redirect:/noticeDetail?nseq="+ noticedto.getNseq();
+            ads.update(noticedto);
         }
         return url;
     }
+
+    @GetMapping("/noticeimg")
+    public String noticeimg() {
+        return "admin/noticeimg";
+    }
+
+
+
+
 
     /*부서, 팀, 상태*/
     @GetMapping("allInfoCtr")

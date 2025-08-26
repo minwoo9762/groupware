@@ -40,12 +40,12 @@
                         <td>
                             <select class="providerSelect btn">
                                 <option value="0" ${user.provider == 0 ? 'selected' : ''}>선택</option>
-                                <option value="1" ${user.provider == 1 ? 'selected' : ''}>사원</option>
-                                <option value="2" ${user.provider == 2 ? 'selected' : ''}>주임</option>
-                                <option value="3" ${user.provider == 3 ? 'selected' : ''}>대리</option>
-                                <option value="4" ${user.provider == 4 ? 'selected' : ''}>과장</option>
-                                <option value="5" ${user.provider == 5 ? 'selected' : ''}>부장</option>
-                                <option value="6" ${user.provider == 99 ? 'selected' : ''}>대표(관리자)</option>
+                                <option value="1" ${user.provider == 1 ? 'selected' : ''}>대표(관리자)</option>
+                                <option value="2" ${user.provider == 2 ? 'selected' : ''}>부장</option>
+                                <option value="3" ${user.provider == 3 ? 'selected' : ''}>과장</option>
+                                <option value="4" ${user.provider == 4 ? 'selected' : ''}>대리</option>
+                                <option value="5" ${user.provider == 5 ? 'selected' : ''}>주임</option>
+                                <option value="6" ${user.provider == 6 ? 'selected' : ''}>사원</option>
                             </select>
                         </td>
                         <td>

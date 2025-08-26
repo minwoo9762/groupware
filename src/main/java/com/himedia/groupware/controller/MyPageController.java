@@ -28,7 +28,7 @@ public class MyPageController {
 
         String url = "redirect:/";
         if (loginUser != null) {
-            InfoDto idto = is.getInfo(loginUser.getName());
+            InfoDto idto = is.getInfo(loginUser.getId());
             model.addAttribute("info", idto);
             url = "myPage/profile";
         }
@@ -41,7 +41,7 @@ public class MyPageController {
         String url = "redirect:/";
         if(loginUser != null){
             model.addAttribute("dto", loginUser);
-            InfoDto idto = is.getInfo(loginUser.getName());
+            InfoDto idto = is.getInfo(loginUser.getId());
             model.addAttribute("info", idto);
             model.addAttribute("oldImage", loginUser.getProfileimg());
             url = "myPage/updateProfileForm";
@@ -53,7 +53,7 @@ public class MyPageController {
     public String updateProfile(@ModelAttribute("dto") @Valid UserDto userdto, BindingResult result,
                                 HttpSession session, Model model) {
         String url = "myPage/updateProfileForm";
-        InfoDto idto = is.getInfo(userdto.getName());
+        InfoDto idto = is.getInfo(userdto.getId());
         model.addAttribute("info", idto);
         if (result.hasFieldErrors("name"))
             model.addAttribute("message", "이름을 입력하세요.");

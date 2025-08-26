@@ -105,6 +105,7 @@
             <div class="input-row">
                 <input type="text" name="email" class="input-text-fixed">
                 <input type="button" value="인증메일 보내기" id="sendMailForPwd" class="btn-common">
+                <input type="hidden" id="sendCheck" name="sendCheck">
             </div>
         </div>
 
@@ -113,6 +114,7 @@
             <div class="input-row">
                 <input type="text" name="code" class="input-text-fixed">
                 <input type="button" value="인증하기" id="confirmCode" class="btn-common">
+                <input type="hidden" id="codeCheck" name="codeCheck">
             </div>
         </div>
 
