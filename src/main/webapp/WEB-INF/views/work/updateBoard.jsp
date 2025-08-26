@@ -1,9 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../header.jsp"%>
-<section class="section admin">
+
+<div class="layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
 
-    <div class="formBundle">
+    <article>
     <form class="containerForm" name="updateBoard" id="updateBoard" method="post" action="updateBoard" >
       <input type="hidden" name="id" value="${dto.id}" />
 
@@ -18,11 +20,11 @@
 
             <div class="bar">
               <div class="left" >${dto.name} (<c:choose>
-                        <c:when test="${board.part == 1}">개발팀</c:when>
-                        <c:when test="${board.part == 2}">기획팀</c:when>
-                        <c:when test="${board.part == 3}">영업팀</c:when>
-                        <c:when test="${board.part == 4}">운영팀 </c:when>
-                        <c:when test="${board.part == 5}">인사팀 </c:when>
+                        <c:when test="${dto.part == 1}">개발팀</c:when>
+                        <c:when test="${dto.part == 2}">기획팀</c:when>
+                        <c:when test="${dto.part == 3}">영업팀</c:when>
+                        <c:when test="${dto.part == 4}">운영팀 </c:when>
+                        <c:when test="${dto.part == 5}">인사팀 </c:when>
                         <c:otherwise>알 수 없음</c:otherwise>
                     </c:choose>) </div>
               <div class="right">
@@ -34,22 +36,24 @@
               <div class="titleTitle" >내 용</div>
             </div>
 
-            <div class="contentBar" style="height:500px;">
+            <div class="contentBar">
                 <div class="contentLeft">
-                    <div class="first">게시판</div>
-                    <div class="second">기존 이미지</div>
-                    <div class="imgField">
+                    <div class="second">게시판</div>
+                    <div class="first">게시글 수정</div>
+                    <div class="second">이미지</div>
+                    <div class="imgField" style="display: flex; flex-direction: column;">
                     <c:choose>
                         <c:when test="${empty oldfilename}">
                             <img src="${pageContext.request.contextPath}/images/noname.jpg" alt="기본 이미지" />
                         </c:when>
                         <c:otherwise>
+                        기존 이미지
                             <img src="${pageContext.request.contextPath}/images/${oldfilename}" alt="기존 업로드 이미지" />
                         </c:otherwise>
                     </c:choose>
                     <input type="hidden" name="oldfilename" value="${oldfilename}" />
 
-                    <div class="insertImg">이미지 미리보기
+                    <div class="insertImg" style="text-align: center;">
                 <c:choose>
                     <c:when test="${empty dto.savefilename}">
                             <img src="" id="previewimg" style="display: none" alt="미리보기 이미지 없음" />
@@ -57,21 +61,17 @@
                         <input type="hidden" name="savefilename" />
                     </c:when>
                     <c:otherwise>
+                    변경할 이미지
                             <img src="${pageContext.request.contextPath}/images/${dto.savefilename}" id="previewimg" alt="업로드 이미지 미리보기" />
                         <input type="hidden" name="image" value="${dto.image}" />
                         <input type="hidden" name="savefilename" value="${dto.savefilename}" />
                     </c:otherwise>
                 </c:choose>
-
-                <div class="">
-                <label>업데이트 할 이미지</label>
                 <input type="button" value="이미지 선택" onclick="selectImg()" />
-            </div>
-            </div>
+                </div>
+                </div>
+                </div>
 
-            </div>
-
-            </div>
                 <div class="contentBox">
                     <textarea name="content" placeholder="내용을 입력하세요">${dto.content}</textarea>
                 </div>
@@ -85,16 +85,8 @@
         </div>
     </div>
     </form>
+    </article>
+  </div>
 
-<%--    <form method="post" enctype="multipart/form-data" id="boardImageForm">--%>
-<%--      <div class="">--%>
-<%--        <label>Upload Image</label>--%>
-<%--        <input type="file" name="boardimage" id="boardimage" value="이미지 선택"/>--%>
-<%--      </div>--%>
-<%--    </form>--%>
-    </div>
-
-  </section>
-  </body>
-  </html>
+<%@ include file="../footer.jsp" %>
 

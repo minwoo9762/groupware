@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IInfoDao {
-    InfoDto getInfo(String name);
+    InfoDto getInfo(int id);
 }

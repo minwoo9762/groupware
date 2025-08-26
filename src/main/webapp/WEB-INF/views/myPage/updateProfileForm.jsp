@@ -1,9 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../header.jsp"%>
-<section class="section myPage">
+
+<div class="layout" style="display: flex;" id="main">
+
     <%@include file="../lnb.jsp"%>
+
+    <article>
     <form action="updateProfile" method="post">
-        <div>
+        <div class="myPage_title">
             <h2>Update Profile</h2>
             <div class="field">
                 <label>프로필 미리보기</label>
@@ -113,6 +117,7 @@
             </div>
         </div>
     </form>
-</section>
+    </article>
+</div>
 </body>
 </html>

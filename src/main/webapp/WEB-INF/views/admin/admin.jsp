@@ -39,9 +39,11 @@
                         <td>${user.name}</td>
                         <td>
                             <select class="providerSelect btn">
+                              
                                 <c:forEach items="${providerList}" var="list">
                                     <option value="${list.id}" ${user.provider == list.id ? 'selected' : ''}>${list.name}</option>
                                 </c:forEach>
+                          
                             </select>
                         </td>
                         <td>

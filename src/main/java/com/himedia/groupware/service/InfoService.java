@@ -10,7 +10,7 @@ public class InfoService {
     @Autowired
     IInfoDao idao;
 
-    public InfoDto getInfo(String name) {
-        return idao.getInfo(name);
+    public InfoDto getInfo(int id) {
+        return idao.getInfo(id);
     }
 }

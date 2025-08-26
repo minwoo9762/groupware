@@ -49,6 +49,7 @@ public class WorkController {
         if (loginUser != null) {
             url = "work/workBoard";
             result = bs.selectBoard(request);
+
             model.addAttribute("boardList", result.get("boardList"));
             model.addAttribute("paging", result.get("paging"));
             model.addAttribute("key", result.get("key"));
@@ -156,15 +157,13 @@ public class WorkController {
                               @RequestParam("oldfilename") String oldfilename, Model model){
         model.addAttribute("oldfilename", oldfilename);
         String url="work/updateBoard";
-        WorkBoardDto bdto = bs.getBoardOne(boarddto.getId());
-
+//        WorkBoardDto bdto = bs.getBoardOne(boarddto.getId());
 
         if (result.hasFieldErrors("title"))
             model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
         else if (result.hasFieldErrors("content"))
             model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
         else{
-            System.out.println(boarddto.getId());
             url="redirect:/boardViewWithoutCnt?id="+ boarddto.getId();
             bs.update(boarddto);
         }

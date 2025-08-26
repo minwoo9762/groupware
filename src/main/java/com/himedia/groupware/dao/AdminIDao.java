@@ -1,6 +1,7 @@
 package com.himedia.groupware.dao;
 
 import com.himedia.groupware.dto.*;
+import jakarta.validation.Valid;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -60,5 +61,8 @@ public interface AdminIDao {
     void userReplacePart(Integer deleteid);void deletePart(Integer deleteid);
 
 
-    ArrayList<AsInfoDto> userAllInfoList();
+    NoticeDto getNoticeOne(int nseq);
+
+    void update(@Valid NoticeDto noticedto);
+
 }

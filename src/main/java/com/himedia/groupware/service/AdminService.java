@@ -4,6 +4,7 @@ import com.himedia.groupware.dao.AdminIDao;
 import com.himedia.groupware.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -218,6 +219,15 @@ public class AdminService {
     }
     public void deleteState(Integer deleteid) {
         adidao.deleteState(deleteid);
+    }
+
+
+    public NoticeDto getNoticeOne(int nseq) {
+        return adidao.getNoticeOne(nseq);
+    }
+
+    public void update(@Valid NoticeDto noticedto) {
+        adidao.update(noticedto);
     }
 
 }

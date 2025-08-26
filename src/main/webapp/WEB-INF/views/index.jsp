@@ -127,6 +127,7 @@
                     <span class="name">
                         ${loginUser.name}
                         ${info.providerName}
+
                     </span>
                     <span class="part">
                         ${user.partName}

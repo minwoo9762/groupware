@@ -11,6 +11,7 @@
         <input type="hidden" name="part" value="${loginUser.part}" />
 
         <div class="container">
+            <h2 class="head">자료글 작성</h2>
             <div class="mainBox">
                 <div class="titleBar">
                     <div class="titleWriter">작성자</div>
