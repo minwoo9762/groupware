@@ -57,7 +57,8 @@
                         if(data.state == 'confirmed') {
                             $('#confirmMsg').html("&nbsp;&nbsp;<span style='color:blue'>인증에 성공했습니다.</span>")
                             $('#codeCheck').val('confirmed');
-                            $('#changePwd').show();
+                            $('#next_btn').css('background', 'blue');
+                            $('#next_btn').prop('disabled', false);
                         }else {
                             alert(data.codeMsg);
                         }
@@ -68,22 +69,6 @@
                 });
             });
         });
-
-        function updatePwd() {
-            var pwdRegex = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()-+=]).{8,20}$/;
-            if(document.findPwd.pwd.value==''){
-                alert('비밀번호를 입력하세요.');
-            }else if(!pwdRegex.test(document.findPwd.pwd.value)) {
-                alert('올바른 비밀번호를 입력하세요.');
-            } else if(document.findPwd.pwd.value != document.findPwd.confirmPwd.value) {
-                alert('비밀번호 확인이 일치하지 않습니다.');
-            }else if(document.findPwd.codeCheck.value != 'confirmed') {
-                alert('이메일 인증을 완료하지 않았습니다.');
-            }else {
-                document.findPwd.action = "updatePwd";
-                document.findPwd.submit();
-            }
-        }
     </script>
 </head>
 <body>
@@ -119,24 +104,9 @@
         </div>
 
         <div class="btn">
-            <input type="button" value="돌아가기" onclick="location.href='/'" class="btn-common" id="backButton">
-        </div>
-    </div>
-
-    <div class="loginForm" id="changePwd" style="display: none">
-        <div class="field">
-            <label>새 비밀번호</label>
-            <input type="password" name="pwd" class="input-text">
-        </div>
-        <div class="password-info">
-            비밀번호는 숫자와 특수문자를 포함한 8자 이상, 20자 이하의 영문으로 작성합니다.
-        </div>
-        <div class="field">
-            <label>비밀번호 확인</label>
-            <input type="password" name="confirmPwd" class="input-text">
-        </div>
-        <div class="btn">
-            <input type="button" value="비밀번호 변경" onclick="updatePwd()" class="btn-common">
+            <input type="button" value="돌아가기" onclick="location.href='/'">
+            <input type="button" id="next_btn" style="background: gray"
+                   value="다음으로" onclick="location.href='/changePwd'" disabled>
         </div>
     </div>
 </form>

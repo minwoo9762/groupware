@@ -9,6 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.lang.reflect.Method;
 import java.util.concurrent.Executor;
 
+// 비동기 실행을 위한 커스텀 executor 생성
 @Configuration
 @EnableAsync
 public class SpringAsyncConfig implements AsyncConfigurer {
@@ -23,11 +24,13 @@ public class SpringAsyncConfig implements AsyncConfigurer {
         return executor;
     }
 
+    // 비동기 실행의 예외 처리를 위한 커스텀 예외 핸들러 오버라이드
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new CustomAsyncExceptionHandler();
     }
 
+    // 커스텀 예외 핸들러 생성
     public class CustomAsyncExceptionHandler
             implements AsyncUncaughtExceptionHandler {
         @Override

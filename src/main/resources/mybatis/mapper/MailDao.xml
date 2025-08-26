@@ -12,15 +12,40 @@
         select * from mail_view where receiverid=#{id}
         order by indate desc limit 3
     </select>
-    <select id="getAllCountForMail" resultType="_int">
-        select count(*)
+    <select id="getAllCountForReceiveMail" resultType="_int">
+        select count(*) from mail_view where receiverid=#{id} and subject like concat('%', #{key}, '%')
     </select>
-    <select id="getSendMail" resultType="com.himedia.groupware.dto.MailDto">
-        select * from mail_view where senderid=#{id}
-        order by indate desc
+    <select id="getAllCountForSendMail" resultType="_int">
+        select count(*) from mail_view where senderid=#{id} and subject like concat('%', #{key}, '%')
     </select>
     <select id="getReceiveMail" resultType="com.himedia.groupware.dto.MailDto">
-        select * from mail_view where receiverid=#{id}
+        select * from mail_view where receiverid=#{id} and subject like concat('%', #{key}, '%')
         order by indate desc
+    </select>
+    <select id="getSendMail" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where senderid=#{id} and subject like concat('%', #{key}, '%')
+        order by indate desc
+    </select>
+    <select id="getMail" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where id=#{id}
+    </select>
+    <update id="setRead">
+        update mail set `read` = 1 where id=#{id}
+    </update>
+    <select id="getRepliedList" resultType="com.himedia.groupware.dto.MailDto">
+        select * from mail_view where reply=#{id}
+    </select>
+    <insert id="insertMail" parameterType="com.himedia.groupware.dto.MailDto">
+        insert into mail(senderid, receiverid, subject, content, reply)
+        values(#{senderId}, #{receiverId}, #{subject}, #{content}, #{reply})
+    </insert>
+    <update id="deleteReply">
+        update mail set reply=0 where reply=#{id}
+    </update>
+    <delete id="deleteMail">
+        delete from mail where id=#{id}
+    </delete>
+    <select id="countMailToday" resultType="_int">
+        select count(*) from mail where receiverid=#{id} and date(indate) = curdate();
     </select>
 </mapper>

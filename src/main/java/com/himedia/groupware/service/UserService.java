@@ -3,9 +3,12 @@ package com.himedia.groupware.service;
 import com.himedia.groupware.dao.IUserDao;
 import com.himedia.groupware.dto.Paging;
 import com.himedia.groupware.dto.UserDto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +44,14 @@ public class UserService {
 
     public ArrayList<UserDto> getAllUser() {
         return udao.getAllUser();
+    }
+
+    public boolean isValidName(String name) {
+        return udao.isValidName(name);
+    }
+
+    public int getUseridByName(String name) {
+        return udao.getUseridByName(name);
     }
 
     public HashMap<String, Object> selectAddress(HttpServletRequest request) {
@@ -90,4 +101,5 @@ public class UserService {
     }
 
     public void insert(@Valid UserDto userdto) {udao.insert(userdto);}
+
 }

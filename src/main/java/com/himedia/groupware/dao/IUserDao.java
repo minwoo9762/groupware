@@ -14,10 +14,9 @@ public interface IUserDao {
     void updatePwd(String email, String pwd);
     void updateUser(UserDto userdto);
     ArrayList<UserDto> getAllUser();
-
+    boolean isValidName(String name);
+    int getUseridByName(String name);
     int getAllCountForAddress(String key);
-
     ArrayList<UserDto> selectAddress(Paging paging, String key);
-
     void insert(@Valid UserDto userdto);
 }

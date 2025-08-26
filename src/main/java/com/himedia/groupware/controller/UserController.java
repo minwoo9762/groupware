@@ -159,6 +159,11 @@ public class UserController {
         return result;
     }
 
+    @PostMapping("/changePwd")
+    public String changePwd() {
+        return "user/changePwd";
+    }
+
     @PostMapping("/updatePwd")
     public String updatePwd(@RequestParam("pwd") String pwd, @RequestParam("email") String email,
                             Model model) {
