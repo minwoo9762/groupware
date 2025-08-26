@@ -126,10 +126,10 @@
                     <div class="npm">
                     <span class="name">
                         ${loginUser.name}
-                        ${loginUser.provider == 1 ? "사원" : loginUser.provider == 2 ? "주임" : loginUser.provider == 3 ? "대리" : loginUser.provider == 4 ? "과장" : loginUser.provider == 5 ? "부장" : loginUser.provider == 99 ? "대표(관리자)" : "미정"}
+                        ${info.providerName}
                     </span>
                     <span class="part">
-                        ${loginUser.part == 1 ? "개발팀" : loginUser.part == 2 ? "기획팀" : loginUser.part == 3 ? "영업팀" : loginUser.part == 4 ? "운영팀" : loginUser.part == 5 ? "인사팀" : "미정"}
+                        ${user.partName}
                     </span>
                     <div class="util">
                         <div class="list armMail">
@@ -142,10 +142,6 @@
                         </div>
                     </div>
                     </div>
-                </div>
-                <span class="line"></span>
-                <div class="bottom">
-
                 </div>
             </div>
 

@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${userList}" var="user" varStatus="i">
-                    <tr>
+                    <tr class="${user.provider == '1'? 'adminUser' : ''}">
                             <%--<td>${(userList.size() - i.count) + 1}</td>--%>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
@@ -68,7 +68,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <div class="row">  <!-- 페이지의 시작 -->
+            <div class="row" style="justify-content: center;">  <!-- 페이지의 시작 -->
                 <div class="coltitle" style="text-align: center; font-size:120%; font-weight:bold;">
                     <c:if test="${paging.prev}"><a href="admin?page=${paging.beginPage-1}">◁</a></c:if>&nbsp;
 

@@ -220,8 +220,4 @@ public class AdminService {
         adidao.deleteState(deleteid);
     }
 
-
-    public ArrayList<AsInfoDto> userAllInfoList() {
-        return adidao.userAllInfoList();
-    }
 }
