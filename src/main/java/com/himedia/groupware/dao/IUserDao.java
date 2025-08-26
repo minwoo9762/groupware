@@ -1,6 +1,8 @@
 package com.himedia.groupware.dao;
 
+import com.himedia.groupware.dto.Paging;
 import com.himedia.groupware.dto.UserDto;
+import jakarta.validation.Valid;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -12,4 +14,10 @@ public interface IUserDao {
     void updatePwd(String email, String pwd);
     void updateUser(UserDto userdto);
     ArrayList<UserDto> getAllUser();
+
+    int getAllCountForAddress(String key);
+
+    ArrayList<UserDto> selectAddress(Paging paging, String key);
+
+    void insert(@Valid UserDto userdto);
 }

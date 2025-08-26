@@ -1,11 +1,13 @@
 package com.himedia.groupware.controller;
 
-import com.himedia.groupware.dto.InfoDto;
+import com.himedia.groupware.dto.AsInfoDto;
 import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.service.AdminService;
 import com.himedia.groupware.service.ExMailService;
 import com.himedia.groupware.service.InfoService;
 import com.himedia.groupware.service.UserService;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,13 @@ public class UserController {
     @Autowired
     ExMailService exMailService;
     private static int number;
+//    @Autowired
+//    AdminService ads;
+//
+//    ArrayList<AsInfoDto> providerList = ads.getProvider();
+//    ArrayList<AsInfoDto> partList = ads.getPart();
+//    ArrayList<AsInfoDto> stateList = ads.getState();
+
 
     @GetMapping("/")
     public String init() {
@@ -188,20 +196,31 @@ public class UserController {
     }
 
     @GetMapping("/address")
-    public String address(HttpSession session, Model model) {
-        String url = "user/loginForm";
+    public String address(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
         UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        HashMap<String, Object> result = null;
+        String url = "user/loginForm";
+
         if(loginUser != null) {
-            ArrayList<UserDto> userList = us.getAllUser();
-            ArrayList<InfoDto> infoList = new ArrayList<>();
-            for (UserDto udto : userList) {
-                InfoDto idto = is.getInfo(udto.getName());
-                infoList.add(idto);
-            }
-            model.addAttribute("userList", userList);
-            model.addAttribute("infoList", infoList);
             url = "user/address";
+            result = us.selectAddress(request);
+            model.addAttribute("userList", result.get("userList"));
+            model.addAttribute("paging", result.get("paging"));
+            model.addAttribute("key", result.get("key"));
         }
         return url;
     }
+
+    @GetMapping("/addressWrite")
+    public String addressWrite() {return "user/addressInsert";}
+
+    @PostMapping("/addressInsert")
+    public String addressInsert(@Valid @ModelAttribute("dto") UserDto userdto, Model model) {
+        us.insert(userdto);
+        model.addAttribute("dto", userdto);
+        return "addressBook";
+    }
+
+
 }

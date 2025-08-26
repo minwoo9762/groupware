@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../header.jsp"%>
 
-<div class=" layout" style="display: flex;" id="main">
+<div class="layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
 
 <div class="container">
@@ -44,9 +44,12 @@
         </div>
 
             <div class="updateBtns">
-                <button type="button" onclick="updateNotice(${notice.nseq})">수정하기</button>
-                <button type="button" onclick="location.href='notice'">돌아가기</button>
+                <c:if test="${loginUser.provider == 1}">
+                <input type="button" onclick="updateNotice(${notice.nseq})" value="수정하기" />
+                </c:if>
+                <input type="button" onclick="location.href='notice'" value="돌아가기" />
             </div>
+
     </div>
 </div>
 </div>

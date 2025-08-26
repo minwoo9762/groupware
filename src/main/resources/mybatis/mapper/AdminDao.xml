@@ -101,4 +101,12 @@
         delete from state where stateid=#{deleteid}
     </delete>
 
+    <select id="getNoticeOne" resultType="com.himedia.groupware.dto.NoticeDto">
+        select * from notice where nseq=#{nseq}
+    </select>
+
+    <update id="update" parameterType="com.himedia.groupware.dto.NoticeDto">
+        update notice set title=#{title}, content=#{content}, image=#{image}, savefilename=#{savefilename} where nseq=#{nseq}
+    </update>
+
 </mapper>

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../header.jsp"%>
 
-<div class=" layout" style="display: flex;" id="main">
+<div class="layout" style="display: flex;" id="main">
     <%@include file="../lnb.jsp"%>
 
 <div class="container">

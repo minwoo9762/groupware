@@ -44,6 +44,7 @@ public class ApprovalController {
         return url;
     }
 
+
     @GetMapping("/appView")
     public ModelAndView appView(@RequestParam("id") int id){
         ModelAndView mav = new ModelAndView();
@@ -73,7 +74,7 @@ public class ApprovalController {
             model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
         else{
 
-            url="redirect:/appMain";
+            url="redirect:/appMain?first=n";
             as.insert(approvaldto);
         }
         model.addAttribute("dto", approvaldto);
