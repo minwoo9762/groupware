@@ -1,59 +1,71 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="../header.jsp"%>
 
-<%@include file="../header.jsp" %>
-<section class="section admin">
-    <%@include file="../lnb.jsp" %>
-    <div class="main">
-        <h2 class="title">Admin</h2>
-        <div class="tableWrap">
-            <table>
-                <colgroup>
-                    <col width="150px">
-                    <col width="">
-                </colgroup>
-                <tbody>
-                <tr>
-                    <th>제목</th>
-                    <td style="text-align: left;"><input id="title" class="inputStyle" type="text" value="" required></td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td style="text-align: left;"><span id="name">${user.name}</span><span id="email" class="display-none">${user.email}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td><textarea id="content" required></textarea></td>
-                </tr>
-                <tr>
-                    <th>이미지</th>
-                    <td style="height: auto; text-align: left;">
+<div class="layout" style="display: flex;" id="main">
+    <%@include file="../lnb.jsp"%>
 
-                        <div class="fileWrap">
-                            <div class="customFile">
-                                <div id="savefilename"></div>
-                                <label class="btn" for="imageAddBtn">파일 업로드</label>
-                            </div>
-                            <div id="imagepreview" style="justify-content: flex-start;"></div>
+    <article>
+    <form class="containerForm" name="noticeUpdate" method="post" action="noticeWriteInsert" >
+        <input type="hidden" name="userid" value="${loginUser.name}" />
+        <input type="hidden" name="id" value="${loginUser.id}" />
+
+    <div class="container">
+        <h2 class="head">공지글 작성</h2>
+        <div class="mainBox">
+            <div class="titleBar">
+                <div class="titleWriter">작성자</div>
+                <div class="titleTitle">제 목</div>
+            </div>
+
+            <div class="bar">
+                <div class="left">${loginUser.name}</div>
+                <div class="right"><input type="text" class="inputText" name="title" placeholder="제목을 입력하세요" /></div>
+            </div>
+
+            <div class="bodyBar">
+                <div class="titleWriter" >카테고리</div>
+                <div class="titleTitle" >내 용</div>
+            </div>
+
+            <div class="contentBar">
+                    <div class="contentLeft">
+                        <div class="second">게시판</div>
+                        <div class="first">게시물 등록</div>
+                        <div class="second">이미지</div>
+                        <div class="imgField">
+                        <c:choose>
+                    <c:when test="${empty dto.savefilename}">
+                        <div>
+                            <img src="" id="previewimg"/>
                         </div>
+                        <input type="hidden" name="image" />
+                        <input type="hidden" name="savefilename" />
+                    </c:when>
+                    <c:otherwise>
+                        <div>
+                            <img src="/images/${dto.savefilename}" id="previewimg"/>
+                        </div>
+                        <input type="hidden" name="image" value="${dto.image}"/>
+                        <input type="hidden" name="savefilename" value="${dto.savefilename}"/>
+                    </c:otherwise>
+                </c:choose>
 
-                        <form name="formm" id="fileupForm" method="post" enctype="multipart/form-data">
-                            <input class="display-none" type="file" name="fileimage" id="imageAddBtn" value="파일을 선택하세요."
-                                   onchange="fileUp();">
-                        </form>
+                <input type="button" value="이미지 선택" onclick="noticeImg()"/>
+                </div>
+             </div>
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="btnWrap topright">
-                <button type="button" class="btn btnWrite" onclick="writeNotice(${user.id})">저장하기</button>
+                    <div class="contentBox"  ><textarea name="content" placeholder="내용을 입력하세요"></textarea> </div>
+                </div>
+
+            <div class="updateBtns">
+                <input type="submit" value="작성완료" />
+                <input type="button" value="돌아가기" onclick="location.href='notice'" />
             </div>
         </div>
     </div>
-</section>
+    </form>
+    </article>
+</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/script/admin.js"></script>
-</body>
-</html>
+<%@ include file="../footer.jsp" %>

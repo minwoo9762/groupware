@@ -5,68 +5,64 @@
 <div class="layout" style="display: flex;" id="main">
 
     <%@include file="../lnb.jsp" %>
-
-
-    <div class="main">
-        <h2 class="title">Admin</h2>
-        <div class="searchWrap">
-            <input type="text" class="inputStyle" id="key"/>
-            <button class="btn btnSearch" type="button" onClick="go_search(this)"/>
-            검색
-            </button>
-        </div>
-        <div class="tableWrap">
-            <table style="table-layout: fixed;">
-                <colgroup>
-                    <col width="44px">
-                    <col width="420px">
-                    <col width="">
-                    <col width="300px">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>제목</th>
-                    <th>내용</th>
-                    <th>날짜</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${noticeList}" var="notice" varStatus="i">
-                    <tr>
-                        <td>${notice.nseq}</td>
-                        <td class="content" style="text-align: center;">${notice.title}</td>
-                        <td class="content" style="text-align: left;"><a href="noticeDetail?nseq=${notice.nseq}"><c:out value="${notice.content}" /></a></td>
-                        <td>
-                            <fmt:formatDate value="${notice.indate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <div class="btnWrap topright">
-                <button type="button" class="btn btnWrite" onclick="location.href='noticeWrite'">글 쓰기</button>
+<article>
+    <form method="get" name="fr">
+    <div class="tb">
+        <div class="find-box">
+            <div class="col search-box">
+            <input type="text" name="key" placeholder="검색 제목 입력" value="${key}">
+            <input type="button" name="btn_search" value="검색" onClick="go_search('notice')" />
+            <input type="button" value="공지 작성" onclick="location.href='noticeWrite'" />
             </div>
-            <div class="row">  <!-- 페이지의 시작 -->
-                <div class="coltitle" style="text-align: center; font-size:120%; font-weight:bold;">
-                    <c:if test="${paging.prev}"><a href="notice?page=${paging.beginPage-1}">◁</a></c:if>&nbsp;
+        </div>
 
-                    <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-                        <c:if test="${index!=paging.page}">
-                            <a href="notice?page=${index}">${index}&nbsp;</a>
-                        </c:if>
-                        <c:if test="${index==paging.page}">
-                            <span style="color:red">${index}&nbsp;</span>
-                        </c:if>
-                    </c:forEach>
+        <div class="header-row">
+            <div class="coltitle">No.</div>
+            <div class="coltitle">제목</div>
+            <div class="coltitle">내용</div>
+            <div class="coltitle">날짜</div>
+        </div>
 
-                    &nbsp;
-                    <c:if test="${paging.next}"><a href="notice?page=${paging.endPage+1}">▷</a></c:if>
+        <c:forEach items="${noticeList}" var="notice" varStatus="i">
+            <div class="row">
+                <div class="col">${notice.nseq}</div>
+                <div class="col">${notice.title}</div>
+                <div class="col">
+                    <a href="noticeDetail?nseq=${notice.nseq}">
+                        ${notice.content}
+                    </a>
+                </div>
+                <div class="col">
+                    <fmt:formatDate value="${notice.indate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </div>
             </div>
-            <%--페이지의 끝--%>
+        </c:forEach>
+
+            <div class="row">  <!-- 페이지의 시작 -->
+        <div class="col" style="font-size:120%; font-weight:bold;">
+            <c:if test="${paging.prev}" >
+                <a href="notice?page=${paging.beginPage-1}">PREV</a>&nbsp;
+            </c:if>
+
+            <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
+                <c:if test="${index!=paging.page}">
+                    <a href="notice?page=${index}">${index}</a>&nbsp;
+                </c:if>
+                <c:if test="${index==paging.page}">
+                    <span style="color:red">${index}&nbsp;</span>
+                </c:if>
+            </c:forEach>
+
+
+            <c:if test="${paging.next}" >
+                <a href="notice?page=${paging.endPage+1}">NEXT</a>&nbsp;
+            </c:if>
+			</div>
+            </div>
         </div>
-    </div>
+    </form>
+</article>
 </div>
+
 
 <%@ include file="../footer.jsp" %>

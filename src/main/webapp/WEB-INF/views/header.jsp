@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/workBoard.css">
     <link rel="stylesheet" type="text/css" href="/css/payCheckList.css">
+    <link rel="stylesheet" type="text/css" href="/css/mypage.css">
     <script src="/script/admin.js"></script>
     <script src="/script/hr.js"></script>
     <script src="/script/workboard.js"></script>
@@ -46,17 +47,14 @@
 <body>
     <div id="wrap">
         <header id="header">
-            <h1 class="logo">
-
-                <%--<img src="" />--%>
-                GROUPWARE
-            </h1>
-
+            <h2>
+                    The Quintessence of Connectivity
+            </h2>
 
             <div class="util">
                 <a class="mypage" href="myPage"><img src="/images/${loginUser.profileimg}" alt="마이페이지"/></a>
-                <a class="address" href="address"><img src="/images/address.png" alt="주소록" /></a>
-                <a class="logout" href="logout"><img src="/images/logout.png" alt="로그아웃" /></a>
+                <a class="address" href="address?first=y"><img src="/images/phonelist.png" alt="주소록" /></a>
+                <a class="logout" href="logout"><img src="/images/checkout.png" alt="로그아웃" /></a>
             </div>
         </header>
 

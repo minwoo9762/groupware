@@ -7,9 +7,9 @@
         <h2 class="title">${title}</h2>
         <ul class="tabList">
 
-            <li style="${parm == 1 ? 'font-weight: 700' : ''}" onclick="location.href='allInfoCtr?tabid=1'">직책</li>
-            <li style="${parm == 2 ? 'font-weight: 700' : ''}" onclick="location.href='allInfoCtr?tabid=2'">부서</li>
-            <li style="${parm == 3 ? 'font-weight: 700' : ''}" onclick="location.href='allInfoCtr?tabid=3'">직원 상태</li>
+            <li style="${parms == 1 ? 'font-weight: 700' : ''}" onclick="location.href='allInfoCtr?tabid=1'">직책</li>
+            <li style="${parms == 2 ? 'font-weight: 700' : ''}" onclick="location.href='allInfoCtr?tabid=2'">부서</li>
+            <li style="${parms == 3 ? 'font-weight: 700' : ''}" onclick="location.href='allInfoCtr?tabid=3'">직원 상태</li>
         </ul>
         <div class="tableWrap">
             <div class="boxWrap">
@@ -24,10 +24,10 @@
                         </div>
                     </div>
 
-                    <c:forEach items="${infoList}" var="info">
+                    <c:forEach items="${infoList}" var="info" varStatus="i">
                         <div class="tr">
                             <div class="tl">
-                                    ${info.id}
+                                    ${i.count}
                             </div>
                             <div class="td">
                                     ${info.name}
@@ -36,7 +36,7 @@
                     </c:forEach>
                 </div>
 
-                <form class="table fncTable">
+                <form class="table fncTable" action="allInfoCtrAction?tabid=${parms}" method="post" name="infoForm">
                     <h3 class="tableTitle">변경 구성</h3>
                     <div class="tr">
                         <div class="tl tableHeader">
@@ -47,45 +47,49 @@
                         </div>
                     </div>
 
-                    <c:forEach items="${infoList}" var="info">
+                    <c:forEach items="${infoList}" var="info" varStatus="i">
                         <div class="tr">
                             <div class="tl">
-                                    ${info.id}
+                                    ${i.count}
+                                <input type="hidden" name="id" value="${info.id}">
                             </div>
-                            <div class="td">
+                            <div class="td fnc">
                                 <input type="text" name="name" value="${info.name}" maxlength="10"/>
                             </div>
+                            <c:choose>
+                                <c:when test="${i.index==0}">
+                                    <div class="td delete">
+                                        <button type="button" class="deleteInfo disable">
+                                            삭제
+                                        </button>
+                                    </div>
+                                </c:when>
+                                <c:when test="${i.index==1 && parms==1}">
+                                     <div class="td delete">
+                                        <button type="button" class="deleteInfo disable">
+                                            삭제
+                                        </button>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="td delete">
+                                        <button type="button" class="deleteInfo" onclick="deleteInfo(this)">
+                                            삭제
+                                        </button>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </c:forEach>
                     <div class="bthWrap">
-                        <button id="infoSave" type="submit">저장</button>
+                        <button id="infoAdd" type="button" class="addInfo" onclick="addInfo(this)">+ 추가</button>
+                        <button id="infoSave" type="button" onclick="saveInfo('${title}')">저장</button>
                     </div>
                 </form>
             </div>
-
-
-            <%--<div class="row">  <!-- 페이지의 시작 -->
-                <div class="coltitle" style="text-align: center; font-size:120%; font-weight:bold;">
-                    <c:if test="${paging.prev}"><a href="admin?page=${paging.beginPage-1}">◁</a></c:if>&nbsp;
-
-                    <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-                        <c:if test="${index!=paging.page}">
-                            <a href="admin?page=${index}">${index}&nbsp;</a>
-                        </c:if>
-                        <c:if test="${index==paging.page}">
-                            <span style="color:red">${index}&nbsp;</span>
-                        </c:if>
-                    </c:forEach>
-
-                    &nbsp;
-                    <c:if test="${paging.next}"><a href="admin?page=${paging.endPage+1}">▷</a></c:if>
-                </div>
-            </div>--%>
-            <%--페이지의 끝--%>
         </div>
     </div>
 </section>
 
-<script src="/script/admin.js"></script>
 </body>
 </html>

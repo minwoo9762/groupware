@@ -9,8 +9,8 @@
         <form method="post" action="login" name="loginForm">
             <div class="loginForm">
                 <h2>Login</h2>
-                <div class="field" style="flex-direction: row">
-                    <div style="flex-direction: column; flex: 4">
+                <div class="field">
+                    <div >
                         <div class="field">
                             <label>E-Mail</label>
                             <input type="text" name="email" value="${dto.email}">
@@ -20,15 +20,16 @@
                             <input type="password" name="pwd">
                         </div>
                     </div>
-                    <div class="btn" style="margin-left: 30px; align-items: center; flex: 1">
-                            <input type="submit" value="로그인" style="height: 100%">
+                    <div class="message">${message}</div>
+                    <div class="btn">
+                            <input type="submit" value="로그인">
                     </div>
                 </div>
-                <div class="btn">
+                <div class="sub-buttons">
+                    <input type="button" value="비밀번호 찾기" onclick="location.href='findPwd'"> |
                     <input type="button" value="회원가입" onclick="location.href='joinForm'">
-                    <input type="button" value="비밀번호 찾기" onclick="location.href='findPwd'">
                 </div>
-                <div>${message}</div>
+
             </div>
         </form>
     </div>

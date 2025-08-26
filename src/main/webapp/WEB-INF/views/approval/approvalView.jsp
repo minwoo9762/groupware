@@ -27,7 +27,7 @@
     }
 </script>
 
-<div class=" layout" style="display: flex;" id="main">
+<div class="layout" style="display: flex;" id="main">
   <%@include file="../lnb.jsp"%>
 
 <div class="container">
@@ -82,14 +82,9 @@
         </div>
 
     <div class="updateBtns">
-        <c:choose>
-            <c:when test="${loginUser.provider == 1}">
-            <input type="hidden" value="결제확인" onClick="approvalCheck()"/>
-            </c:when>
-            <c:otherwise>
-                <input type="button" value="결제확인" onClick="approvalCheck()"/>
-            </c:otherwise>
-        </c:choose>
+        <c:if test="${loginUser.provider == 1}">
+        <input type="button" value="결제확인" onClick="approvalCheck()"/>
+        </c:if>
       <input type="button" value="삭제" onClick="deleteApp('${app.id}')"/>
       <input type="button" value="목록으로" onClick="location.href='appMain'"/>
     </div>
@@ -109,10 +104,13 @@
       <div class="reply_body">
         <div class="reply_Writer">
         <c:choose>
+        <c:when test="${loginUser.provider==1}">대표(관리자)</c:when>
         <c:when test="${loginUser.provider==2}">부장</c:when>
-        <c:when test="${loginUser.provider==3}">팀장</c:when>
-        <c:when test="${loginUser.provider==4}">본부장</c:when>
-        <c:otherwise>알 수 없음</c:otherwise>
+        <c:when test="${loginUser.provider==3}">과장</c:when>
+        <c:when test="${loginUser.provider==4}">대리</c:when>
+        <c:when test="${loginUser.provider==5}">주임</c:when>
+        <c:when test="${loginUser.provider==6}">사원</c:when>
+        <c:otherwise>미정</c:otherwise>
         </c:choose>
         </div>
         <div class="reply_Date">
@@ -134,10 +132,13 @@
           <div class="reply_body">
             <div class="reply_Writer">
         <c:choose>
-        <c:when test="${reply.provider==2}">부장</c:when>
-        <c:when test="${reply.provider==3}">팀장</c:when>
-        <c:when test="${reply.provider==4}">본부장</c:when>
-        <c:otherwise>알 수 없음</c:otherwise>
+        <c:when test="${loginUser.provider==1}">대표(관리자)</c:when>
+        <c:when test="${loginUser.provider==2}">부장</c:when>
+        <c:when test="${loginUser.provider==3}">과장</c:when>
+        <c:when test="${loginUser.provider==4}">대리</c:when>
+        <c:when test="${loginUser.provider==5}">주임</c:when>
+        <c:when test="${loginUser.provider==6}">사원</c:when>
+        <c:otherwise>미정</c:otherwise>
         </c:choose>
             </div>
             <div class="reply_Date"><fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm"/></div>
@@ -152,6 +153,7 @@
       </c:otherwise>
     </c:choose>
 </div>
+
 </div>
 </div>
 

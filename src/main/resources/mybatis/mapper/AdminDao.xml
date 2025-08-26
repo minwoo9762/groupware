@@ -13,7 +13,7 @@
     </select>
 
     <update id="updateUser" parameterType="com.himedia.groupware.dto.UserDto">
-        UPDATE user set part=#{part}, provider=#{provider} WHERE id = #{id}
+        UPDATE user set part=#{part}, provider=#{provider}, state=#{state} WHERE id = #{id}
     </update>
 
     <select id="getAllCountNotice" resultType="_int">
@@ -67,5 +67,55 @@
     <select id="getState" resultType="com.himedia.groupware.dto.AsInfoDto">
         SELECT stateid AS id, statename AS name FROM state
     </select>
+
+    <!--프로바이더-->
+    <insert id="insertProvider" parameterType="com.himedia.groupware.dto.InfoDto">
+        INSERT IGNORE INTO provider(providerid, providername) VALUES (#{id}, #{name})
+    </insert>
+    <update id="replaceProvider" parameterType="com.himedia.groupware.dto.InfoDto">
+        update provider set providername=#{name} where providerid=#{id}
+    </update>
+    <update id="userReplaceProvider" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set provider=0  where provider=#{deleteid}
+    </update>
+    <delete id="deleteProvider" parameterType="com.himedia.groupware.dto.InfoDto">
+        delete from provider where providerid=#{deleteid}
+    </delete>
+
+    <!--파트-->
+    <insert id="insertPart" parameterType="com.himedia.groupware.dto.InfoDto">
+        INSERT IGNORE INTO part(partid, partname) VALUES (#{id}, #{name})
+    </insert>
+    <update id="replacePart" parameterType="com.himedia.groupware.dto.InfoDto">
+        update part set partname=#{name} where partid=#{id}
+    </update>
+    <update id="userReplacePart" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set part=0  where part=#{deleteid}
+    </update>
+    <delete id="deletePart" parameterType="com.himedia.groupware.dto.InfoDto">
+        delete from part where partid=#{deleteid}
+    </delete>
+
+    <!--스테이트-->
+    <insert id="insertState" parameterType="com.himedia.groupware.dto.InfoDto">
+        INSERT IGNORE INTO state(stateid, statename) VALUES (#{id}, #{name})
+    </insert>
+    <update id="replaceState" parameterType="com.himedia.groupware.dto.InfoDto">
+        update state set statename=#{name} where stateid=#{id}
+    </update>
+    <update id="userReplaceState" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set state=0  where state=#{deleteid}
+    </update>
+    <delete id="deleteState" parameterType="com.himedia.groupware.dto.InfoDto">
+        delete from state where stateid=#{deleteid}
+    </delete>
+
+    <select id="getNoticeOne" resultType="com.himedia.groupware.dto.NoticeDto">
+        select * from notice where nseq=#{nseq}
+    </select>
+
+    <update id="update" parameterType="com.himedia.groupware.dto.NoticeDto">
+        update notice set title=#{title}, content=#{content}, image=#{image}, savefilename=#{savefilename} where nseq=#{nseq}
+    </update>
 
 </mapper>

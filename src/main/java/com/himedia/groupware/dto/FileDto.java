@@ -11,7 +11,7 @@ public class FileDto {
     private int id;
     private String originalname;
     private String savedname;
-    private Timestamp uploadtime;
+    private Timestamp indate;
     private int userid;
     private String title;
     private String part;

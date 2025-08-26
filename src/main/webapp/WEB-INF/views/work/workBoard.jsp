@@ -49,7 +49,7 @@
                         <c:when test="${board.part == 3}">영업팀</c:when>
                         <c:when test="${board.part == 4}">운영팀 </c:when>
                         <c:when test="${board.part == 5}">인사팀 </c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
+                        <c:otherwise>미정</c:otherwise>
                     </c:choose>
                 </div>
                 <div class="col">

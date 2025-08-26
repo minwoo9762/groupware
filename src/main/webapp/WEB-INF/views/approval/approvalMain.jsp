@@ -21,7 +21,9 @@
             <div class="col search-box">
                 <input type="text" name="key" placeholder="검색 제목 입력" value="${key}">
                 <input type="button" name="btn_search" value="검색" onclick="go_searchWork('appMain')" />
+                <c:if test="${loginUser.provider != 1}">
                 <input type="button" value="결재 신청" onclick="location.href='appWrite'" />
+                </c:if>
             </div>
             </div>
 
@@ -43,7 +45,7 @@
                         <c:when test="${app.part == 3}">영업팀</c:when>
                         <c:when test="${app.part == 4}">운영팀 </c:when>
                         <c:when test="${app.part == 5}">인사팀 </c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
+                        <c:otherwise>미정</c:otherwise>
                     </c:choose>
                 </div>
                 <div class="col">
@@ -54,7 +56,7 @@
                         <c:when test="${app.category == 0}">휴가</c:when>
                         <c:when test="${app.category == 1}">영수증</c:when>
                         <c:when test="${app.category == 2}">법인차량</c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
+                        <c:otherwise>미정</c:otherwise>
                     </c:choose>
                 </div>
                 <div class="col">
@@ -70,7 +72,7 @@
                         <c:when test="${app.status == 0}">결재대기</c:when>
                         <c:when test="${app.status == 1}">결재보류</c:when>
                         <c:when test="${app.status == 2}">결재완료</c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
+                        <c:otherwise>미정</c:otherwise>
                     </c:choose>
                 </div>
             </div>

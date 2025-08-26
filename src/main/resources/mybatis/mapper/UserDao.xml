@@ -31,4 +31,16 @@
     <select id="getUseridByName">
         select id from user where name=#{name}
     </select>
+    <select id="getAllCountForAddress" resultType="_int">
+        select count(*) from user where name like concat('%',#{key},'%')
+    </select>
+
+    <select id="selectAddress" parameterType="com.himedia.groupware.dto.Paging" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user where name like concat('%',#{key},'%') order by name desc limit #{paging.displayRow} offset #{paging.startNum}
+    </select>
+
+    <insert id="insert" parameterType="com.himedia.groupware.dto.UserDto">
+        insert into user(email, pwd, name, phone, part, address1, address2, provider)
+        values(#{email}, #{pwd}, #{name}, #{phone}, #{part}, #{address1}, #{address2}, #{provider})
+    </insert>
 </mapper>

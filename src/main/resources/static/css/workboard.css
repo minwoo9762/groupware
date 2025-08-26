@@ -1,5 +1,147 @@
-/*여기서 부터 */
+.admin .main {display: flex; flex-direction: column;}
+.admin .main .searchWrap {display: flex; justify-content: flex-end; align-items: center; gap: 5px; padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
 
+.admin .tableWrap {padding: 20px 30px 20px 30px; width: 100%; box-sizing: border-box;}
+.admin .tableWrap table {width: 100%; border-top:3px solid #555; border-bottom:3px solid #555; box-sizing: border-box;  border-collapse: collapse;}
+.admin .tableWrap th {border-bottom: 1px solid #555; height: 55px; text-align: center;}
+.admin .tableWrap td {padding:0 10px; box-sizing: border-box; border-bottom: 1px solid #555; height: 48px; text-align: center;}
+.admin .tableWrap table textarea {margin: 10px 0; padding: 10px; width: 100%; height: 200px; border: 1px solid #555; box-sizing: border-box; background: #fff; border-radius: 4px; color: #555;}
+.admin .tableWrap td.content {text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+
+
+button.btn {padding: 0 10px; min-width: 80px; height: 26px; border: 1px solid #555; box-sizing: border-box; background: #fff; border-radius: 4px; color: #555; cursor: pointer;}
+select.btn {padding: 0 10px; min-width: 80px; height: 26px; border: 1px solid #555; box-sizing: border-box; background: #fff; border-radius: 4px; color: #555; cursor: pointer;}
+label.btn {flex-shrink: 0; padding: 0 10px; height: 100%; line-height: 30px; box-sizing: border-box; background: #fff; border-radius: 4px; font-size: 14px; color: #555; cursor: pointer;}
+
+/* notice.css */
+.topright {display: flex; justify-content: flex-end; margin-top: 12px; gap: 6px;}
+.btnWrite {}
+.admin .fileWrap {display: flex; flex-direction: column; margin: 10px 0;}
+.admin .fileWrap .customFile {display: flex; align-items: center;  width: 320px; height: 32px; border: 1px solid #555; box-sizing: border-box; background: #fff; border-radius: 4px; color: #555;}
+.admin .fileWrap .customFile #savefilename {padding: 0 10px; width: 100%; height: 100%; line-height: 30px; font-size: 14px; border-right: 1px solid #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.admin .fileWrap #imagepreview {border-radius: 4px; overflow: hidden;}
+
+/* allInfoCtr  직책, 부서(조직도), 유저상태 관리 */
+.admin .tabList {display: flex; justify-content: center; align-items: center; margin: 24px auto 16px; padding: 0px 15px; width: 300px; box-sizing: border-box;}
+.admin .tabList li {display: flex; justify-content: center; align-items: center; margin: 10px 0px; width: 33.33%; border-right: 1px solid #ddd; box-sizing: border-box; cursor: pointer;}
+.admin .tabList li:hover {color: #0e2957;}
+.admin .tabList li:last-of-type {border-right: 0;}
+.admin .boxWrap {display: flex; justify-content: center; gap: 70px;}
+.admin .fncTable {display: flex; flex-direction: column; padding: 20px 30px; width: 368px; height: 100%; max-height: 768px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box;}
+.admin .fncTable .tableTitle {margin-bottom: 24px; height: 32px; line-height: 32px; font-size: 18px; font-weight: 700;}
+.admin .fncTable > .tr {display: flex; align-items: center; border-bottom: 1px solid #ddd;}
+.admin .fncTable > div.tr:last-of-type {border-bottom: 0;}
+.admin .fncTable > .tr > .tl {display: flex; justify-content: center; align-items: center; flex-shrink: 0; padding: 0 10px;  box-sizing: border-box;  width: 120px; height: 48px;}
+.admin .fncTable > .tr > .td {display: flex; justify-content: center; align-items: center; padding: 0 10px; box-sizing: border-box; width: 100%; height: 48px; font-size: 16px; font-weight: 400; color: #555;}
+.admin .fncTable > .tr > .tableHeader {font-size: 16px; color: #222; font-weight: 700;}
+.admin .fncTable > .tr > .td > input {padding: 0px 8px; width: 108px; height: 28px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px;}
+.admin .fncTable .bthWrap {display: flex; justify-content: flex-end; margin-top: 20px; width: 100%;}
+.admin .fncTable .bthWrap #infoSave {width: 82px; height: 28px; border: 1px solid #555; border-radius: 4px; box-sizing: border-box; text-align: center; font-size: 14px; font-weight: 400;}
+
+.container {
+    width: 1280px;
+    margin: 0 auto;
+    font-family: "Noto Sans KR", sans-serif;
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.head {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
+
+.titleBar, .bodyBar {
+    display: flex;
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 22px;
+}
+.titleWriter{flex: 2; text-align: center;}
+.titleTitle{flex: 5; text-align: center;}
+.first{text-align: center;}
+.second {text-align: center;}
+.left{flex: 2; text-align: center;}
+.right{flex: 5; text-align: center;}
+
+.bar, .contentBar {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-left: 4px solid #3b82f6;
+    margin: 10px 0;
+    background: white;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.contentLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 122px;
+}
+
+.contentLeft > div{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+.contentLeft .second {
+    background: #eff6ff;
+    font-size: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.contentBox {
+    flex: 3;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+    min-height: 100px;
+}
+
+.updateBtns {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+.updateBtns input {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 8px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.updateBtns input:hover {
+    background: #1d4ed8;
+}
+
+.reply{display: flex; flex-direction: column;}
+.reply_title{
+    display: flex;
+    background: #eff6ff;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+.reply_Writer{flex: 1;}
+  
 .container {
     width: 800px;
     margin: 30px auto;
@@ -96,8 +238,22 @@
     cursor: pointer;
     font-weight: bold;
 }
-.updateBtns input:hover {
+.updateBtns input:active {
     background: #1d4ed8;
+}
+
+.fileDelete input{
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 8px;
+    background: #0f172a;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.fileDelete input:active{
+    background: #1e293b;
 }
 
 .reply{display: flex; flex-direction: column;}

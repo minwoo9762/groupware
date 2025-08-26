@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 40px 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    box-sizing: border-box;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+}
+
+.loginForm {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.loginForm h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0e2957;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.field label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.field input[type="text"],
+.field input[type="password"],
+.field input[type="file"],
+.field select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+}
+
+.field select {
+    background-color: white;
+    appearance: none;
+}
+
+input[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-row input.input-text-fixed {
+    flex: 2;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-row input.btn-common {
+    flex: 1;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 12px;
+    background-color: #0e2957;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.input-row input.btn-common:hover {
+    background-color: #1a3c87;
+}
+
+.btn {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn input[type="submit"],
+.btn input[type="button"],
+.btn-common {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #0e2957;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn input[type="submit"]:hover,
+.btn input[type="button"]:hover,
+.btn-common:hover {
+    background-color: #1a3c87;
+}
+
+#backButton {
+    background-color: #555;
+    color: white;
+    padding: 0 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 40px;
+    line-height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#backButton:hover {
+    background-color: #333;
+}

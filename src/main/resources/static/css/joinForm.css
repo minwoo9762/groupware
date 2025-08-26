@@ -1,0 +1,184 @@
+body {
+    margin: 0;
+    padding: 40px 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+}
+
+.loginForm {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.loginForm h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0e2957;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.field label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.field input[type="text"],
+.field input[type="password"],
+.field input[type="file"],
+.field select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+}
+
+.field input[type="text"].address,
+.field input[type="text"].detail-address {
+    height: 40px;
+}
+
+.field input[type="button"],
+.field input[type="submit"] {
+    padding: 0;
+    font-size: 14px;
+    background-color: #0e2957;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.field input[type="button"]:hover,
+.field input[type="submit"]:hover {
+    background-color: #1a3c87;
+}
+
+.field input[type="text"]:focus,
+.field input[type="password"]:focus,
+.field input[type="button"]:focus {
+    outline: none;
+    border-color: #0e2957;
+}
+
+input[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.btn {
+    margin-top: 24px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn input[type="submit"],
+.btn input[type="button"] {
+    flex: 1;
+    padding: 0;
+    font-size: 16px;
+    background-color: #0e2957;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn input[type="button"]:not([value="중복검사"]) {
+    background-color: #555;
+}
+
+.btn input[type="submit"]:hover,
+.btn input[type="button"]:hover {
+    background-color: #0e2957;
+}
+
+.btn input[type="button"]:not([value="중복검사"]):hover {
+    background-color: #333;
+}
+
+#duplication {
+    background-color: #0e2957;
+    color: white;
+    padding: 0;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#duplication:hover {
+    background-color: #1a3c87;
+}
+
+#duplicationMsg {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+div[style*="font-size: 80%"] {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    color: #777;
+}
+
+#profileimgPrev img {
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    height: 100px;
+    object-fit: cover;
+}
+
+.loginForm .message,
+.loginForm > div:last-child {
+    text-align: center;
+    color: red;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.message {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #d00;
+    padding-left: 2px;
+    text-align: left;
+}

@@ -48,14 +48,16 @@
         </div>
         <div class="col">${file.name}</div>
         <div class="col">${file.title}</div>
-        <div class="col">${file.uploadtime}</div>
+        <div class="col">
+        <fmt:formatDate value="${file.indate}" pattern="yyyy-MM-dd"/>
+        </div>
         <div class="col">
             <a href="${pageContext.request.contextPath}/filedownload?filename=${file.savedname}">
                 ${file.originalname}
             </a>
         </div>
         <div class="col">
-            <div class="updateBtns">
+            <div class="fileDelete">
                 <input type="button" value="삭제" onClick="deleteFile('${file.id}')" />
             </div>
         </div>

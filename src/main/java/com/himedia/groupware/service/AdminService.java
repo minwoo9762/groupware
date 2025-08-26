@@ -4,6 +4,7 @@ import com.himedia.groupware.dao.AdminIDao;
 import com.himedia.groupware.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -166,4 +167,67 @@ public class AdminService {
     public ArrayList<AsInfoDto> getState() {
         return adidao.getState();
     }
+
+
+
+
+
+
+
+    /*추가(인설트)*/
+    public void insertProvider(int id, String name) {
+        adidao.insertProvider(id, name);
+    }
+    public void insertPart(int id, String name) {
+        adidao.insertPart(id, name);
+    }
+    public void insertState(int id, String name) {
+        adidao.insertState(id, name);
+    }
+
+    /*업데이트*/
+    public void replaceProvider(int id, String name) {
+        adidao.replaceProvider(id, name);
+    }
+    public void replacePart(int id, String name) {
+        adidao.replacePart(id, name);
+    }
+    public void replaceState(int id, String name) {
+        adidao.replaceState(id, name);
+    }
+
+    /*프로바이더 삭제*/
+    public void userReplaceProvider(int deleteid) {
+        adidao.userReplaceProvider(deleteid);
+    }
+    public void deleteProvider(int deleteid) {
+        adidao.deleteProvider(deleteid);
+    }
+
+    /* 파트 삭제*/
+    public void userReplacePart(Integer deleteid) {
+        adidao.userReplacePart(deleteid);
+    }
+    public void deletePart(Integer deleteid) {
+        adidao.deletePart(deleteid);
+    }
+
+
+    /*스테이트 삭제*/
+    public void userReplaceState(Integer deleteid) {
+        adidao.userReplaceState(deleteid);
+    }
+    public void deleteState(Integer deleteid) {
+        adidao.deleteState(deleteid);
+    }
+
+
+    public NoticeDto getNoticeOne(int nseq) {
+        return adidao.getNoticeOne(nseq);
+    }
+
+    public void update(@Valid NoticeDto noticedto) {
+        adidao.update(noticedto);
+    }
+
 }

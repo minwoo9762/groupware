@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>JOIN</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/joinForm.css">
     <script src="script/jquery-3.7.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -46,7 +46,7 @@
             });
 
             $('#pfimg').change(function() {
-                var formSelector = $('#selectImg')[0];
+                var formSelector = $('#insertForm')[0];
                 var formData = new FormData(formSelector);
                 $.ajax(
                     {
@@ -78,12 +78,12 @@
         <h2>Join</h2>
         <div class="field">
             <label>E-Mail</label>
-            <div class="btn">
+            <div class="btn" style="gap: 10px">
                 <input type="text" name="email" value="${dto.email}">&nbsp;
                 <input type="button" value="중복검사" id="duplication">
-                <div id="duplicationMsg" style="flex: 2"></div>
-                <input type="hidden" name="emailCheck" id="emailCheck" value="${emailCheck}">
             </div>
+            <div class="message" id="duplicationMsg" style="flex: 2"></div>
+            <input type="hidden" name="emailCheck" id="emailCheck" value="${emailCheck}">
         </div>
         <div class="field">
             <label>비밀번호</label>
@@ -171,6 +171,12 @@
                 }).open();
             }
         </script>
+
+        <div class="field">
+            <label>프로필 이미지</label>
+            <input type="file" name="pfimg" id="pfimg">
+        </div>
+
         <div class="field">
             <label>프로필 미리보기</label>
             <c:choose>
@@ -178,7 +184,7 @@
                     <div id="profileimgPrev"></div>
                 </c:when>
                 <c:otherwise>
-                    <div id="profileimgPrev"><img src="${dto.profileimg}" height="100"></div>
+                    <div id="profileimgPrev"><img src="${dto.profileimg}"></div>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -188,14 +194,6 @@
             <input type="button" value="돌아가기" onclick="location.href='/'">
         </div>
         <div>${message}</div>
-    </div>
-</form>
-<form id="selectImg" method="post" enctype="multipart/form-data">
-    <div class="loginform" style="margin: 0">
-        <div class="field">
-            <label>프로필 이미지</label>
-            <input type="file" name="pfimg" id="pfimg" value="이미지 선택">
-        </div>
     </div>
 </form>
 </body>
