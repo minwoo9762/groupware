@@ -52,6 +52,8 @@ public class ApprovalController {
         mav.addObject("app", result.get("app"));
         mav.addObject("replyList", result.get("replyList"));
         mav.setViewName("approval/approvalView");
+        System.out.println("@@@@@@@@");
+        System.out.println(mav);
         return mav;
     }
 
