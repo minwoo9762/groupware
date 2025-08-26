@@ -7,6 +7,7 @@ import com.himedia.groupware.dto.VacationDto;
 import com.himedia.groupware.service.AdminService;
 import com.himedia.groupware.service.AttendanceService;
 import com.himedia.groupware.service.HomeServiece;
+import com.himedia.groupware.service.MailService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,8 @@ public class HomeController {
     AdminService admins;
     @Autowired
     HomeServiece homes;
+    @Autowired
+    MailService mails;
 
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
@@ -141,6 +144,9 @@ public class HomeController {
                 }
             }
 
+            // 당일 송신 메일 확인
+            int today_mail = mails.countMailToday(udto.getId());
+            model.addAttribute("today_mail", today_mail);
 
         }
         return url;

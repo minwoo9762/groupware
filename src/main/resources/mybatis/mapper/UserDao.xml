@@ -23,4 +23,12 @@
     <select id="getAllUser" resultType="com.himedia.groupware.dto.UserDto">
         select * from user order by name;
     </select>
+    <select id="isValidName" resultType="boolean">
+        select exists(
+            select 1 from user where name=#{name}
+        )
+    </select>
+    <select id="getUseridByName">
+        select id from user where name=#{name}
+    </select>
 </mapper>

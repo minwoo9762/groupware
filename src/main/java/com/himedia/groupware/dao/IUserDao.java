@@ -12,4 +12,6 @@ public interface IUserDao {
     void updatePwd(String email, String pwd);
     void updateUser(UserDto userdto);
     ArrayList<UserDto> getAllUser();
+    boolean isValidName(String name);
+    int getUseridByName(String name);
 }

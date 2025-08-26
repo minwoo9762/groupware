@@ -1,9 +1,9 @@
 package com.himedia.groupware.service;
 
 import com.himedia.groupware.dao.IMailDao;
-import com.himedia.groupware.dto.ApprovalDto;
 import com.himedia.groupware.dto.MailDto;
 import com.himedia.groupware.dto.Paging;
+import com.himedia.groupware.dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,12 @@ public class MailService {
         return result;
     }
 
-    public HashMap<String, Object> selectMail(HttpServletRequest request) {
+    public HashMap<String, Object> getMailList(HttpServletRequest request, String opt) {
         HashMap<String, Object> result = new HashMap<>();
         HttpSession session = request.getSession();
         if (request.getParameter("first") != null) {
             session.removeAttribute("page");
             session.removeAttribute("key");
-            session.removeAttribute("part");
         }
 
         int page = 1;
@@ -49,38 +48,59 @@ public class MailService {
             key = (String) session.getAttribute("key");
         }
 
-        String part = "";
-        if (request.getParameter("part") != null) {
-            part = request.getParameter("part");
-            session.setAttribute("part", part);
-        } else if (session.getAttribute("part") != null) {
-            part = (String) session.getAttribute("part");
-        }
-
         Paging paging = new Paging();
         paging.setPage(page);
         paging.setDisplayPage(10);
         paging.setDisplayRow(10);
-        int count = mdao.getAllCountForMail(key);
+        int count = 0;
+        if(opt.equals("r"))
+            count = mdao.getAllCountForReceiveMail(key);
+        else if(opt.equals("s"))
+            count = mdao.getAllCountForSendMail(key);
         if(count < 1) count = 1;
         paging.setTotalCount(count);
         paging.calPaging();
-
 
         if (page > paging.getEndPage()) {
             paging.setPage(paging.getEndPage());
             paging.calPaging();
         }
-        int id = Integer.parseInt((String) session.getAttribute("id"));
-        ArrayList<MailDto> sendList = mdao.getSendMail(id);
-        ArrayList<MailDto> receiveList = mdao.getReceiveMail(id);
-
-        result.put("sendList", sendList);
-        result.put("receiveList", receiveList);
+        int id = ((UserDto) session.getAttribute("loginUser")).getId();
+        if(opt.equals("r")) {
+            ArrayList<MailDto> receiveList = mdao.getReceiveMail(id, paging, key);
+            result.put("receiveList", receiveList);
+        }
+        else if(opt.equals("s")) {
+            ArrayList<MailDto> sendList = mdao.getSendMail(id, paging, key);
+            result.put("sendList", sendList);
+        }
         result.put("paging", paging);
         result.put("key", key);
-        result.put("part", part);
         return result;
     }
 
+    public MailDto getMail(int id) {
+        return mdao.getMail(id);
+    }
+
+    public void setRead(int id) {
+        mdao.setRead(id);
+    }
+
+    public ArrayList<MailDto> getRepliedList(int id) {
+        return mdao.getRepliedList(id);
+    }
+
+    public void insertMail(MailDto maildto) {
+        mdao.insertMail(maildto);
+    }
+
+    public void deleteMail(int id) {
+        mdao.deleteReply(id);
+        mdao.deleteMail(id);
+    }
+
+    public int countMailToday(int id) {
+        return mdao.countMailToday(id);
+    }
 }

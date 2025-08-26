@@ -143,8 +143,8 @@
                         ${loginUser.part == 1 ? "개발팀" : loginUser.part == 2 ? "기획팀" : loginUser.part == 3 ? "영업팀" : loginUser.part == 4 ? "운영팀" : loginUser.part == 5 ? "인사팀" : "미정"}
                     </span>
                     <div class="util">
-                        <div class="list armMail">
-                            <span class="num">8</span>
+                        <div class="list armMail" style="cursor: pointer" onclick="location.href='/mail'">
+                            <span class="num">${today_mail}</span>
                             <span class="txt">오늘 온 메일</span>
                         </div>
                         <div class="list armSchedule ">

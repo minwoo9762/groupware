@@ -2,6 +2,8 @@ package com.himedia.groupware.service;
 
 import com.himedia.groupware.dao.IUserDao;
 import com.himedia.groupware.dto.UserDto;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +39,13 @@ public class UserService {
     public ArrayList<UserDto> getAllUser() {
         return udao.getAllUser();
     }
+
+    public boolean isValidName(String name) {
+        return udao.isValidName(name);
+    }
+
+    public int getUseridByName(String name) {
+        return udao.getUseridByName(name);
+    }
+
 }
