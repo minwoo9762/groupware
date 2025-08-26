@@ -78,9 +78,9 @@
         <h2>Join</h2>
         <div class="field">
             <label>E-Mail</label>
-            <div class="btn" style="gap: 10px">
+            <div class="btn">
                 <input type="text" name="email" value="${dto.email}">&nbsp;
-                <input type="button" value="중복검사" id="duplication">
+                <input type="button" value="중복검사" id="duplication" class="check-btn">
             </div>
             <div class="message" id="duplicationMsg" style="flex: 2"></div>
             <input type="hidden" name="emailCheck" id="emailCheck" value="${emailCheck}">
@@ -89,7 +89,7 @@
             <label>비밀번호</label>
             <input type="password" name="pwd">
         </div>
-        <div style="font-size: 80%; color: gray">
+        <div style="font-size: 80%; color: gray; margin-bottom: 20px">
             비밀번호는 숫자와 특수문자를 포함한 8자 이상, 20자 이하의 영문으로 작성합니다.
         </div>
         <div class="field">
@@ -108,7 +108,7 @@
             <label>우편번호</label>
             <div class="btn">
                 <input type="text" id="my_postcode" name="zipNum" value="${dto.zipNum}" readonly>&nbsp;
-                <input type="button" value="우편번호 찾기" onclick="findZipNum()">
+                <input type="button" value="우편번호 찾기" onclick="findZipNum()" class="find-btn">
             </div>
         </div>
         <div class="field">
@@ -116,8 +116,8 @@
         </div>
         <div class="field">
             <label>상세 주소</label>
-            <input type="text" id="my_detailAddress" name="address2" value="${dto.address2}" style="flex: 4">&nbsp;
-            <input type="text" id="my_extraAddress" name="address3" value="${dto.address3}" style="flex: 1">
+            <input type="text" id="my_detailAddress" name="address2" value="${dto.address2}">&nbsp;
+            <input type="text" id="my_extraAddress" name="address3" value="${dto.address3}">
         </div>
         <div class="field">
         </div>
@@ -190,8 +190,8 @@
         </div>
         <input type="hidden" name="profileimg" id="profileimg" value="${dto.profileimg}">
         <div class="btn">
-            <input type="submit" value="가입">
-            <input type="button" value="돌아가기" onclick="location.href='/'">
+            <input type="submit" value="가입" class="submit-btn">
+            <input type="button" value="돌아가기" onclick="location.href='/'" class="back-btn">
         </div>
         <div>${message}</div>
     </div>
