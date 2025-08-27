@@ -19,21 +19,22 @@
                 </div>
 
                 <div class="bar">
-                    <div class="left">${loginUser.name}</div>
+                    <div class="left">${loginUser.name}
+                    <c:forEach items="${partList}" var="part">
+                        <c:if test="${loginUser.part == part.id}">(${part.name})</c:if>
+                    </c:forEach>
+                    </div>
                     <div class="right"><input type="text" class="inputText" name="title" placeholder="제목을 입력하세요" /></div>
                 </div>
 
                 <div class="bodyBar">
-                    <div class="titleWriter" >카테고리</div>
+                    <div class="titleWriter" >이미지</div>
                     <div class="titleTitle" >내 용</div>
                 </div>
 
-                <div class="contentBar">
+                <div class="contentBar" style="height: 400px;">
                     <div class="contentLeft">
-                        <div class="second">게시판</div>
-                        <div class="first">게시물 등록</div>
-                        <div class="second">이미지</div>
-                        <div class="imgField">
+                        <div class="imgField" style="display: flex; flex-direction: column;">
                         <c:choose>
                     <c:when test="${empty dto.savefilename}">
                         <div>
@@ -50,7 +51,6 @@
                         <input type="hidden" name="savefilename" value="${dto.savefilename}"/>
                     </c:otherwise>
                 </c:choose>
-
                 <input type="button" value="이미지 선택" onclick="selectImg()"/>
                 </div>
              </div>

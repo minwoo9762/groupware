@@ -58,3 +58,9 @@ function deleteApp(id){
         location.href='deleteApp?id='+id
     }
 }
+
+function deleteAddress(id){
+    if(confirm('해당 신청서를 삭제하시겠습니까?')){
+        location.href='deleteAddress?id='+id
+    }
+}

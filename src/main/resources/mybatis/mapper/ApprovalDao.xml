@@ -22,7 +22,7 @@
     </delete>
 
     <insert id="insert" parameterType="com.himedia.groupware.dto.ApprovalDto">
-        insert into approval (id, username, title, category, content, status, part) values (#{id}, #{username}, #{title}, #{category}, #{content}, #{status}, #{part})
+        insert into approval (id, username, title, category, content, status, part, provider) values (#{id}, #{username}, #{title}, #{category}, #{content}, #{status}, #{part}, #{provider})
     </insert>
 
     <update id="updateStatus">

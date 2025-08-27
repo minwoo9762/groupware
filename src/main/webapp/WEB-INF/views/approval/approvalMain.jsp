@@ -11,12 +11,9 @@
         <div class="tb">
             <div class="find-box">
             <select name="part" class="dropdown">
-                <option value="" disabled selected hidden>부서명</option>
-                <option value="1">개발</option>
-                <option value="2">기획</option>
-                <option value="3">영업</option>
-                <option value="4">운영</option>
-                <option value="5">인사</option>
+                <c:forEach items="${partList}" var="part">
+                    <option value="${part.id}">${part.name}</option>
+                </c:forEach>
             </select>
             <div class="col search-box">
                 <input type="text" name="key" placeholder="검색 제목 입력" value="${key}">
@@ -37,16 +34,14 @@
         </div>
 
         <c:forEach items="${appList}" var="app">
+        <a href="appView?id=${app.id}" style="text-decoration: none; color: inherit; padding-left: 0;">
             <div class="row">
                 <div class="col">
-                    <c:choose>
-                    <c:when test="${app.part == 1}">개발팀</c:when>
-                        <c:when test="${app.part == 2}">기획팀</c:when>
-                        <c:when test="${app.part == 3}">영업팀</c:when>
-                        <c:when test="${app.part == 4}">운영팀 </c:when>
-                        <c:when test="${app.part == 5}">인사팀 </c:when>
-                        <c:otherwise>미정</c:otherwise>
-                    </c:choose>
+                   <c:forEach items="${partList}" var="part">
+                        <c:if test="${app.part == part.id}">
+                            ${part.name}
+                        </c:if>
+                    </c:forEach>
                 </div>
                 <div class="col">
                     ${app.username}
@@ -60,9 +55,8 @@
                     </c:choose>
                 </div>
                 <div class="col">
-                    <a href="appView?id=${app.id}" style="text-decoration: none; color: inherit; padding-left: 0;">
                          ${app.title}
-                    </a>
+
                 </div>
                 <div class="col">
                     <fmt:formatDate value="${app.indate}" pattern="yyyy-MM-dd"/>
@@ -76,6 +70,7 @@
                     </c:choose>
                 </div>
             </div>
+            </a>
         </c:forEach>
 
         <div class="row">  <!-- 페이지의 시작 -->

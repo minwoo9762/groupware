@@ -1,8 +1,10 @@
 package com.himedia.groupware.controller;
 
 import com.himedia.groupware.dto.ApprovalDto;
+import com.himedia.groupware.dto.AsInfoDto;
 import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.dto.WorkBoardDto;
+import com.himedia.groupware.service.AdminService;
 import com.himedia.groupware.service.ApprovalService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -25,6 +28,13 @@ public class ApprovalController {
 
     @Autowired
     ApprovalService as;
+
+    @Autowired
+    AdminService abs;
+
+    ArrayList<AsInfoDto> providerList;
+    ArrayList<AsInfoDto> partList;
+    ArrayList<AsInfoDto> stateList;
 
     @GetMapping("/appMain")
     public String appMain(HttpServletRequest request, Model model){
@@ -36,6 +46,8 @@ public class ApprovalController {
         if (loginUser != null) {
             url = "approval/approvalMain";
             result = as.selectApp(request);
+            partList = abs.getPart();
+            model.addAttribute("partList", partList);
             model.addAttribute("appList", result.get("appList"));
             model.addAttribute("paging", result.get("paging"));
             model.addAttribute("key", result.get("key"));
@@ -49,6 +61,10 @@ public class ApprovalController {
     public ModelAndView appView(@RequestParam("id") int id){
         ModelAndView mav = new ModelAndView();
         HashMap<String, Object> result = as.getApp(id);
+        partList = abs.getPart();
+        providerList = abs.getProvider();
+        mav.addObject("providerList", providerList);
+        mav.addObject("partList", partList);
         mav.addObject("app", result.get("app"));
         mav.addObject("replyList", result.get("replyList"));
         mav.setViewName("approval/approvalView");
@@ -77,6 +93,8 @@ public class ApprovalController {
             url="redirect:/appMain?first=n";
             as.insert(approvaldto);
         }
+        partList = abs.getPart();
+        model.addAttribute("partList", partList);
         model.addAttribute("dto", approvaldto);
         return url;
     }

@@ -11,12 +11,9 @@
         <div class="tb">
             <div class="find-box">
             <select name="part" class="dropdown">
-                <option value="" disabled selected hidden>부서명</option>
-                <option value="1">개발</option>
-                <option value="2">기획</option>
-                <option value="3">영업</option>
-                <option value="4">운영</option>
-                <option value="5">인사</option>
+                <c:forEach items="${partList}" var="part">
+                    <option value="${part.id}">${part.name}</option>
+                </c:forEach>
             </select>
             <div class="col search-box">
                 <input type="text" name="key" placeholder="검색 내용 입력" value="${key}">
@@ -35,6 +32,7 @@
         </div>
 
         <c:forEach items="${boardList}" var="board" varStatus="status">
+            <a href="boardView?id=${board.id}" style="text-decoration: none; color: inherit;">
             <div class="row">
                 <div class="col">
                     ${(paging.page - 1) * paging.displayRow + status.index + 1}
@@ -43,19 +41,14 @@
                         ${board.name}
                 </div>
                 <div class="col">
-                    <c:choose>
-                        <c:when test="${board.part == 1}">개발팀</c:when>
-                        <c:when test="${board.part == 2}">기획팀</c:when>
-                        <c:when test="${board.part == 3}">영업팀</c:when>
-                        <c:when test="${board.part == 4}">운영팀 </c:when>
-                        <c:when test="${board.part == 5}">인사팀 </c:when>
-                        <c:otherwise>미정</c:otherwise>
-                    </c:choose>
+                    <c:forEach items="${partList}" var="part">
+                        <c:if test="${board.part == part.id}">
+                            ${part.name}
+                        </c:if>
+                    </c:forEach>
                 </div>
                 <div class="col">
-                    <a href="boardView?id=${board.id}" style="text-decoration: none; color: inherit;">
                     ${board.title}
-                    </a>
                 </div>
                 <div class="col">
                     <fmt:formatDate value="${board.indate}" pattern="yyyy-MM-dd"/>
@@ -64,6 +57,7 @@
                     댓글${board.replycnt}
                 </div>
             </div>
+            </a>
         </c:forEach>
 
     <div class="row">  <!-- 페이지의 시작 -->
