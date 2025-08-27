@@ -19,35 +19,31 @@
             </div>
 
             <div class="bar">
-              <div class="left" >${dto.name} (<c:choose>
-                        <c:when test="${dto.part == 1}">개발팀</c:when>
-                        <c:when test="${dto.part == 2}">기획팀</c:when>
-                        <c:when test="${dto.part == 3}">영업팀</c:when>
-                        <c:when test="${dto.part == 4}">운영팀 </c:when>
-                        <c:when test="${dto.part == 5}">인사팀 </c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
-                    </c:choose>) </div>
+              <div class="left" >
+                  ${dto.name}
+              <c:forEach items="${partList}" var="part">
+                  <c:if test="${dto.part == part.id}">
+                      (${part.name})
+                  </c:if>
+              </c:forEach>
+              </div>
               <div class="right">
                   <input type="text" class="inputText" name="title" value="${dto.title}" placeholder="제목을 입력하세요"/></div>
             </div>
 
             <div class="bodyBar">
-              <div class="titleWriter" >카테고리</div>
+              <div class="titleWriter" >이미지</div>
               <div class="titleTitle" >내 용</div>
             </div>
 
-            <div class="contentBar">
+            <div class="contentBar" style="height: 250px;">
                 <div class="contentLeft">
-                    <div class="second">게시판</div>
-                    <div class="first">게시글 수정</div>
-                    <div class="second">이미지</div>
-                    <div class="imgField" style="display: flex; flex-direction: column;">
+                    <div class="imgField" style="display: flex; flex-direction: column; margin-top: auto;">
                     <c:choose>
                         <c:when test="${empty oldfilename}">
                             <img src="${pageContext.request.contextPath}/images/noname.jpg" alt="기본 이미지" />
                         </c:when>
                         <c:otherwise>
-                        기존 이미지
                             <img src="${pageContext.request.contextPath}/images/${oldfilename}" alt="기존 업로드 이미지" />
                         </c:otherwise>
                     </c:choose>
@@ -61,7 +57,7 @@
                         <input type="hidden" name="savefilename" />
                     </c:when>
                     <c:otherwise>
-                    변경할 이미지
+                    변경 할 이미지
                             <img src="${pageContext.request.contextPath}/images/${dto.savefilename}" id="previewimg" alt="업로드 이미지 미리보기" />
                         <input type="hidden" name="image" value="${dto.image}" />
                         <input type="hidden" name="savefilename" value="${dto.savefilename}" />

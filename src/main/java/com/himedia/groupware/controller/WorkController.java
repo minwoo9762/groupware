@@ -71,7 +71,7 @@ public class WorkController {
         ModelAndView mav = new ModelAndView();
         HashMap<String, Object> result = bs.getBoard(id);
        partList = abs.getPart();
-       mav.addObject("partList", partList);
+        mav.addObject("partList", partList);
         mav.addObject("board", result.get("board"));
         mav.addObject("replyList", result.get("replyList"));
         mav.setViewName("work/workBoardView");
@@ -79,7 +79,9 @@ public class WorkController {
     }
 
     @GetMapping("/boardWrite")
-    public String boardWrite(){
+    public String boardWrite(Model model){
+        partList = abs.getPart();
+        model.addAttribute("partList", partList);
         return "work/workBoardWrite";
     }
 
@@ -157,6 +159,8 @@ public class WorkController {
     @GetMapping("/updateBoardForm")
     public ModelAndView updateBoardForm(@RequestParam("id") int id) {
         ModelAndView mav = new ModelAndView();
+        partList = abs.getPart();
+        mav.addObject("partList", partList);
         mav.addObject("dto", bs.getBoardOne(id));
         mav.addObject("oldfilename",bs.getBoardOne(id).getSavefilename());
         mav.setViewName("work/updateBoard");
@@ -181,6 +185,8 @@ public class WorkController {
             url="redirect:/boardViewWithoutCnt?id="+ boarddto.getId();
             bs.update(boarddto);
         }
+        partList = abs.getPart();
+        model.addAttribute("partList", partList);
         return url;
     }
 
