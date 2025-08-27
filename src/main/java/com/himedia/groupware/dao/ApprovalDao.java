@@ -26,4 +26,5 @@ public interface ApprovalDao {
     void updateStatus(@Param("id") int id, @Param("status") int status);
 
 
+    void ajaxViewDate(ApprovalDto approvaldto);
 }

@@ -98,4 +98,13 @@ public class ApprovalService {
     public void updateStatus(int id, int status) {
         adao.updateStatus(id, status);
     }
+
+
+
+
+
+
+    public void ajaxViewDate(ApprovalDto approvaldto) {
+        adao.ajaxViewDate(approvaldto);
+    }
 }

@@ -81,9 +81,35 @@
                 <div class="contentBox">${app.content}</div>
             </div>
 
-            <c:if test="${app.category == 0}">
 
-            </c:if>
+            <c:choose>
+                <c:when test="${app.category == 0 && loginUser.provider == 1}">
+                <div class="bodyBar">
+                    <div class="titleWriter">연차 기간</div>
+                    <div class="titleTitle">
+                        <label style="font-size: 16px;">발생일 : </label><input id="startDay" name="startday" style="border: 1px solid #ddd;width: 120px;height: 28px;padding: 0 10px;box-sizing: border-box;" type="date" onchange="calDay()" value="${app.startdate}"/>
+                        &nbsp;&nbsp;
+                        <label style="font-size: 16px;">만료일 : </label><input id="endDay" name="endday" style="border: 1px solid #ddd;width: 120px;height: 28px;padding: 0 10px;box-sizing: border-box;" type="date" onchange="calDay()" value="${app.enddate}"/>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn" onclick="ajaxViewDate();">저장</button>
+                    </div>
+                </div>
+                </c:when>
+                <c:when test="${app.category == 0}">
+                    <div class="bodyBar">
+                    <div class="titleWriter">연차 기간</div>
+                    <div class="titleTitle">
+                        <label style="font-size: 16px;">발생일 : </label><span id="startDay" name="startday" style="display: inline-block; border: 1px solid #ddd;width: 120px;height: 28px; line-height:28px;padding: 0 10px;box-sizing: border-box; font-size: 16px;">${app.startdate}</span>
+                        &nbsp;&nbsp;
+                        <label style="font-size: 16px;">만료일 : </label><span id="endDay" name="endday" style="display: inline-block;; border: 1px solid #ddd;width: 120px;height: 28px; line-height:28px;padding: 0 10px;box-sizing: border-box; font-size: 16px;" >${app.enddate}</span>
+                    </div>
+                </div>
+                </c:when>
+                <c:otherwise>
+
+                </c:otherwise>
+            </c:choose>
+
 
             <div class="updateBtns">
                 <c:if test="${loginUser.provider == 1}">
@@ -166,5 +192,58 @@
 
 
 </div>
+
+<script>
+    function calDay() {
+        const startInput = document.getElementById("startDay");
+        const endInput = document.getElementById("endDay");
+
+        const startDate = new Date(startInput.value);
+        const endDate = new Date(endInput.value);
+
+        // 입력된 값이 둘 다 유효할 경우에만 비교
+        if (startInput.value && endInput.value) {
+            if (endDate < startDate) {
+                alert("만료일은 발생일보다 이전일 수 없습니다.");
+                endInput.value = ""; // 만료일 초기화
+                endInput.focus();    // 다시 입력 유도
+            }
+        }
+    }
+
+    function ajaxViewDate() {
+        const startInput = document.getElementById("startDay");
+        const endInput = document.getElementById("endDay");
+        const searchid = new URLSearchParams(location.search).get("id");
+
+        if (startInput.value && endInput.value) {
+            if (endInput.value < startInput.value) {
+                alert("만료일은 발생일보다 이전일 수 없습니다.");
+                endInput.value = "";
+                endInput.focus();
+            } else {
+                let formData = {
+                    id: searchid,
+                    startdate: startInput.value,  // "yyyy-MM-dd"
+                    enddate: endInput.value
+                };
+
+                $.ajax({
+                    url: location.origin + "/ajaxViewDate",
+                    type: "POST",
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    timeout: 10000,
+                    success: function (data) {
+                        alert("연차 기안일이 저장되었습니다.");
+                    },
+                    error: function () {
+                        alert("실패했습니다.");
+                    }
+                });
+            }
+        }
+    }
+</script>
 
 <%@ include file="../footer.jsp" %>
