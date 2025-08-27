@@ -113,11 +113,16 @@ document.addEventListener('DOMContentLoaded', function () {
         events: eventData,            // 위에서 정의한 이벤트 배열
 
         // 🔹 날짜를 클릭했을 때 실행되는 함수
+
         dateClick: function(info) {
-            // 클릭한 날짜 정보는 info.date 또는 info.dateStr에 들어 있음
-            if(confirm("전자결재 문서를 작성하시겠습니까?")) {
-                document.getElementById("popupApprovalWrite").classList.add("active");
-                document.getElementById("dim").classList.add("active");
+            if(adminState == 1) {
+                location.href = 'appMain?first=y';
+            } else {
+                // 클릭한 날짜 정보는 info.date 또는 info.dateStr에 들어 있음
+                if(confirm("전자결재 문서를 작성하시겠습니까?")) {
+                    document.getElementById("popupApprovalWrite").classList.add("active");
+                    document.getElementById("dim").classList.add("active");
+                }
             }
         }
     });

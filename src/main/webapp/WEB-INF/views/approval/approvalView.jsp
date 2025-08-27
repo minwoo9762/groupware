@@ -193,7 +193,7 @@
 
 
 
-    <form action="addAppReply" method="post" name="addAppRep">
+  <%--  <form action="addAppReply" method="post" name="addAppRep">
       <input type="hidden" name="appid" value="${app.id}" />
       <input type="hidden" name="userid" value="${loginUser.id}" />
       <input type="hidden" name="provider" value="${loginUser.provider}" />
@@ -237,7 +237,7 @@
       </c:otherwise>
     </c:choose>
 
-</div>
+</div>--%>
 
 <script>
     function calDay() {
