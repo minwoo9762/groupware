@@ -1,9 +1,6 @@
 package com.himedia.groupware.controller;
 
-import com.himedia.groupware.dto.AttendanceDto;
-import com.himedia.groupware.dto.PayDto;
-import com.himedia.groupware.dto.UserDto;
-import com.himedia.groupware.dto.VacationDto;
+import com.himedia.groupware.dto.*;
 import com.himedia.groupware.service.HomeServiece;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -101,8 +98,6 @@ public class HrController {
         model.addAttribute("earlyLeaveCount", earlyLeaveCount);
         model.addAttribute("vacationCount", vacationCount);
         model.addAttribute("remainingVacation", remainingVacation);
-
-        // 휴가 리스트 가져오기
 
         return "attendance/attendance";
     }

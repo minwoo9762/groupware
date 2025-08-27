@@ -15,28 +15,23 @@
         </div>
 
         <div class="bar">
-          <div class="left" >${board.name} (<c:choose>
-                        <c:when test="${board.part == 1}">개발팀</c:when>
-                        <c:when test="${board.part == 2}">기획팀</c:when>
-                        <c:when test="${board.part == 3}">영업팀</c:when>
-                        <c:when test="${board.part == 4}">운영팀 </c:when>
-                        <c:when test="${board.part == 5}">인사팀 </c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
-                    </c:choose>)
+          <div class="left" >${board.name}
+          <c:forEach items="${partList}" var="part">
+              <c:if test="${board.part == part.id}">
+                  (${part.name})
+              </c:if>
+          </c:forEach>
           </div>
           <div class="right">${board.title}</div>
         </div>
 
         <div class="bodyBar">
-              <div class="titleWriter" >카테고리</div>
+              <div class="titleWriter" >이미지</div>
               <div class="titleTitle" >내 용</div>
         </div>
 
         <div class="contentBar">
           <div class="contentLeft">
-              <div class="second">게시판</div>
-              <div class="first">상세보기</div>
-              <div class="second">이미지</div>
       <div class="imgField">
         <c:choose>
           <c:when test="${empty board.savefilename}">
@@ -70,7 +65,14 @@
       <input type="hidden" name="userid" value="${loginUser.id}" />
       <input type="hidden" name="name" value="${loginUser.name}" />
       <div class="reply_body">
-        <div class="reply_Writer">${loginUser.name}</div>
+        <div class="reply_Writer">
+        ${loginUser.name}
+        <c:forEach items="${partList}" var="part">
+            <c:if test="${board.part == part.id}">
+                (${part.name})
+            </c:if>
+        </c:forEach>
+        </div>
         <div class="reply_Date">
           <c:set var="now" value="<%=new java.util.Date()%>"/>
           <fmt:formatDate value="${now}" pattern="MM/dd hh:mm"/>

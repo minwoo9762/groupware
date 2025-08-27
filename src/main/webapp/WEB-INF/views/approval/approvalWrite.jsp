@@ -19,7 +19,11 @@
                 </div>
 
                 <div class="bar">
-                    <div class="left">${loginUser.name}</div>
+                    <div class="left">${loginUser.name}
+                    <c:forEach items="${partList}" var="part">
+                        <c:if test="${loginUser.part == part.id}">(${part.name})</c:if>
+                    </c:forEach>
+                    </div>
                     <div class="right"><input type="text" class="inputText" name="title" placeholder="제목을 입력하세요" /></div>
                 </div>
 
@@ -28,7 +32,7 @@
                     <div class="titleTitle" >결재내용</div>
                 </div>
 
-                <div class="contentBar">
+                <div class="contentBar" style="height: 300px;">
                     <div class="contentLeft">
                         <div class="second">결재분류</div>
                         <div class="first">
@@ -43,6 +47,7 @@
 
                     <div class="contentBox"  ><textarea name="content" placeholder="내용을 입력하세요"></textarea> </div>
                 </div>
+
 
                 <div class="updateBtns">
                     <input type="submit" value="작성완료" />

@@ -102,4 +102,13 @@ public class UserService {
 
     public void insert(@Valid UserDto userdto) {udao.insert(userdto);}
 
+    public void delete(int id) {udao.delete(id);
+    }
+
+    public UserDto getAddressOne(int id) {
+        return udao.getAddress(id);
+    }
+
+    public void updateAddress(@Valid UserDto userdto) {udao.updateAddress(userdto);
+    }
 }
