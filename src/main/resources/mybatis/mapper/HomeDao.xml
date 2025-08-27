@@ -4,8 +4,8 @@
 
 
 <mapper namespace="com.himedia.groupware.dao.HomeIDao">
-    <select id="getVCT" parameterType="com.himedia.groupware.dto.VacationDto">
-        select * from vacation where userid=#{id}
+    <select id="getVCT" parameterType="com.himedia.groupware.dto.ApprovalDto">
+        select * from approval where userid=#{id}
     </select>
 
     <select id="userAllInfoList" parameterType="com.himedia.groupware.dto.InfoDto">
