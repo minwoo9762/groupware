@@ -5,10 +5,11 @@
 
 <mapper namespace="com.himedia.groupware.dao.HrDao">
 
-    <select id="selectAttendanceByUserId" parameterType="int" resultType="com.himedia.groupware.dto.AttendanceDto">
-        SELECT * FROM attendance WHERE userid = #{userid}
+    <select id="selectAttendanceByUserId" parameterType="String" resultType="com.himedia.groupware.dto.AttendanceDto">
+        SELECT aseq, userid, indate, outdate, state FROM attendance WHERE userid = #{userid}
     </select>
-    
+
+
     <select id="getAllCountForPay" resultType="_int">
         select count(*) from pay where title like concat('%', #{key} , '%' )
     </select>
@@ -20,21 +21,5 @@
     <select id="getPay" resultType="com.himedia.groupware.dto.PayDto">
         select * from pay where pseq=#{pseq}
     </select>
-
-    <select id="getAllCountForVacation" resultType="_int">
-        select count(*) from vacation where title like concat('%', #{key} , '%' )
-    </select>
-
-    <select id="selectVacation" resultType="com.himedia.groupware.dto.VacationDto">
-        select * from vacation where title like concat('%', #{key} , '%' )  order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
-    </select>
-
-    <select id="getVacation" resultType="com.himedia.groupware.dto.VacationDto">
-        select * from vacation where pseq=#{pseq}
-    </select>
-
-    <delete id="deleteVacation">
-        delete from vacation where pseq=#{pseq}
-    </delete>
     
 </mapper>

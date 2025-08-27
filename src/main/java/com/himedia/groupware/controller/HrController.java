@@ -27,13 +27,14 @@ public class HrController {
 
     @GetMapping("/attendance")
     public String attendance(@RequestParam("aseq") int aseq, Model model, HttpSession session, HttpServletRequest request) {
-        Object loginUser = request.getSession().getAttribute("loginUser");
-        if (loginUser == null) {
+        UserDto udto = (UserDto) session.getAttribute("loginUser");
+        if (udto == null) {
             return "redirect:/";
         }
 
-        UserDto udto = (UserDto)session.getAttribute("loginUser");
-        List<AttendanceDto> attendanceList = hs.selectAttendanceByUserId(aseq);
+        String userid = udto.getEmail();
+
+        List<AttendanceDto> attendanceList = hs.selectAttendanceByUserId(userid);
 
         // 출근, 퇴근 기준 시간
         LocalTime cutoffLate = LocalTime.of(9, 30);
@@ -62,30 +63,32 @@ public class HrController {
             }
 
             LocalTime inTime = indate.toLocalDateTime().toLocalTime();
-
-            // 지각 여부
-            if (inTime.isAfter(cutoffLate)) {
-                att.setState(1);
-                lateCount++;
-            } else {
-                att.setState(0);
-            }
+            boolean isLate = inTime.isAfter(cutoffLate);
+            boolean isEarlyLeave = false;
 
             if (outdate != null) {
                 LocalTime outTime = outdate.toLocalDateTime().toLocalTime();
-                // 조퇴 여부
-                if (outTime.isBefore(cutoffEarlyLeave)) {
-                    att.setState(4);
-                    earlyLeaveCount++;
-                }
+                isEarlyLeave = outTime.isBefore(cutoffEarlyLeave);
+            }
+
+            if (isLate && isEarlyLeave) {
+                att.setState(3);  // 지각+조퇴
+                lateCount++;
+                earlyLeaveCount++;
+            } else if (isLate) {
+                att.setState(1);  // 지각
+                lateCount++;
+            } else if (isEarlyLeave) {
+                att.setState(4);  // 조퇴
+                earlyLeaveCount++;
+            } else {
+                att.setState(0);  // 정상 출근/퇴근
             }
         }
 
         // 잔여 휴가 계산 (15일 고정)
         int totalVacationDays = 15;
         int remainingVacation = totalVacationDays - vacationCount;
-
-        String userid = attendanceList.isEmpty() ? "" : attendanceList.get(0).getUserid();
 
         model.addAttribute("attendanceList", attendanceList);
         model.addAttribute("aseq", aseq);
@@ -96,13 +99,11 @@ public class HrController {
         model.addAttribute("vacationCount", vacationCount);
         model.addAttribute("remainingVacation", remainingVacation);
 
-        ArrayList<ApprovalDto> vacationList = homes.getVCT(udto.getId());
-        model.addAttribute("vacation", vacationList);
-
-        System.out.println("vacationList size: " + vacationList.size());
-
         return "attendance/attendance";
     }
+
+
+
 
     @GetMapping("/vacation")
     public String vacation(HttpServletRequest request, Model model) {

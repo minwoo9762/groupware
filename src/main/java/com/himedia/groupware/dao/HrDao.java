@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface HrDao {
-    List<AttendanceDto> selectAttendanceByUserId(int aseq);
+    List<AttendanceDto> selectAttendanceByUserId(String userid);
 
     int getAllCountForPay(String key);
 
@@ -26,4 +26,6 @@ public interface HrDao {
     VacationDto getVacation(int pseq);
 
     void deleteVacation(int pseq);
+
+
 }
