@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -89,53 +90,49 @@ public class HomeController {
             model.addAttribute("notice", ndto);
 
             // 달력
-            ArrayList<VacationDto> vacationList = homes.getVCT(udto.getId());
+            ArrayList<ApprovalDto> vacationList = homes.getVCT(udto.getId());
             model.addAttribute("vacation", vacationList);
+            System.out.println(vacationList);
 
-            // 휴가 유무 판단
+            // 오늘 날짜 String으로 미리 정의
+            String today = LocalDate.now().toString();
+
             if (vacationList != null) {
-
-                // 오늘 날짜를 Date 객체로 생성
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String today = sdf.format(new Date());  // 오늘 날짜 추출
-
-                // 휴가 중 여부를 판단하는 변수
                 boolean isVacation = false;
 
-                // 각 휴가 리스트를 순회하며 날짜 비교
-                for (VacationDto vct : vacationList) {
-                    Timestamp indate = vct.getIndate();
-                    Timestamp outdate = vct.getOutdate();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-                    // indate와 outdate가 null일 수 있으므로 null 체크
+                for (ApprovalDto vct : vacationList) {
+                    LocalDate indate = vct.getStartdate();
+                    LocalDate outdate = vct.getEnddate();
+
                     if (indate != null && outdate != null) {
-                        String startOnly = sdf.format(indate);  // 시작일 추출
-                        String endOnly = sdf.format(outdate);   // 종료일 추출
+                        String startOnly = indate.toString();
+                        String endOnly = outdate.toString();
 
-                        // 오늘 날짜가 시작일 또는 종료일 사이에 포함되는지 확인
                         if (today.equals(startOnly) || today.equals(endOnly) || (today.compareTo(startOnly) > 0 && today.compareTo(endOnly) < 0)) {
-                            // 하나라도 포함되면 휴가 중
                             System.out.println("휴가 기간 중입니다: " + startOnly + "부터 " + endOnly + "까지");
-                            model.addAttribute("indateTrue", 0);  // 출석 버튼 비활성화
-                            model.addAttribute("outdateTrue", 0);  // 퇴근 버튼 비활성화
+                            model.addAttribute("indateTrue", 0);
+                            model.addAttribute("outdateTrue", 0);
 
-                            String oldStartDay = (indate != null) ? sdf.format(confirmAtd.getIndate()) : null;  // null 체크
-                            String oldEndDay = (outdate != null) ? sdf.format(confirmAtd.getOutdate()) : null;    // null 체크
-                            if (!oldStartDay.equals(today) && !oldEndDay.equals(today)) {
-                                // 오늘의 날짜와 startOnly가 같을 경우 실행할 코드
-                                atds.insertAtdVct(startOnly, endOnly, 5, udto.getEmail());
+                            // confirmAtd가 null일 가능성 체크s
+                            if (confirmAtd != null) {
+                                String oldStartDay = (confirmAtd.getIndate() != null) ? sdf.format(confirmAtd.getIndate()) : null;
+                                String oldEndDay = (confirmAtd.getOutdate() != null) ? sdf.format(confirmAtd.getOutdate()) : null;
+
+                                if (oldStartDay != null && oldEndDay != null && !oldStartDay.equals(today) && !oldEndDay.equals(today)) {
+                                    atds.insertAtdVct(startOnly, endOnly, 5, udto.getEmail());
+                                }
                             }
 
                             isVacation = true;
-                            break; // 한 번이라도 "휴가 중"이면 더 이상 확인할 필요 없이 종료
+                            break;
                         }
                     } else {
-                        // indate 또는 outdate가 null일 경우 처리
                         System.out.println("휴가 정보가 불완전합니다.");
                     }
                 }
 
-                // 휴가 기간 중이 아니라면 추가적인 처리를 할 수 있습니다.
                 if (!isVacation) {
                     System.out.println("휴가 기간 외입니다.");
                 }

@@ -69,7 +69,9 @@ body #wrap {min-width: 1280px; height: calc(100% - 80px);}
 .main #mypage .top .util .list {display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;}
 .main #mypage .top .util .list .num {font-size: 28px; font-weight: 700; color: #0f172a;}
 .main #mypage .top .util .list .txt {font-size: 14px; color: #aaa;}
-
+.fc-event-time {
+    display: none;
+}
 .npm{display: flex; flex-direction: column;}
 
 .line {margin: 24px 0; border: 1px solid #e5e5e5; box-sizing: border-box;}

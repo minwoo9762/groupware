@@ -1,9 +1,6 @@
 package com.himedia.groupware.controller;
 
-import com.himedia.groupware.dto.AttendanceDto;
-import com.himedia.groupware.dto.PayDto;
-import com.himedia.groupware.dto.UserDto;
-import com.himedia.groupware.dto.VacationDto;
+import com.himedia.groupware.dto.*;
 import com.himedia.groupware.service.HomeServiece;
 import com.himedia.groupware.service.HrService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -99,7 +96,7 @@ public class HrController {
         model.addAttribute("vacationCount", vacationCount);
         model.addAttribute("remainingVacation", remainingVacation);
 
-        ArrayList<VacationDto> vacationList = homes.getVCT(udto.getId());
+        ArrayList<ApprovalDto> vacationList = homes.getVCT(udto.getId());
         model.addAttribute("vacation", vacationList);
 
         System.out.println("vacationList size: " + vacationList.size());
