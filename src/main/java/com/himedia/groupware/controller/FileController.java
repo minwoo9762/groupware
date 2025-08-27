@@ -1,8 +1,10 @@
 package com.himedia.groupware.controller;
 
 
+import com.himedia.groupware.dto.AsInfoDto;
 import com.himedia.groupware.dto.FileDto;
 import com.himedia.groupware.dto.UserDto;
+import com.himedia.groupware.service.AdminService;
 import com.himedia.groupware.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -26,6 +29,8 @@ public class FileController {
 
     @Autowired
     FileService fs;
+    @Autowired
+    AdminService ads;
 
     @GetMapping("/fileMain")
     public String fileMain(HttpServletRequest request, Model model) {
@@ -40,6 +45,10 @@ public class FileController {
             model.addAttribute("fileList", result.get("fileList"));
             model.addAttribute("paging", result.get("paging"));
             model.addAttribute("key",  result.get("key"));
+
+            ArrayList<AsInfoDto> partList = ads.getPart();
+            model.addAttribute("partList", partList);
+            model.addAttribute("loginUser", loginUser);
         }
         return url;
     }

@@ -12,13 +12,15 @@
             <div class="find-box">
             <select name="part" class="dropdown">
                 <c:forEach items="${partList}" var="part">
-                    <option value="${part.id}">${part.name}</option>
+                    <c:if test="${part.id != 0}">
+                        <option value="${part.id}">${part.name}</option>
+                    </c:if>
                 </c:forEach>
             </select>
             <div class="col search-box">
                 <input type="text" name="key" placeholder="검색 제목 입력" value="${key}">
                 <input type="button" name="btn_search" value="검색" onclick="go_searchWork('appMain')" />
-                <c:if test="${loginUser.provider != 1}">
+                <c:if test="${loginUser.provider != 1 && loginUser.provider != 0 && loginUser.part !=0}">
                 <input type="button" value="결재 신청" onclick="location.href='appWrite'" />
                 </c:if>
             </div>

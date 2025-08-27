@@ -87,7 +87,8 @@ public class AdminController {
                 if(pdto == null) {
                     url = "admin/adminPayForm";
                 } else {
-                    url = "admin/adminPayFormUpdate";
+                    url = "admin/adminPayForm";
+                    /*url = "admin/adminPayFormUpdate";*/
                     model.addAttribute("pdto", pdto);
                 };
                 model.addAttribute("id", id);

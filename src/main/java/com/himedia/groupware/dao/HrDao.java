@@ -5,6 +5,7 @@ import com.himedia.groupware.dto.Paging;
 import com.himedia.groupware.dto.PayDto;
 import com.himedia.groupware.dto.VacationDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public interface HrDao {
 
     int getAllCountForPay(String key);
 
-    ArrayList<PayDto> selectPay(Paging paging, String key);
+    ArrayList<PayDto> selectPay(Paging paging, String key, int id);
 
     PayDto getPay(int pseq);
 
