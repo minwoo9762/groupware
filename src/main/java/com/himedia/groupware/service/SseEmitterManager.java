@@ -31,7 +31,7 @@ public class SseEmitterManager {
                 emitter.send(SseEmitter.event().name("mail").data(data));
             } catch (IOException e) {
                 emitters.remove(clientId);
-                System.out.println("이벤트 보내다 오류, emitter 제거");
+                System.out.println("이벤트 전송 오류, emitter 제거");
             }
         } else {
             System.out.println("해당 clientId의 emitter 없음");
