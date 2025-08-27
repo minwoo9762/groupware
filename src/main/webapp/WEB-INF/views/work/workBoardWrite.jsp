@@ -32,7 +32,7 @@
                     <div class="titleTitle" >내 용</div>
                 </div>
 
-                <div class="contentBar" style="height: 400px;">
+                <div class="contentBar" style="height: 250px;">
                     <div class="contentLeft">
                         <div class="imgField" style="display: flex; flex-direction: column;">
                         <c:choose>

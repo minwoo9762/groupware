@@ -21,4 +21,5 @@ public interface IMailDao {
     void deleteReply(int id);
     void deleteMail(int id);
     int countMailToday(int id);
+    MailDto getLatestMail(int senderid);
 }

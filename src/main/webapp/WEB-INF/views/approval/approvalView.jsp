@@ -134,15 +134,9 @@
                     <input type="hidden" name="provider" value="${loginUser.provider}"/>
                     <div class="reply_body">
                         <div class="reply_Writer">
-                            <c:choose>
-                                <c:when test="${loginUser.provider==1}">대표(관리자)</c:when>
-                                <c:when test="${loginUser.provider==2}">부장</c:when>
-                                <c:when test="${loginUser.provider==3}">과장</c:when>
-                                <c:when test="${loginUser.provider==4}">대리</c:when>
-                                <c:when test="${loginUser.provider==5}">주임</c:when>
-                                <c:when test="${loginUser.provider==6}">사원</c:when>
-                                <c:otherwise>미정</c:otherwise>
-                            </c:choose>
+                            <c:forEach items="${providerList}" var="provider">
+                                <c:if test="${loginUser.provider == provider.id}">${provider.name}</c:if>
+                            </c:forEach>
                         </div>
                         <div class="reply_Date">
                             <c:set var="now" value="<%=new java.util.Date()%>"/>
@@ -163,15 +157,9 @@
                         <c:forEach items="${replyList}" var="reply">
                             <div class="reply_body">
                                 <div class="reply_Writer">
-                                    <c:choose>
-                                        <c:when test="${loginUser.provider==1}">대표(관리자)</c:when>
-                                        <c:when test="${loginUser.provider==2}">부장</c:when>
-                                        <c:when test="${loginUser.provider==3}">과장</c:when>
-                                        <c:when test="${loginUser.provider==4}">대리</c:when>
-                                        <c:when test="${loginUser.provider==5}">주임</c:when>
-                                        <c:when test="${loginUser.provider==6}">사원</c:when>
-                                        <c:otherwise>미정</c:otherwise>
-                                    </c:choose>
+                                    <c:forEach items="${providerList}" var="provider">
+                                <c:if test="${loginUser.provider == provider.id}">${provider.name}</c:if>
+                            </c:forEach>
                                 </div>
                                 <div class="reply_Date"><fmt:formatDate value="${reply.writedate}"
                                                                         pattern="MM/dd hh:mm"/></div>
@@ -187,57 +175,11 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-
         </div>
     </div>
 
+</div>
 
-
-  <%--  <form action="addAppReply" method="post" name="addAppRep">
-      <input type="hidden" name="appid" value="${app.id}" />
-      <input type="hidden" name="userid" value="${loginUser.id}" />
-      <input type="hidden" name="provider" value="${loginUser.provider}" />
-      <div class="reply_body">
-        <div class="reply_Writer">
-        <c:forEach items="${providerList}" var="provider">
-            <c:if test="${loginUser.provider == provider.id}">${provider.name}</c:if>
-        </c:forEach>
-        </div>
-        <div class="reply_Date">
-          <c:set var="now" value="<%=new java.util.Date()%>"/>
-          <fmt:formatDate value="${now}" pattern="MM/dd hh:mm"/>
-        </div>
-        <div class="reply_Content"><input type="text" name="reply" size="40" placeholder="의견을 입력하세요"></div>
-        <div class="reply_AD">
-          <input type="submit" value="작성" onclick="return replyAppCheck();" />
-        </div>
-      </div>
-    </form>
-    <c:choose>
-      <c:when test="${replyList.size()==0}">
-        <div class="reply_msg">의견이 없습니다.</div>
-      </c:when>
-      <c:otherwise>
-        <c:forEach items="${replyList}" var="reply">
-          <div class="reply_body">
-            <div class="reply_Writer">
-               <c:forEach items="${providerList}" var="provider">
-                   <c:if test="${reply.provider == provider.id}">${provider.name}</c:if>
-               </c:forEach>
-            </div>
-            <div class="reply_Date"><fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm"/></div>
-            <div class="reply_Content">${reply.reply}</div>
-            <div class="reply_AD">
-                <c:if test="${reply.userid==loginUser.id}">
-                  <input type="button" value="삭제" onClick="deleteAppReply('${reply.id}','${app.id}')" />
-                </c:if>
-            </div>
-          </div>
-        </c:forEach>
-      </c:otherwise>
-    </c:choose>
-
-</div>--%>
 
 <script>
     function calDay() {
