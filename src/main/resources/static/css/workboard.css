@@ -199,6 +199,14 @@ label.btn {flex-shrink: 0; padding: 0 10px; height: 100%; line-height: 30px; box
     justify-content: center;
     align-items:  center;
 }
+
+.imgField {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; /* 마진을 제거하여 위로 밀어넣음 */
+    justify-content: flex-start; /* 자식 요소들이 위쪽에 정렬되도록 */
+    height: 85%; /* imgField가 부모의 높이에 맞게 크기 조정 */
+}
 .contentLeft .second {
     background: #eff6ff;
     font-size: 20px;
