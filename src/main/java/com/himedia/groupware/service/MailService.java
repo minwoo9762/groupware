@@ -21,7 +21,6 @@ public class MailService {
         HashMap<String, Object> result = new HashMap<>();
         result.put("sendList",  mdao.getRecentSendMail(id));
         result.put("receiveList", mdao.getRecentReceiveMail(id));
-        ArrayList<MailDto> test = mdao.getRecentSendMail(id);
         return result;
     }
 
