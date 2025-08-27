@@ -103,4 +103,8 @@ public class MailService {
     public int countMailToday(int id) {
         return mdao.countMailToday(id);
     }
+
+    public MailDto getLatestMail(int senderid) {
+        return mdao.getLatestMail(senderid);
+    }
 }

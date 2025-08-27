@@ -53,7 +53,8 @@ public class MyPageController {
     public String updateProfile(@ModelAttribute("dto") @Valid UserDto userdto, BindingResult result,
                                 HttpSession session, Model model) {
         String url = "myPage/updateProfileForm";
-        InfoDto idto = is.getInfo(userdto.getId());
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        InfoDto idto = is.getInfo(loginUser.getId());
         model.addAttribute("info", idto);
         if (result.hasFieldErrors("name"))
             model.addAttribute("message", "이름을 입력하세요.");
@@ -64,7 +65,7 @@ public class MyPageController {
         else {
             ms.updateUser(userdto);
             session.setAttribute("loginUser", userdto);
-            url = "redirect:/myPage";
+            url = "myPage/profile";
         }
         return url;
     }
