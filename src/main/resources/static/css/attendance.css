@@ -1,6 +1,28 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container1 {
+    display: flex;
+    width: 1280px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.layout {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px;
+}
+
 .calendar2 {
-    flex: 2.5;
-    background-color: #ffffff;
+    flex: 2;
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
@@ -13,7 +35,7 @@
     color: #333;
 }
 
-#calendar2 {
+#calendar {
     width: 100%;
     height: 500px;
     background-color: #f9f9f9;
@@ -26,11 +48,8 @@
     font-style: italic;
 }
 
-/*#calendar { flex-shrink: 0; padding: 20px; width: 100%; height:calc(100% - 230px); border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px;  }*/
-
-/* 근태 요약 박스 */
 .attendance5 {
-    flex: 1.5;
+    flex: 1;
     background-color: #fcfcfc;
     border: 1px solid #ddd;
     border-radius: 8px;

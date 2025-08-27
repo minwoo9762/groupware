@@ -3,39 +3,36 @@
 <link rel="stylesheet" type="text/css" href="/css/attendance.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
 
-<!-- ✅ layout 시작 -->
-<div class="layout" style="display: flex;">
+<!-- 전체 레이아웃 -->
+<div class="main">
+    <div class="container1">
 
-  <!-- ✅ 왼쪽 메뉴 -->
-  <%@ include file="../lnb.jsp" %>
+        <!-- 왼쪽 사이드 메뉴 -->
+        <%@ include file="../lnb.jsp" %>
 
-  <!-- ✅ 오른쪽 본문 -->
-  <div class="calendar2" >
-    <h2>Calendar</h2>
-    <div id="calendar"></div>
+        <!-- 본문 -->
+        <div class="layout">
 
-  </div>
+            <!-- 캘린더 영역 -->
+            <div class="calendar2">
+                <h2>Calendar</h2>
+                <div id="calendar"></div>
+            </div>
 
-
-
-<%--<style>--%>
-<%--  .main #calendar { flex-shrink: 0; padding: 20px; width: 100%; height:calc(100% - 230px); border: 1px solid #e5e5e5; box-sizing: border-box; border-radius: 18px; }--%>
-<%--</style>--%>
-
-  <div class="attendance5" >
-    <h2>${loginUser.name}님의 근태 조회</h2>
-    <div id="attendance5">
-      <br />
-      <label>지각 : ${lateCount}</label><br>
-      <label>결석 : ${absentCount}</label><br>
-      <label>조퇴 : ${earlyLeaveCount}</label><br>
-      <label>휴가 : ${vacationCount}</label><br>
-      <label>잔여 휴가 : ${remainingVacation}</label>
+            <!-- 출결 통계 -->
+            <div class="attendance5">
+                <h2>${loginUser.name}님의 근태 조회</h2>
+                <div id="attendance5">
+                    <label>지각 : ${lateCount}</label><br>
+                    <label>결석 : ${absentCount}</label><br>
+                    <label>조퇴 : ${earlyLeaveCount}</label><br>
+                    <label>휴가 : ${vacationCount}</label><br>
+                    <label>잔여 휴가 : ${remainingVacation}</label>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
 </div>
-<!-- ✅ layout 끝 -->
 
 <script>
   // vacationList를 자바스크립트 객체 배열로 변환
@@ -52,6 +49,8 @@
     <c:if test="${!status.last}">, </c:if>
     </c:forEach>
   ];
+
+  console.log("📅 vacationList:", vacationList);
 
   // 🔹 달력에 표시될 이벤트 데이터 정의 (서버에서 가져온 것이라 가정)
   const eventData = vacationList;
