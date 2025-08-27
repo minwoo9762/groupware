@@ -43,4 +43,17 @@
         insert into user(email, pwd, name, phone, part, address1, address2, provider)
         values(#{email}, #{pwd}, #{name}, #{phone}, #{part}, #{address1}, #{address2}, #{provider})
     </insert>
+
+    <delete id="delete">
+        delete from user where id=#{id}
+    </delete>
+
+    <select id="getAddress" resultType="com.himedia.groupware.dto.UserDto">
+        select * from user where id=#{id}
+    </select>
+
+    <update id="updateAddress" parameterType="com.himedia.groupware.dto.UserDto">
+        update user set email=#{email}, pwd=#{pwd}, name=#{name}, phone=#{phone}, part=#{part},
+                        address1=#{address1}, address2=#{address2}, provider=#{provider}
+    </update>
 </mapper>

@@ -19,4 +19,10 @@ public interface IUserDao {
     int getAllCountForAddress(String key);
     ArrayList<UserDto> selectAddress(Paging paging, String key);
     void insert(@Valid UserDto userdto);
+
+    void delete(int id);
+
+    UserDto getAddress(int id);
+
+    void updateAddress(@Valid UserDto userdto);
 }

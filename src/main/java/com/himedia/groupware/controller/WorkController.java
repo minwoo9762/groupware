@@ -1,8 +1,9 @@
 package com.himedia.groupware.controller;
 
-import com.himedia.groupware.dto.Paging;
+import com.himedia.groupware.dto.AsInfoDto;
 import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.dto.WorkBoardDto;
+import com.himedia.groupware.service.AdminService;
 import com.himedia.groupware.service.WorkBoardService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,9 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,6 +38,15 @@ public class WorkController {
     @Autowired
     ServletContext context;
 
+    @Autowired
+    AdminService abs;
+
+    ArrayList<AsInfoDto> providerList;
+    ArrayList<AsInfoDto> partList;
+    ArrayList<AsInfoDto> stateList;
+
+
+
     @GetMapping("/workBoard")
     public String boardList(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
@@ -49,7 +57,8 @@ public class WorkController {
         if (loginUser != null) {
             url = "work/workBoard";
             result = bs.selectBoard(request);
-
+            partList = abs.getPart();
+            model.addAttribute("partList", partList);
             model.addAttribute("boardList", result.get("boardList"));
             model.addAttribute("paging", result.get("paging"));
             model.addAttribute("key", result.get("key"));
@@ -61,6 +70,8 @@ public class WorkController {
     public ModelAndView boardView(@RequestParam("id") int id){
         ModelAndView mav = new ModelAndView();
         HashMap<String, Object> result = bs.getBoard(id);
+       partList = abs.getPart();
+       mav.addObject("partList", partList);
         mav.addObject("board", result.get("board"));
         mav.addObject("replyList", result.get("replyList"));
         mav.setViewName("work/workBoardView");
@@ -125,7 +136,10 @@ public class WorkController {
 
             url="redirect:/workBoard";
             bs.insert(boarddto);
+
         }
+        partList = abs.getPart();
+        model.addAttribute("partList", partList);
         model.addAttribute("dto", boarddto);
         return url;
     }
