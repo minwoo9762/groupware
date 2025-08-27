@@ -41,8 +41,13 @@ public class UserController {
 
 
     @GetMapping("/")
-    public String init() {
-        return "user/loginForm";
+    public String init(HttpSession session) {
+        UserDto loginUser = (UserDto) session.getAttribute("loginUser");
+        String url = "user/loginForm";
+        if(loginUser != null){
+            url = "redirect:/home";
+        }
+        return url;
     }
 
     @PostMapping("/login")

@@ -34,7 +34,7 @@
             <div class="field">
                 <label>우편번호</label>
                 <div>
-                    <input type="text" id="my_postcode" name="zip_num" value="${dto.zipNum}" readonly>
+                    <input type="text" id="my_postcode" name="zipNum" value="${dto.zipNum}" readonly>
                     <input type="button" value="우편번호 찾기" onclick="findZipNum()">
                 </div>
             </div>

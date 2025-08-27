@@ -7,14 +7,12 @@
     <script type="text/javascript">
         function updatePwd() {
             var pwdRegex = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()-+=]).{8,20}$/;
-            if(document.updatePwd.pwd.value==''){
+            if(document.updatePwd.pwd.value===''){
                 alert('비밀번호를 입력하세요.');
             }else if(!pwdRegex.test(document.updatePwd.pwd.value)) {
                 alert('올바른 비밀번호를 입력하세요.');
-            } else if(document.updatePwd.pwd.value != document.updatePwd.confirmPwd.value) {
+            } else if(document.updatePwd.pwd.value !== document.updatePwd.confirmPwd.value) {
                 alert('비밀번호 확인이 일치하지 않습니다.');
-            }else if(document.updatePwd.codeCheck.value != 'confirmed') {
-                alert('이메일 인증을 완료하지 않았습니다.');
             }else {
                 document.updatePwd.submit();
             }

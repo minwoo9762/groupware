@@ -3,6 +3,7 @@ package com.himedia.groupware.controller;
 import com.himedia.groupware.dto.MailDto;
 import com.himedia.groupware.dto.UserDto;
 import com.himedia.groupware.service.MailService;
+import com.himedia.groupware.service.SseEmitterManager;
 import com.himedia.groupware.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +26,8 @@ public class MailController {
     private MailService ms;
     @Autowired
     private UserService us;
+    @Autowired
+    SseEmitterManager emitterManager;
 
     @GetMapping("/mail")
     public String mail(HttpSession session, Model model) {
@@ -142,6 +145,11 @@ public class MailController {
                 maildto.setReceiverId(us.getUseridByName(maildto.getReceiverName()));
                 maildto.setReply(replyCheck);
                 ms.insertMail(maildto);
+                MailDto mail_temp = ms.getLatestMail(loginUser.getId());
+                HashMap<String, Object> payload = new HashMap<>();
+                payload.put("mailId", mail_temp.getId());
+                payload.put("mailSubject", mail_temp.getSubject());
+                emitterManager.sendToClient(mail_temp.getReceiverId(), payload);
                 url = "redirect:/mail";
             }
         }
