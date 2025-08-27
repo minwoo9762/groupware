@@ -39,17 +39,18 @@
                 <div class="titleTitle">제 목</div>
             </div>
 
-            <div class="bar">
-                <div class="left">${app.username}(<c:choose>
-                    <c:when test="${app.part == 1}">개발팀</c:when>
-                    <c:when test="${app.part == 2}">기획팀</c:when>
-                    <c:when test="${app.part == 3}">영업팀</c:when>
-                    <c:when test="${app.part == 4}">운영팀 </c:when>
-                    <c:when test="${app.part == 5}">인사팀 </c:when>
-                    <c:otherwise>알 수 없음</c:otherwise> </c:choose>)
-                </div>
-                <div class="right">${app.title}</div>
-            </div>
+
+        <div class="bar">
+          <div class="left" >${app.username}
+              <c:forEach items="${partList}" var="part">
+                        <c:if test="${app.part == part.id}">
+                            (${part.name})
+                        </c:if>
+                    </c:forEach>
+          </div>
+          <div class="right">${app.title}</div>
+        </div>
+
 
             <div class="bodyBar">
                 <div class="titleWriter">카테고리</div>
@@ -190,6 +191,51 @@
         </div>
     </div>
 
+
+
+    <form action="addAppReply" method="post" name="addAppRep">
+      <input type="hidden" name="appid" value="${app.id}" />
+      <input type="hidden" name="userid" value="${loginUser.id}" />
+      <input type="hidden" name="provider" value="${loginUser.provider}" />
+      <div class="reply_body">
+        <div class="reply_Writer">
+        <c:forEach items="${providerList}" var="provider">
+            <c:if test="${loginUser.provider == provider.id}">${provider.name}</c:if>
+        </c:forEach>
+        </div>
+        <div class="reply_Date">
+          <c:set var="now" value="<%=new java.util.Date()%>"/>
+          <fmt:formatDate value="${now}" pattern="MM/dd hh:mm"/>
+        </div>
+        <div class="reply_Content"><input type="text" name="reply" size="40" placeholder="의견을 입력하세요"></div>
+        <div class="reply_AD">
+          <input type="submit" value="작성" onclick="return replyAppCheck();" />
+        </div>
+      </div>
+    </form>
+    <c:choose>
+      <c:when test="${replyList.size()==0}">
+        <div class="reply_msg">의견이 없습니다.</div>
+      </c:when>
+      <c:otherwise>
+        <c:forEach items="${replyList}" var="reply">
+          <div class="reply_body">
+            <div class="reply_Writer">
+               <c:forEach items="${providerList}" var="provider">
+                   <c:if test="${reply.provider == provider.id}">${provider.name}</c:if>
+               </c:forEach>
+            </div>
+            <div class="reply_Date"><fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm"/></div>
+            <div class="reply_Content">${reply.reply}</div>
+            <div class="reply_AD">
+                <c:if test="${reply.userid==loginUser.id}">
+                  <input type="button" value="삭제" onClick="deleteAppReply('${reply.id}','${app.id}')" />
+                </c:if>
+            </div>
+          </div>
+        </c:forEach>
+      </c:otherwise>
+    </c:choose>
 
 </div>
 

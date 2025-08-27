@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,13 +33,8 @@ public class UserController {
     @Autowired
     ExMailService exMailService;
     private static int number;
-//    @Autowired
-//    AdminService ads;
-//
-//    ArrayList<AsInfoDto> providerList = ads.getProvider();
-//    ArrayList<AsInfoDto> partList = ads.getPart();
-//    ArrayList<AsInfoDto> stateList = ads.getState();
-
+    @Autowired
+    AdminService ads;
 
     @GetMapping("/")
     public String init() {
@@ -210,6 +206,10 @@ public class UserController {
         if(loginUser != null) {
             url = "user/address";
             result = us.selectAddress(request);
+            ArrayList<AsInfoDto> partList = ads.getPart();
+            ArrayList<AsInfoDto> providerList = ads.getProvider();
+            model.addAttribute("providerList", providerList);
+            model.addAttribute("partList", partList);
             model.addAttribute("userList", result.get("userList"));
             model.addAttribute("paging", result.get("paging"));
             model.addAttribute("key", result.get("key"));
@@ -218,13 +218,58 @@ public class UserController {
     }
 
     @GetMapping("/addressWrite")
-    public String addressWrite() {return "user/addressInsert";}
+    public String addressWrite(Model model) {
+        ArrayList<AsInfoDto> partList = ads.getPart();
+        ArrayList<AsInfoDto> providerList = ads.getProvider();
+        model.addAttribute("providerList", providerList);
+        model.addAttribute("partList", partList);
+        return "user/addressInsert";
+    }
 
     @PostMapping("/addressInsert")
     public String addressInsert(@Valid @ModelAttribute("dto") UserDto userdto, Model model) {
-        us.insert(userdto);
+
+        ArrayList<AsInfoDto> partList = ads.getPart();
+        ArrayList<AsInfoDto> providerList = ads.getProvider();
+        model.addAttribute("providerList", providerList);
+        model.addAttribute("partList", partList);
         model.addAttribute("dto", userdto);
-        return "addressBook";
+        us.insert(userdto);
+
+
+        return "redirect:/address";
+    }
+
+    @GetMapping("/updateAddressForm")
+    public ModelAndView updateAddressForm(@RequestParam("id") int id) {
+        ModelAndView mav = new ModelAndView();
+
+        ArrayList<AsInfoDto> partList = ads.getPart();
+        ArrayList<AsInfoDto> providerList = ads.getProvider();
+        mav.addObject("partList", partList);
+        mav.addObject("providerList", providerList);
+        mav.addObject("dto", us.getAddressOne(id));
+        mav.setViewName("user/addressUpdate");
+        return mav;
+    }
+
+    @PostMapping("addressUpdate")
+    public String addressUpdate(@ModelAttribute("dto") @Valid UserDto userdto, Model model){
+
+        ArrayList<AsInfoDto> partList = ads.getPart();
+        ArrayList<AsInfoDto> providerList = ads.getProvider();
+        model.addAttribute("providerList", providerList);
+        model.addAttribute("partList", partList);
+        model.addAttribute("dto", userdto);
+        us.updateAddress(userdto);
+
+        return "redirect:/address";
+    }
+
+    @GetMapping("/deleteaddress")
+    public String deleteAddress(@RequestParam("id") int id) {
+        us.delete(id);
+        return "redirect:/address";
     }
 
 
