@@ -6,6 +6,7 @@
     <script src="script/jquery-3.7.1.min.js"></script>
     <script type="text/javascript">
         function updatePwd() {
+            // 비밀번호 판정 정규식 : 영문, 숫자, 일부 특수문자를 포함한 8~20자 이내의 문자
             var pwdRegex = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()-+=]).{8,20}$/;
             if(document.updatePwd.pwd.value===''){
                 alert('비밀번호를 입력하세요.');

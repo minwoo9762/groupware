@@ -9,6 +9,7 @@
     <script type="text/javascript">
         $(function() {
             $('#duplication').click(function(){
+                // 정규식을 통한 이메일 검증(이름, 도메인 판정)
                 var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if(document.insertForm.email.value==''){
                     alert('이메일을 입력하세요.');
