@@ -13,6 +13,9 @@
       <form>
         <h2>${payDetail.title}</h2>
         <div class="field">
+          급여 : &nbsp;&nbsp;<div style="height: auto; padding: 0px; margin: 0; font-size: 18px; font-weight: 700;">${payDetail.pay} 원</div>
+        </div>
+        <div class="field">
           <div>${payDetail.content}</div>
         </div>
         <div class="btn">

@@ -119,7 +119,7 @@ label.btn {flex-shrink: 0; padding: 0 10px; height: 100%; line-height: 30px; box
 .admin .fncTable::-webkit-scrollbar-track {background-color: grey;}
 .admin .fncTable + .fncTable {position: relative; width: 448px;}
 .admin .fncTable + .fncTable:after {content: ''; position: absolute; top: 50%; left: -50px; width: 34px; height: 34px; background: url(/images/arrowRight.png) 50% 50% no-repeat; background-size: 100% 100%; transform: translateY(-50%);}
-.admin .fncTable .tableTitle { position: sticky; z-index: 1; top: 0; left: 0; background: #fff; width: 100%; padding-top: 30px; padding-bottom: 20px; height: 32px; line-height: 32px; font-size: 18px; font-weight: 700; color: #0e2957;}
+.admin .fncTable .tableTitle { position: sticky; z-index: 1; top: 0; left: 0; background: #f5f8fa; width: 100%; padding-top: 30px; padding-bottom: 20px; height: 32px; line-height: 32px; font-size: 18px; font-weight: 700; color: #0e2957;}
 .admin .fncTable > .tr {display: flex; align-items: center; border-bottom: 1px solid #ddd;}
 .admin .fncTable > .tr:last-of-type {border-bottom: 0;}
 .admin .fncTable > .tr > .tl {display: flex; justify-content: center; align-items: center; flex-shrink: 0; padding: 0 10px;  box-sizing: border-box;  width: 120px; height: 48px; font-weight: 700;}
@@ -131,8 +131,8 @@ label.btn {flex-shrink: 0; padding: 0 10px; height: 100%; line-height: 30px; box
 .admin .fncTable .bthWrap #infoSave {width: 82px; height: 28px; border: 1px solid #0e2957; background: #0e2957; border-radius: 4px; box-sizing: border-box; text-align: center; font-size: 14px; font-weight: 400; color: #fff; transition: all 0.2s;}
 .admin .fncTable .bthWrap #infoSave:hover {border-color:#0e2957;  background: #335185;}
 
-.admin .fncTable .deleteInfo {width: 48px; height: 28px; border: 1px solid #0e2957; text-align: center; border-radius: 4px; box-sizing: border-box; color: #0e2957;}
-.admin .fncTable .addInfo {width: 82px; height: 28px; border: 1px solid #0e2957; text-align: center; border-radius: 4px; box-sizing: border-box; color: #0e2957;}
+.admin .fncTable .deleteInfo {width: 48px; height: 28px; border: 1px solid #0e2957; text-align: center; border-radius: 4px; box-sizing: border-box; color: #0e2957; background: #fff;}
+.admin .fncTable .addInfo {width: 82px; height: 28px; border: 1px solid #0e2957; text-align: center; border-radius: 4px; box-sizing: border-box; color: #0e2957; background: #fff;}
 
 /*
 @media only screen and (max-width: 1660px) {

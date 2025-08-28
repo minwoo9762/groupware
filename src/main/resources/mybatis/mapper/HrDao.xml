@@ -15,7 +15,7 @@
     </select>
     
     <select id="selectPay" resultType="com.himedia.groupware.dto.PayDto">
-        select * from pay where title like concat('%', #{key} , '%' )    order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
+        select * from pay where id=#{id} and title like concat('%', #{key} , '%' )    order by pseq desc  limit  #{paging.displayRow}  offset  #{paging.startNum}
     </select>
 
     <select id="getPay" resultType="com.himedia.groupware.dto.PayDto">

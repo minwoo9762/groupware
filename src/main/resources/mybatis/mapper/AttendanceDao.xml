@@ -21,7 +21,7 @@
     </update>
 
     <insert id="insertAtdVct">
-        insert into attendance (userid, indate, outdate, state)  values (#{email}, #{startOnly}, #{startOnly}, #{i});
+        insert into attendance (userid, indate, outdate, state)  values (#{email}, #{startOnly}, #{endOnly}, #{i});
     </insert>
 
 </mapper>

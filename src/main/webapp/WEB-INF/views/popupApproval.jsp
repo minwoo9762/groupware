@@ -3,7 +3,7 @@
 
 <div class=" layout" style="display: flex; width: 100%;" id="main">
 
-  <form class="containerForm" name="updateBoard" method="post" action="insertApp" >
+  <form style="width: 100%;" class="containerForm" name="updateBoard" method="post" action="insertApp" >
     <input type="hidden" name="userid" value="${loginUser.id}" />
     <input type="hidden" name="username" value="${loginUser.name}" />
     <input type="hidden" name="part" value="${loginUser.part}" />

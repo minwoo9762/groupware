@@ -77,7 +77,7 @@ public class HrService {
             paging.calPaging();
         }
 
-        ArrayList<PayDto> list = hdao.selectPay(paging, key);
+        ArrayList<PayDto> list = hdao.selectPay(paging, key, Integer.parseInt(request.getParameter("pseq")));
         result.put("payList", list);
         result.put("paging", paging);
         result.put("key", key);

@@ -11,17 +11,18 @@
     <div class="tb">
      <div class="find-box">
             <select name="part" class="dropdown">
-                <option value="" disabled selected hidden>부서명</option>
-                <option value="1">개발</option>
-                <option value="2">기획</option>
-                <option value="3">영업</option>
-                <option value="4">운영</option>
-                <option value="5">인사</option>
+                <c:forEach items="${partList}" var="part">
+                    <c:if test="${part.id != 0}">
+                        <option value="${part.id}">${part.name}</option>
+                    </c:if>
+                </c:forEach>
             </select>
     <div class="col search-box">
     <input type="text" name="key" placeholder="검색 내용 입력" value="${key}">
     <input type="button" name="btn_search" value="검색" onclick="go_searchWork('fileMain')" />
+     <c:if test="${loginUser.provider != 0 && loginUser.part !=0}">
     <input type="button" value="자료등록" onclick="location.href='fileInsertForm'" />
+    </c:if>
     </div>
     </div>
 

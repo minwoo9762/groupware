@@ -138,6 +138,7 @@ public class HrController {
     @GetMapping("/paycheck")
     public String paycheck(HttpServletRequest request, Model model) {
         HashMap<String, Object> result = hs.selectPay(request);
+        System.out.println("Query String: " + request.getQueryString());
 
         model.addAttribute("payList", result.get("payList"));
         model.addAttribute("paging", result.get("paging"));

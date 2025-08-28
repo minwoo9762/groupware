@@ -167,18 +167,27 @@
 </div>
 
 <script>
+
+    let adminState;
+    <c:if test="${loginUser.provider == 1}">
+        adminState = 1;
+        console.log(adminState)
+    </c:if>
+
     // vacationList를 자바스크립트 객체 배열로 변환
     let vacationList = [
         <c:forEach items="${vacation}" var="v" varStatus="status">
-        {
-            title: "연차",
-            start: "${v.startdate}",
-            end: "${v.enddate}T23:59:59",
-            textColor: "#1e90ff",
-            backgroundColor: "yellow",
-            allDay: false
-        }
-        <c:if test="${!status.last}">, </c:if>
+            <c:if test="${v.status == 2}">
+                {
+                    title: "연차",
+                    start: "${v.startdate}",
+                    end: "${v.enddate}T23:59:59",
+                    textColor: "#1e90ff",
+                    backgroundColor: "yellow",
+                    allDay: false
+                }
+                <c:if test="${!status.last}">, </c:if>
+            </c:if>
         </c:forEach>
     ];
 
