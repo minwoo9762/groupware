@@ -107,4 +107,16 @@ public class MailService {
     public MailDto getLatestMail(int senderid) {
         return mdao.getLatestMail(senderid);
     }
+
+    public void setNotified(boolean notified, int id) {
+        mdao.setNotified(notified, id);
+    }
+
+    public int countUnnotified(int id) {
+        return mdao.countUnnotified(id);
+    }
+
+    public void clearUnnotified(int id) {
+        mdao.clearUnnotified(id);
+    }
 }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/workBoard.css">
     <link rel="stylesheet" type="text/css" href="/css/payCheckList.css">
+    <link rel="stylesheet" type="text/css" href="/css/mail.css">
     <link rel="stylesheet" type="text/css" href="/css/mypage.css">
     <link rel="stylesheet" type="text/css" href="/css/toast.css">
     <script src="/script/admin.js"></script>

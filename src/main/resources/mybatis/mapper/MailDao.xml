@@ -51,4 +51,13 @@
     <select id="getLatestMail" resultType="com.himedia.groupware.dto.MailDto">
         select * from mail where senderid=${senderid} order by indate desc limit 1
     </select>
+    <update id="setNotified">
+        update mail set notified = #{notified} where id=#{id}
+    </update>
+    <select id="countUnnotified" resultType="_int">
+        select count(*) from mail where receiverid=#{id} and notified=0
+    </select>
+    <update id="clearUnnotified">
+        update mail set notified=1 where receiverid=#{id} and notified=0
+    </update>
 </mapper>
