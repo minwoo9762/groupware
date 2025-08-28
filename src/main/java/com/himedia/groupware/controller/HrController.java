@@ -99,6 +99,9 @@ public class HrController {
         model.addAttribute("vacationCount", vacationCount);
         model.addAttribute("remainingVacation", remainingVacation);
 
+        ArrayList<ApprovalDto> vacationList = homes.getVCT(udto.getId());
+        model.addAttribute("vacation", vacationList);
+
         return "attendance/attendance";
     }
 
