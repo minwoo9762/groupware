@@ -57,7 +57,7 @@
                 <div class="titleTitle">결재내용</div>
             </div>
 
-            <div class="contentBar">
+            <div class="contentBar" style="height: 180px;">
                 <div class="contentLeft">
                     <div class="second">결재분류</div>
                     <div class="first">

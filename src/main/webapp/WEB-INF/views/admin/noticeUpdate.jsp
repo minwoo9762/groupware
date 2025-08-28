@@ -26,22 +26,18 @@
             </div>
 
             <div class="bodyBar">
-                <div class="titleWriter">카테고리</div>
+                <div class="titleWriter">이미지</div>
                 <div class="titleTitle">내 용</div>
             </div>
 
             <div class="contentBar">
                 <div class="contentLeft">
-                    <div class="second">공지사항</div>
-                    <div class="first">공지글 수정</div>
-                    <div class="second">이미지</div>
                     <div class="imgField" style="display: flex; flex-direction: column;">
                         <c:choose>
                         <c:when test="${empty oldfilename}">
                             <img src="${pageContext.request.contextPath}/images/noname.jpg" alt="기본 이미지" />
                         </c:when>
                         <c:otherwise>
-                        기존 이미지
                             <img src="${pageContext.request.contextPath}/images/${oldfilename}" alt="기존 업로드 이미지" />
                         </c:otherwise>
                     </c:choose>

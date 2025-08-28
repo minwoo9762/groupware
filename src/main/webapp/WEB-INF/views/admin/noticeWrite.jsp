@@ -24,16 +24,13 @@
             </div>
 
             <div class="bodyBar">
-                <div class="titleWriter" >카테고리</div>
+                <div class="titleWriter" >이미지</div>
                 <div class="titleTitle" >내 용</div>
             </div>
 
             <div class="contentBar">
-                    <div class="contentLeft">
-                        <div class="second">게시판</div>
-                        <div class="first">게시물 등록</div>
-                        <div class="second">이미지</div>
-                        <div class="imgField">
+                    <div class="contentLeft" >
+                        <div class="imgField" style="display: flex; flex-direction: column; margin-top: auto;">
                         <c:choose>
                     <c:when test="${empty dto.savefilename}">
                         <div>
@@ -54,9 +51,10 @@
                 <input type="button" value="이미지 선택" onclick="noticeImg()"/>
                 </div>
              </div>
-
-                    <div class="contentBox"  ><textarea name="content" placeholder="내용을 입력하세요"></textarea> </div>
+                <div class="contentBox"  ><textarea name="content" placeholder="내용을 입력하세요"></textarea>
                 </div>
+
+            </div>
 
             <div class="updateBtns">
                 <input type="submit" value="작성완료" />

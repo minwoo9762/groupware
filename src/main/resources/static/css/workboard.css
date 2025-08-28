@@ -185,6 +185,9 @@ label.btn {flex-shrink: 0; padding: 0 10px; height: 100%; line-height: 30px; box
     border-radius: 8px;
     align-items: center;
 }
+.contentBar{
+    height: 250px;
+}
 
 .contentLeft {
     flex: 1;
