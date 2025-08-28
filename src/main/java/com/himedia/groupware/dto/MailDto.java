@@ -22,4 +22,5 @@ public class MailDto {
     private boolean read;
     private int reply;
     private int replyCount;
+    private boolean notified;
 }

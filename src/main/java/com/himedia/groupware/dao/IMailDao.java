@@ -22,4 +22,7 @@ public interface IMailDao {
     void deleteMail(int id);
     int countMailToday(int id);
     MailDto getLatestMail(int senderid);
+    void setNotified(boolean notified, int id);
+    int countUnnotified(int id);
+    void clearUnnotified(int id);
 }

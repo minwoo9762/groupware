@@ -145,11 +145,20 @@ public class MailController {
                 maildto.setReceiverId(us.getUseridByName(maildto.getReceiverName()));
                 maildto.setReply(replyCheck);
                 ms.insertMail(maildto);
+
+                // 실시간 메일 알림을 위한 SSE 연결 및 전송
+
+                // 사용자가 가장 최근에 만든 메일(insertMail로 방금 생성된 메일)을 불러오기
                 MailDto mail_temp = ms.getLatestMail(loginUser.getId());
+                // HashMap에 메일의 ID와 제목 저장
                 HashMap<String, Object> payload = new HashMap<>();
                 payload.put("mailId", mail_temp.getId());
                 payload.put("mailSubject", mail_temp.getSubject());
-                emitterManager.sendToClient(mail_temp.getReceiverId(), payload);
+                // 받는 사람의 emitter로 알림 전송 시도 후 연결 여부에 따라 결정된 boolean 값 리턴
+                boolean notified = emitterManager.setNotification(mail_temp.getReceiverId(), payload);
+                // 전송된 메일의 notified 값 설정
+                ms.setNotified(notified, mail_temp.getId());
+
                 url = "redirect:/mail";
             }
         }
