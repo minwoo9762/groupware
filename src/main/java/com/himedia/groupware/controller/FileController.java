@@ -54,7 +54,10 @@ public class FileController {
     }
 
     @GetMapping("/fileInsertForm")
-    public String fileInsertForm() {return "work/fileInsertForm";}
+    public String fileInsertForm(Model model) {
+        ArrayList<AsInfoDto> partList = ads.getPart();
+        model.addAttribute("partList", partList);
+        return "work/fileInsertForm";}
 
     @GetMapping("/selectfile")
     public String selectfile(){return "work/selectfile";}
