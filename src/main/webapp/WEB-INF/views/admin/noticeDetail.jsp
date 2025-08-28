@@ -20,15 +20,12 @@
         </div>
 
         <div class="bodyBar">
-            <div class="titleWriter">카테고리</div>
+            <div class="titleWriter">이미지</div>
             <div class="titleTitle">내 용</div>
         </div>
 
         <div class="contentBar">
             <div class="contentLeft">
-                <div class="second">공지사항</div>
-                <div class="first">상세보기</div>
-                <div class="second">이미지</div>
                 <div class="imgField">
         <c:choose>
           <c:when test="${empty notice.savefilename}">
