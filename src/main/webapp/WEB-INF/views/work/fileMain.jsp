@@ -38,14 +38,9 @@
 <c:forEach var="file" items="${fileList}">
     <div class="row">
         <div class="col">
-            <c:choose>
-                <c:when test="${file.part == 1}">개발팀</c:when>
-                <c:when test="${file.part == 2}">기획팀</c:when>
-                <c:when test="${file.part == 3}">영업팀</c:when>
-                <c:when test="${file.part == 4}">운영팀 </c:when>
-                <c:when test="${file.part == 5}">인사팀 </c:when>
-                <c:otherwise>알 수 없음</c:otherwise>
-            </c:choose>
+            <c:forEach items="${partList}" var="part">
+                <c:if test="${file.part == part.id}">${part.name}</c:if>
+            </c:forEach>
         </div>
         <div class="col">${file.name}</div>
         <div class="col">${file.title}</div>

@@ -19,7 +19,11 @@
                 </div>
 
                 <div class="bar">
-                    <div class="left">${loginUser.name}</div>
+                    <div class="left">${loginUser.name}
+                    <c:forEach items="${partList}" var="part">
+                        <c:if test="${loginUser.part == part.id}">(${part.name})</c:if>
+                    </c:forEach>
+                    </div>
                     <div class="right"><input type="text" class="inputText" name="title" placeholder="제목을 입력하세요" /></div>
                 </div>
 
