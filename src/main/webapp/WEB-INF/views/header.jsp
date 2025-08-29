@@ -50,10 +50,11 @@
 <body>
     <div id="wrap">
         <header id="header">
+            <a href="home">
             <h2>
                     The Quintessence of Connectivity
             </h2>
-
+            </a>
             <div class="util">
                 <a class="mypage" href="myPage"><img src="/images/${loginUser.profileimg}" alt="마이페이지"/></a>
                 <a class="address" href="address?first=y"><img src="/images/phonelist.png" alt="주소록" /></a>

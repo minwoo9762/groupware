@@ -24,18 +24,18 @@
         </div>
 
         <c:forEach items="${noticeList}" var="notice" varStatus="i">
+            <a href="noticeDetail?nseq=${notice.nseq}">
             <div class="row">
                 <div class="col">${notice.nseq}</div>
                 <div class="col">${notice.title}</div>
-                <div class="col">
-                    <a href="noticeDetail?nseq=${notice.nseq}">
+                <div class="col" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
                         ${notice.content}
-                    </a>
                 </div>
                 <div class="col">
                     <fmt:formatDate value="${notice.indate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </div>
             </div>
+                </a>
         </c:forEach>
 
             <div class="row">  <!-- 페이지의 시작 -->
