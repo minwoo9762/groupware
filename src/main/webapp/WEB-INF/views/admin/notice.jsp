@@ -10,8 +10,8 @@
     <div class="tb">
         <div class="find-box">
             <div class="col search-box">
-            <input type="text" name="key" placeholder="검색 제목 입력" value="${key}">
-            <input type="button" name="btn_search" value="검색" onClick="go_search('notice')" />
+            <input type="text" name="key" placeholder="검색 제목 입력" id="key" value="${key}">
+            <input type="button" name="btn_search" value="검색" onClick="go_search(this)" />
             <input type="button" value="공지 작성" onclick="location.href='noticeWrite'" />
             </div>
         </div>
