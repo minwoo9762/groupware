@@ -286,6 +286,20 @@ public class AdminController {
         return url;
     }
 
+    @GetMapping("/deleteNotice")
+    public String deleteNotice(@RequestParam("nseq") int nseq, HttpSession session, Model model) {
+        UserDto udto = (UserDto)session.getAttribute("loginUser");
+        String url = "redirect:/";
+        if(udto != null) {
+            url = "redirect:/alert";
+            if (udto.getProvider() == 1) {
+                url = "redirect:/notice?first=y";
+                ads.deleteNotice(nseq);
+            }
+        }
+        return url;
+    }
+
     @GetMapping("/noticeimg")
     public String noticeimg() {
         return "admin/noticeimg";

@@ -42,6 +42,9 @@
 
             <div class="updateBtns">
                 <c:if test="${loginUser.provider == 1}">
+                <input type="button" onclick="deleteNotice(${notice.nseq})" value="삭제하기" />
+                </c:if>
+                <c:if test="${loginUser.provider == 1}">
                 <input type="button" onclick="updateNotice(${notice.nseq})" value="수정하기" />
                 </c:if>
                 <input type="button" onclick="location.href='notice'" value="돌아가기" />

@@ -230,4 +230,7 @@ public class AdminService {
         adidao.update(noticedto);
     }
 
+    public void deleteNotice(int nseq) {
+        adidao.deleteNotice(nseq);
+    }
 }
