@@ -11,6 +11,7 @@
         <div class="tb">
             <div class="find-box">
             <select name="part" class="dropdown">
+            <option value="">부서명</option>
                 <c:forEach items="${partList}" var="part">
                     <c:if test="${part.id != 0}">
                         <option value="${part.id}">${part.name}</option>
