@@ -6,7 +6,7 @@
 <mapper namespace="com.himedia.groupware.dao.WorkBoardDao">
 
     <select id="selectBoard" parameterType="com.himedia.groupware.dto.Paging" resultType="com.himedia.groupware.dto.WorkBoardDto">
-        select*from joinboardpart where title like concat ('%',#{key},'%') and part like concat('%',#{part},'%') order by id desc limit #{paging.displayRow} offset #{paging.startNum}
+        select*from joinboardpart where title like concat ('%',#{key},'%') and (#{part} = '' or part = #{part}) order by id desc limit #{paging.displayRow} offset #{paging.startNum}
     </select>
 
     <select id="getBoard" resultType="com.himedia.groupware.dto.WorkBoardDto">
