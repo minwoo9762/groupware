@@ -5,11 +5,11 @@
 <mapper namespace="com.himedia.groupware.dao.FileDao">
 
     <select id="getAllCountForFile" resultType="_int">
-        select count(*) from files where title like concat('%',#{key},'%') and part like concat('%',#{part},'%')
+        select count(*) from files where title like concat('%',#{key},'%') and (#{part} = '' or part = #{part})
     </select>
 
     <select id="selectFile" parameterType="com.himedia.groupware.dto.Paging" resultType="com.himedia.groupware.dto.FileDto">
-        select*from files where title like concat ('%',#{key},'%') and part like concat('%',#{part},'%') order by id desc limit #{paging.displayRow} offset #{paging.startNum}
+        select*from files where title like concat ('%',#{key},'%') and (#{part} = '' or part = #{part}) order by id desc limit #{paging.displayRow} offset #{paging.startNum}
     </select>
 
     <insert id="insert" parameterType="com.himedia.groupware.dto.FileDto">
