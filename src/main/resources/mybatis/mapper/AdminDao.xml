@@ -33,6 +33,9 @@
     <update id="updateNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
         update notice set title=#{title}, userid=#{userid}, content=#{content}, id=#{id}, image=#{image}, savefilename=#{savefilename} where nseq=#{nseq}
     </update>
+    <delete id="deleteNotice" parameterType="com.himedia.groupware.dto.NoticeDto">
+        delete from notice where nseq=#{nseq}
+    </delete>
 
     <select id="selectNoticeDetail" parameterType="com.himedia.groupware.dto.NoticeDto">
         select * from notice where nseq=#{nseq}

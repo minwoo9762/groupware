@@ -65,4 +65,5 @@ public interface AdminIDao {
 
     void update(@Valid NoticeDto noticedto);
 
+    void deleteNotice(int nseq);
 }

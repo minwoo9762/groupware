@@ -66,6 +66,12 @@ function updateNotice(nseq) {
     location.href = "/noticeUpdateForm?nseq=" + nseq;
 }
 
+function deleteNotice(nseq) {
+    if(confirm("정말로 삭제하시겠습니까?")) {
+        location.href = "/deleteNotice?nseq=" + nseq;
+    }
+}
+
 
 function adminInsertPay(useridN) {
     let id = useridN;

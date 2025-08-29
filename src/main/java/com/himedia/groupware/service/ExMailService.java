@@ -19,7 +19,7 @@ public class ExMailService {
 
         MimeMessage message = JMSender.createMimeMessage();
         try {
-            message.setFrom("shtndhks123@gmail.com");
+            message.setFrom("qc@gamil.com");
             message.setRecipients(MimeMessage.RecipientType.TO, email);
             message.setSubject("이메일 인증");
 

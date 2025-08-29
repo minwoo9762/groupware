@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/css/mypage.css">
     <link rel="stylesheet" type="text/css" href="/css/toast.css">
     <script src="/script/admin.js"></script>
-    <script src="/script/hr.js"></script>
+   <%-- <script src="/script/hr.js"></script>--%>
     <script src="/script/workboard.js"></script>
     <script src="/script/toast.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
