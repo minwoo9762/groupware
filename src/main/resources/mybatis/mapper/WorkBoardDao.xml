@@ -30,7 +30,7 @@
     </delete>
 
     <select id="getAllCountForBoard" resultType="_int">
-        select count(*) from joinboardpart where title like concat('%',#{key},'%') and part like concat('%',#{part},'%')
+        select count(*) from joinboardpart where title like concat('%',#{key},'%') and (#{part} = '' or part = #{part})
     </select>
 
 </mapper>
