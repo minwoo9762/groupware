@@ -80,7 +80,7 @@
 		</c:forEach>
 
 			<c:if test="${paging.next}" >
-				<a href="workBoar?page=${paging.endPage+1}">NEXT</a>&nbsp;
+				<a href="workBoard?page=${paging.endPage+1}">NEXT</a>&nbsp;
 			</c:if>
 			</div>
             </div>
