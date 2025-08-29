@@ -49,7 +49,7 @@
         select count(*) from mail where receiverid=#{id} and date(indate) = curdate();
     </select>
     <select id="getLatestMail" resultType="com.himedia.groupware.dto.MailDto">
-        select * from mail where senderid=${senderid} order by indate desc limit 1
+        select * from mail where senderid=#{senderid} order by indate desc limit 1
     </select>
     <update id="setNotified">
         update mail set notified = #{notified} where id=#{id}
