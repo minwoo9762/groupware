@@ -9,12 +9,13 @@
     <%@ include file="../lnb.jsp" %>
 
         <article>
-            <form method="get" name="fr">
+            <form method="get" name="frm">
                 <div class="tb">
                     <div class="row">
                         <div class="col search-box">
-                            <input type="text" name="key" value="${key}" placeholder="검색 제목 입력" />&nbsp;
-                            <input type="button" name="p_search" value="검색" onclick="go_search('paycheck')"/>
+                            <input type="hidden" name="pseq" value="${loginUser.id}">
+                            <input id="key" type="text" name="key" value="${key}" placeholder="검색 제목 입력" />&nbsp;
+                            <input type="button" name="p_search" value="검색" onclick="go_searchWork('paycheck')"/>
                         </div>
                     </div>
 
